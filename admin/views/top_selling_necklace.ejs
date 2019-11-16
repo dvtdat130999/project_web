@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include elements/tag_head.ejs%>
+</head>
+<body>
+<!--
+	Upper Header Section
+-->
+<% include elements/upper_header.ejs%>
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <% include elements/lower_header.ejs%>
+
+    <!--
+    Navigation Bar Section
+    -->
+    <%include elements/navbar.ejs%>
+
+    <!--
+    Body Section
+    -->
+    <div class="row">
+        <div class="span12">
+
+            <div class="well well-small">
+                <h1>Cửa hàng vòng tay</h1>
+                <h2>Top 10 bán chạy</h2>
+
+                <hr class="soften"/>
+
+                <table class="table table-bordered table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Hạng</th>
+
+                        <th>Sản phẩm</th>
+                        <th>Tên</th>
+                        <th>Mô tả</th>
+                        <th>Số lượng bán được</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td> 1 </td>
+
+                        <td><img width="80" src="assets/img/i.jpg" alt=""></td>
+                        <td>Vòng đôi</td>
+                        <td> Hàng xịn chất lượng cao </td>
+                        <td> 100 </td>
+
+
+                    <tr>
+                        <td> 2 </td>
+                        <td><img  width="80" src="assets/img/f.jpg" alt=""></td>
+                        <td>Vòng cổ</td>
+                        <td> Kiểu dáng mới lạ </td>
+                        <td>80 </td>
+                    </tr>
+                    </tbody>
+
+                </table><br/>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

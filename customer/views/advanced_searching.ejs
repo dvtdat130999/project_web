@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include elements/tag_head.ejs%>
+</head>
+<body>
+<!--
+	Upper Header Section
+-->
+<% include elements/upper_header.ejs%>
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <% include elements/lower_header.ejs%>
+
+    <!--
+    Navigation Bar Section
+    -->
+    <% include elements/navbar.ejs%>
+    <!--
+    Body Section
+    -->
+    <div class="container">
+        <div class="span4">
+            <h4>Nhập tên sản phẩm</h4>
+        </div>
+        <div class="span8">
+            <input type="text" class="span4" placeholder="">
+        </div>
+        <div class="span4">
+            <h4>Tình trạng</h4>
+        </div>
+        <div class="span8">
+            <div class="control-group">
+                <div class="controls">
+                    <select class="span11">
+                        <option>Hết</option>
+                        <option>Mới</option>
+                        <option>Cũ</option>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="span4">
+            <h4>Loại</h4>
+        </div>
+        <div class="span8">
+            <div class="control-group">
+                <div class="controls">
+                    <select class="span11">
+                        <option>Nhẫn</option>
+                        <option>Vòng tay</option>
+                        <option>Đồng hồ</option>
+                        <option>Đá quý</option>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="span4">
+            <h4>Thời gian</h4>
+        </div>
+        <div class="span8">
+            <div class="control-group">
+                <div class="controls">
+                    <select class="span11">
+                        <option>Mới nhất</option>
+                        <option>Cũ nhất</option>
+
+
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="span4">
+            <h4>Giá</h4>
+        </div>
+        <div class="span8">
+            <div class="control-group">
+                <div class="controls">
+                    <select class="span11">
+                        <option>Mắc nhất</option>
+                        <option>Rẻ nhất</option>
+
+
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="span4">
+            <button onclick="successSearch()"type="submit" class="exclusive shopBtn">Tìm nâng cao</button>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+            </div>
+        </div>
+    </div>
+
+
+
+        <!--
+        Clients
+        -->
+        <!--
+        Footer
+        -->
+        <% include elements/footer.ejs%>
+
+    </div><!-- /container -->
+
+    <% include elements/copyright.ejs%>
+    <a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <% include elements/script_end.ejs%>
+</div>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include elements/tag_head.ejs%>
+
+</head>
+<body>
+<!--
+	Upper Header Section
+-->
+<% include elements/upper_header.ejs%>
+<!--
+Lower Header Section
+-->
+<div class="container">
+  <% include elements/lower_header.ejs%>
+
+
+  <!--
+  Navigation Bar Section
+  -->
+  <% include elements/navbar.ejs%>
+
+  <!--
+  Body Section
+  -->
+  <div class="row">
+    <% include elements/sidebar.ejs%>
+
+    <div class="span9">
+      <div class="well np">
+        <div id="myCarousel" class="carousel slide homCar">
+          <div class="carousel-inner">
+            <div class="item">
+              <img style="width:100%" src="assets/img/bootstrap_free-ecommerce.png" alt="bootstrap ecommerce templates">
+
+            </div>
+            <div class="item">
+              <img style="width:100%" src="assets/img/carousel1.png" alt="bootstrap ecommerce templates">
+
+            </div>
+            <div class="item active">
+              <img style="width:100%" src="assets/img/carousel3.png" alt="bootstrap ecommerce templates">
+
+            </div>
+            <div class="item">
+              <img style="width:100%" src="assets/img/bootstrap-templates.png" alt="bootstrap templates">
+
+            </div>
+          </div>
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        </div>
+      </div>
+      <!--
+      New Products
+      -->
+      <div class="well well-small">
+        <h3>Mới</h3>
+        <hr class="soften"/>
+        <div class="row-fluid">
+          <div id="newProductCar" class="carousel slide">
+            <div class="carousel-inner">
+              <div class="item active">
+                <ul class="thumbnails">
+                  <li class="span3">
+                    <div class="thumbnail">
+                      <a class="zoomTool" href="/detail" title="add to cart"><span class="icon-search"></span> Xem nhanh</a>
+                      <a href="#" class="tag"></a>
+                      <a href="/detail"><img src="assets/img/bootstrap-ring.png" alt="bootstrap-ring"></a>
+                    </div>
+                  </li>
+                  <li class="span3">
+                    <div class="thumbnail">
+                      <a class="zoomTool" href="/detail" title="add to cart"><span class="icon-search"></span> Xem nhanh</a>
+                      <a href="#" class="tag"></a>
+                      <a  href="/detail"><img src="assets/img/i.jpg" alt=""></a>
+                    </div>
+                  </li>
+                  <li class="span3">
+                    <div class="thumbnail">
+                      <a class="zoomTool" href="/detail" title="add to cart"><span class="icon-search"></span> Xem nhanh</a>
+                      <a href="#" class="tag"></a>
+                      <a  href="/detail"><img src="assets/img/g.jpg" alt=""></a>
+                    </div>
+                  </li>
+                  <li class="span3">
+                    <div class="thumbnail">
+                      <a class="zoomTool" href="/detail" title="add to cart"><span class="icon-search"></span> Xem nhanh</a>
+                      <a  href="/detail"><img src="assets/img/s.png" alt=""></a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="item">
+                <ul class="thumbnails">
+                  <li class="span3">
+                    <div class="thumbnail">
+                      <a class="zoomTool" href="/detail" title="add to cart"><span class="icon-search"></span> Xem nhanh</a>
+                      <a  href="/detail"><img src="assets/img/i.jpg" alt=""></a>
+                    </div>
+                  </li>
+                  <li class="span3">
+                    <div class="thumbnail">
+                      <a class="zoomTool" href="/detail" title="add to cart"><span class="icon-search"></span> Xem nhanh</a>
+                      <a  href="/detail"><img src="assets/img/f.jpg" alt=""></a>
+                    </div>
+                  </li>
+                  <li class="span3">
+                    <div class="thumbnail">
+                      <a class="zoomTool" href="/detail" title="add to cart"><span class="icon-search"></span> Xem nhanh</a>
+                      <a  href="/detail"><img src="assets/img/h.jpg" alt=""></a>
+                    </div>
+                  </li>
+                  <li class="span3">
+                    <div class="thumbnail">
+                      <a class="zoomTool" href="/detail" title="add to cart"><span class="icon-search"></span> Xem nhanh</a>
+                      <a  href="/detail"><img src="assets/img/j.jpg" alt=""></a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <a class="left carousel-control" href="#newProductCar" data-slide="prev">&lsaquo;</a>
+            <a class="right carousel-control" href="#newProductCar" data-slide="next">&rsaquo;</a>
+          </div>
+        </div>
+
+      </div>
+      <!--
+      Featured Products
+      -->
+      <div class="well well-small">
+        <h3><a class="btn btn-mini pull-right" href="/detail" title="View more">VIew More<span class="icon-plus"></span></a> Tiêu biểu  </h3>
+        <hr class="soften"/>
+        <div class="row-fluid">
+          <ul class="thumbnails">
+            <li class="span4">
+              <div class="thumbnail">
+                <a class="zoomTool" href="/detail" title="add to cart"><span class="icon-search"></span> Xem nhanh</a>
+                <a  href="/detail"><img src="assets/img/d.jpg" alt=""></a>
+                <div class="caption">
+                  <h5>Vòng bạc</h5>
+                  <h4>
+                    <a class="defaultBtn" href="/detail" title="Chi tiết"><span class="icon-zoom-in"></span></a>
+                    <a class="shopBtn" href="#" title="Thêm vào giỏ"><span class="icon-plus"></span></a>
+                    <span class="pull-right">$22.00</span>
+                  </h4>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+
+      <div class="well well-small">
+        <a class="btn btn-mini pull-right" href="#">Xem thêm <span class="icon-plus"></span></a>
+        Nổi tiếng
+      </div>
+      <hr>
+      <div class="well well-small">
+        <a class="btn btn-mini pull-right" href="#">Xem thêm<span class="icon-plus"></span></a>
+        Bán chạy nhất
+      </div>
+    </div>
+  </div>
+  <!--
+  Clients
+  -->
+  <% include elements/client.ejs%>
+
+  <!--
+  Footer
+  -->
+  <% include elements/footer.ejs%>
+
+</div><!-- /container -->
+<% include elements/copyright.ejs%>
+
+<a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
+<!-- Placed at the end of the document so the pages load faster -->
+<%include elements/script_end.ejs%>
+</body>
+</html>

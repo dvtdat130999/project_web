@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include elements/tag_head.ejs%>
+</head>
+<body>
+<!--
+	Upper Header Section
+-->
+<% include elements/upper_header.ejs%>
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <% include elements/lower_header.ejs%>
+
+    <!--
+    Navigation Bar Section
+    -->
+    <%include elements/navbar.ejs%>
+    <!--
+    Body Section
+    -->
+    <div class="row">
+        <div id="sidebar" class="span3">
+            <div class="well well-small">
+                <ul class="nav nav-list">
+                    <li><a href="/bill"><span class="icon-chevron-right"></span>Đã giao</a></li>
+                    <li><a href="/bill"><span class="icon-chevron-right"></span>Chưa giao</a></li>
+                    <li><a href="/bill"><span class="icon-chevron-right"></span>Đang giao</a></li>
+
+
+
+
+                    <li style="border:0"> &nbsp;</li>
+                </ul>
+            </div>
+        </div>
+        <div class="span9">
+            <div class="well well-small">
+                <hr class="soften"/>
+
+                <table class="table table-bordered table-condensed">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên hàng</th>
+                        <th>Số lượng</th>
+                        <th>Đơn giá</th>
+                        <th>Người mua</th>
+                        <th>Địa chỉ</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Nhẫn kim cương</td>
+                        <td>1</td>
+                        <td>10 000 $ </td>
+                        <td>jojo</td>
+                        <td>Hà Nội</td>
+
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Vòng cổ đôi</td>
+                        <td>1</td>
+
+                        <td>400$ </td>
+
+                        <td>dio </td>
+                        <td>Huế</td>
+
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Vòng cổ</td>
+                        <td>3</td>
+                        <td>348.42$</td>
+                        <td>hi </td>
+                        <td>Hồ Chí Minh</td>
+
+                    </tr>
+
+                    </tbody>
+                </table><br/>
+
+
+
+
+            </div>
+
+        </div>
+
+        <!--
+
+
+ </div> //container
+
+  <% include elements/copyright.ejs%>
+  <a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
+  <-- Placed at the end of the document so the pages load faster -->
+        <% include elements/script_end.ejs%>
+    </div>
+
+</div>
+</body>
+</html>

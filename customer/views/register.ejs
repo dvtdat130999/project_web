@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include elements/tag_head.ejs%>
+
+</head>
+<body>
+<!--
+	Upper Header Section
+-->
+<% include elements/upper_header.ejs%>
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <% include elements/lower_header.ejs%>
+
+
+    <!--
+    Navigation Bar Section
+    -->
+    <% include elements/navbar.ejs%>
+
+    <!--
+    Body Section
+    -->
+    <div class="row">
+        <% include elements/sidebar.ejs%>
+
+        <div class="span9">
+            <ul class="breadcrumb">
+                <li><a href="/">Trang chủ</a> <span class="divider">/</span></li>
+                <li class="active">Đăng ký</li>
+            </ul>
+            <h3> Đăng ký</h3>
+            <hr class="soft"/>
+            <div class="well">
+                <form class="form-horizontal">
+                    <h3>Đăng ký</h3>
+
+                    <div class="control-group">
+                        <label class="control-label" for="inputFname">Họ<sup>*</sup></label>
+                        <div class="controls">
+                            <input type="text" id="inputFname" placeholder="">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputLname">Tên <sup>*</sup></label>
+                        <div class="controls">
+                            <input type="text" id="inputLname" placeholder="">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Email <sup>*</sup></label>
+                        <div class="controls">
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Mật khẩu <sup>*</sup></label>
+                        <div class="controls">
+                            <input type="password" placeholder="">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Ngày sinh <sup>*</sup></label>
+                        <div class="controls">
+                            <select class="span1" name="days">
+                                <option value="">-</option>
+                                <option value="1">1&nbsp;&nbsp;</option>
+                                <option value="2">2&nbsp;&nbsp;</option>
+                                <option value="3">3&nbsp;&nbsp;</option>
+                                <option value="4">4&nbsp;&nbsp;</option>
+                                <option value="5">5&nbsp;&nbsp;</option>
+                                <option value="6">6&nbsp;&nbsp;</option>
+                                <option value="7">7&nbsp;&nbsp;</option>
+                            </select>
+                            <select class="span1" name="days">
+                                <option value="">-</option>
+                                <option value="1">1&nbsp;&nbsp;</option>
+                                <option value="2">2&nbsp;&nbsp;</option>
+                                <option value="3">3&nbsp;&nbsp;</option>
+                                <option value="4">4&nbsp;&nbsp;</option>
+                                <option value="5">5&nbsp;&nbsp;</option>
+                                <option value="6">6&nbsp;&nbsp;</option>
+                                <option value="7">7&nbsp;&nbsp;</option>
+                            </select>
+                            <select class="span1" name="days">
+                                <option value="">-</option>
+                                <option value="1">1&nbsp;&nbsp;</option>
+                                <option value="2">2&nbsp;&nbsp;</option>
+                                <option value="3">3&nbsp;&nbsp;</option>
+                                <option value="4">4&nbsp;&nbsp;</option>
+                                <option value="5">5&nbsp;&nbsp;</option>
+                                <option value="6">6&nbsp;&nbsp;</option>
+                                <option value="7">7&nbsp;&nbsp;</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input onclick="successRegister()" type="submit" name="submitAccount" value="Đăng ký" class="exclusive shopBtn">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <!--
+    Clients
+    -->
+    <% include elements/client.ejs%>
+    <!--
+    Footer
+    -->
+    <% include elements/footer.ejs%>
+</div><!-- /container -->
+
+<% include elements/client.ejs%>
+
+<a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
+<!-- Placed at the end of the document so the pages load faster -->
+<% include elements/script_end.ejs%>>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include elements/tag_head.ejs%>
+
+</head>
+<body>
+<!--
+	Upper Header Section
+-->
+<% include elements/upper_header.ejs%>
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <% include elements/lower_header.ejs%>
+
+    <!--
+    Navigation Bar Section
+    -->
+    <% include elements/navbar.ejs%>
+    <!--
+    Body Section
+    -->
+    <div class="row">
+        <% include elements/sidebar.ejs%>
+        <div class="span9">
+            <ul class="breadcrumb">
+                <li><a href="/">Trang chủ</a> <span class="divider">/</span></li>
+                <li class="active">Giao hàng</li>
+            </ul>
+            <h3>Chi tiết giao hàng</h3>
+            <hr class="soft"/>
+
+            <div class="well">
+                <form class="form-horizontal" >
+                    <h3>Thông tin chi tiết giao hàng</h3>
+                    <div class="control-group">
+                        <label class="control-label">Thời gian<sup>*</sup></label>
+                        <div class="controls">
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Cách giao hàng<sup>*</sup></label>
+                        <div class="controls">
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <input onclick="successShip()" type="submit" name="submitAccount" value="Đồng ý" class="shopBtn exclusive">
+                        </div>
+
+                    </div>
+                    <a href="/cart" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Giỏ hàng</a>
+                    <a href="/status" class="shopBtn btn-large pull-right">Xem kết quả  <span class="icon-arrow-right"></span></a>
+
+                </form>
+            </div>
+
+
+
+
+        </div>
+        <!--
+        Clients
+        -->
+        <% include elements/client.ejs%>
+        <!--
+        Footer
+        -->
+        <% include elements/footer.ejs%>
+
+    </div><!-- /container -->
+
+    <% include elements/copyright.ejs%>
+    <a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <% include elements/script_end.ejs%>
+</div>
+</body>
+</html>

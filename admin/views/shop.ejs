@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include elements/tag_head.ejs%>
+</head>
+<body>
+<!--
+	Upper Header Section
+-->
+<% include elements/upper_header.ejs%>
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <% include elements/lower_header.ejs%>
+
+    <!--
+    Navigation Bar Section
+    -->
+    <% include elements/navbar.ejs%>
+    <!--
+    Body Section
+    -->
+    <div class="row">
+        <div class="span12">
+
+            <div class="well well-small">
+                <h1>Thông tin gian hàng</h1>
+                <hr class="soften"/>
+
+                <table class="table table-bordered table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Gian hàng</th>
+                        <th>Tên</th>
+                        <th>Địa chỉ</th>
+                        <th>Liên lạc</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td><a href="/ring"><img width="80" src="assets/img/e.jpg" alt=""></a></td>
+                        <td>Cửa hàng nhẫn</td>
+                        <td> Quang trung </td>
+                        <td>0123456789 </td>
+                        <td><a href="/ring">Sản phẩm</a>
+
+                        <td><a href="/top_ring">Bán chạy</a>
+
+
+                    <tr>
+                        <td><a href="/necklace"><img href="/products"  width="80" src="assets/img/f.jpg" alt=""></a></td>
+                        <td>Cửa hàng vòng cổ</td>
+                        <td> Gò vấp </td>
+                        <td>0123456789 </td>
+                        <td><a href="/necklace">Sản phẩm</a>
+
+                        <td><a href="/top_necklace">Bán chạy</a>
+
+                    </tr>
+                    </tbody>
+
+                </table><br/>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
