@@ -271,6 +271,11 @@ router.post('/insert_new_product', function(req, res, next) {
     description:"Vòng cổ lạ, đẹp",
     thumbnail: 'assets/img/i.jpg',
     category:4,*/
+      name:'Nhẫn lam ngọc',
+      price:30000000,
+      description:"Nhẫn lam ngọc đẹp, quý phái",
+      thumbnail: 'assets/img/j.jpg',
+      category:3,
   });
   newProduct.save((err)=>{
     if(err)
@@ -332,6 +337,12 @@ router.post('/insert_new_product', function(req, res, next) {
           thumbnail: 'assets/img/i.jpg',
           category:4,
             message:'Insert new product successfully'*/
+            name:'Nhẫn lam ngọc',
+            price:20000000,
+            description:"Nhẫn lam ngọc đẹp, quý phái",
+            thumbnail: 'assets/img/j.jpg',
+            category:3,
+            message:'Insert new product successfully'
         }
       });
     }

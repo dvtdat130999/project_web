@@ -29,7 +29,7 @@ var productSchema=new mongoose.Schema({
            type:String,
            enum:['Mới','Đã hết']
        }],
-        default: ['New']
+        default: ['Mới']
     },
     created_date:{
        type:Date,
