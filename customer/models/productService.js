@@ -1,6 +1,7 @@
 var product = require('../databasemodel/products');
 var category=require('../databasemodel/categories');
 var async = require('async');
+const mongoose = require('mongoose');
 
 exports.index = function(req, res) {
     async.parallel({
@@ -59,3 +60,35 @@ exports.product_update_get = function(req, res) {
 exports.product_update_post = function(req, res) {
     res.send('NOT IMPLEMENTED: product update POST');
 };
+
+exports.findByCatagory = (catagory) => {
+    var type;
+    switch (catagory)
+    {
+        case 'watch' : {
+            type = 1;
+            break;
+        }
+        case 'bracelet' : {
+            type = 2;
+            break;
+        }
+        case 'ring' : {
+            type = 3;
+            break;
+        }
+        case 'necklaced' : {
+            type = 4;
+            break;
+        }
+        default : {
+            type = 0;
+        }
+    }
+
+    return product.find({category: type});
+}
+
+exports.findById = (id) => {
+    return product.find({_id: new mongoose.Types.ObjectId(id)})
+}
