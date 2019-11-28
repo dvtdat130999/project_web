@@ -1,5 +1,5 @@
-var product=require('../model/products');
-var category=require('../model/categories');
+var product = require('../databasemodel/products');
+var category=require('../databasemodel/categories');
 var async = require('async');
 
 exports.index = function(req, res) {

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var product=require('../model/products');
-var category=require('../model/categories');
+var product = require('../databasemodel/products');
+var category = require('../databasemodel/categories');
 
 var async = require('async');
 /* GET home page. */
@@ -49,6 +49,7 @@ router.get('/products',  function(req, res, next){
         res.render('products/list', { title: 'Product List', product_list: list_products });
       });
 });
+
 router.get('/watch',  function(req, res, next){
   product.find({category:1})
       .exec(function (err, list_products) {

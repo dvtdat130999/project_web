@@ -1,4 +1,4 @@
-var category=require('../model/categories');
+var category=require('../databasemodel/categories');
 
 // Display list of all category.
 exports.category_list = function(req, res) {

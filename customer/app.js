@@ -1,3 +1,4 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -7,17 +8,18 @@ var mongoose=require('mongoose');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+
 var app = express();
 //connect DB
 //options quan trọng là user với pass
 let options={
   db:{native_parser:true},
   server:{poolSize:5},
-  user:'tdat130999',
-  pass:'kamenrider130999'
+  user: process.env.USER,
+  pass: process.env.PASS
 };
 //đường dẫn tới database tên project ở mongoDB atlas (cloud)
-var uri="mongodb+srv://ptudweb-projectck-mbe9q.mongodb.net/project";
+var uri= process.env.URL;
 
 //Use native Promises
 mongoose.Promise=global.Promise;
