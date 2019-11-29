@@ -44,143 +44,74 @@ router.get('/ship', function(req, res, next) {
 
 // GET request for list of all Product.
 router.get('/products',  function(req, res, next){
-  product.find({},'name price thumbnail')
-      .exec(function (err, list_products) {
-        if (err) { return next(err); }
-        //Successful, so render
-        res.render('products/list', { title: 'Product List', product_list: list_products });
-      });
-});
-
-router.get('/watch',  function(req, res, next){
-    const name = req.query.name;
-    if(typeof name !== "undefined")
+    const category = req.query.category;
+    if(typeof category !== "undefined")
     {
-        var id;
-        switch (name) {
-            case 'donghovang':
-                id = "5dd21dc3708e8600901a63b4";
-                break;
+        const name = req.query.name;
+
+        if(typeof name !== "undefined")
+        {
+            var id;
+            switch (name) {
+                case 'donghovang':
+                    id = "5dd21dc3708e8600901a63b4";
+                    break;
+                case 'kimcuong1':
+                    id = "5dd2465c0f4a47226ccfaaf8";
+                    break;
+                case 'kimcuong2':
+                    id = "5dd2468c25e95c32183394f0";
+                    break;
+                case 'kimcuong3':
+                    id = "5dd246a331b2ee2674c59bc4";
+                    break;
+                case 'nhanlamngoc':
+                    id = "5dd36835503b2b3250e9fb5c";
+                    break;
+                case 'vongvang':
+                    id = "5dd245fafaf28853f0b0bd93";
+                    break;
+                case 'vongkimcuong':
+                    id = "5dd24644da39c2528019b79e";
+                    break;
+                case 'vongtay':
+                    id = "5dd2462ff0499a37dc0f2545";
+                    break;
+                case 'vongco':
+                    id = "5dd246763e9623160c183e89";
+                    break;
+                case 'vongcodoi':
+                    id = "5dd246b92633e93ae8b84b2a";
+                    break;
+            }
+            productService.findById(id)
+                .exec(function (err, list_products) {
+                    if (err) { return next(err); }
+                    //Successful, so render
+                    res.render('products/productdetail', { title: 'Diamond ring 2', product_list: list_products });
+                });
         }
-        productService.findById(id)
-            .exec(function (err, list_products) {
-                if (err) { return next(err); }
-                //Successful, so render
-                res.render('products/productdetail', { title: 'Diamond ring 2', product_list: list_products });
-            });
+        else
+        {
+            productService.findByCatagory(category)
+                .exec(function (err, list_products) {
+                    if (err) { return next(err); }
+                    //Successful, so render
+                    res.render('products/list', { title: 'Watch List', product_list: list_products });
+                });
+        }
     }
     else
     {
-        productService.findByCatagory('watch')
+        product.find()
             .exec(function (err, list_products) {
                 if (err) { return next(err); }
                 //Successful, so render
-                res.render('products/watch', { title: 'Watch List', product_list: list_products });
-            });
-    }
-});
-
-router.get('/ring',  function(req, res, next){
-    const name = req.query.name;
-    if(typeof name !== "undefined")
-    {
-        var id;
-        switch (name) {
-            case 'kimcuong1':
-                id = "5dd2465c0f4a47226ccfaaf8";
-                break;
-            case 'kimcuong2':
-                id = "5dd2468c25e95c32183394f0";
-                break;
-            case 'kimcuong3':
-                id = "5dd246a331b2ee2674c59bc4";
-                break;
-            case 'nhanlamngoc':
-                id = "5dd36835503b2b3250e9fb5c";
-                break;
-        }
-        productService.findById(id)
-            .exec(function (err, list_products) {
-                if (err) { return next(err); }
-                //Successful, so render
-                res.render('products/productdetail', { title: 'Diamond ring 2', product_list: list_products });
-            });
-    }
-    else
-    {
-        productService.findByCatagory('ring')
-      .exec(function (err, list_products) {
-        if (err) { return next(err); }
-        //Successful, so render
-        res.render('products/ring', { title: 'Ring List', product_list: list_products });
-      });
-    }
-});
-
-router.get('/bracelet',  function(req, res, next){
-    const name = req.query.name;
-    if(typeof name !== "undefined")
-    {
-        var id;
-        switch (name) {
-            case 'vongvang':
-                id = "5dd245fafaf28853f0b0bd93";
-                break;
-            case 'vongkimcuong':
-                id = "5dd24644da39c2528019b79e";
-                break;
-            case 'vongtay':
-                id = "5dd2462ff0499a37dc0f2545";
-                break;
-        }
-        productService.findById(id)
-            .exec(function (err, list_products) {
-                if (err) { return next(err); }
-                //Successful, so render
-                res.render('products/productdetail', { title: 'Diamond ring 2', product_list: list_products });
-            });
-    }
-    else
-    {
-        productService.findByCatagory('bracelet')
-            .exec(function (err, list_products) {
-                if (err) { return next(err); }
-                //Successful, so render
-                res.render('products/bracelet', { title: 'Bracelet List', product_list: list_products });
+                res.render('products/list', { product_list: list_products });
             });
     }
 });
 
-router.get('/necklaced',  function(req, res, next){
-    const name = req.query.name;
-    if(typeof name !== "undefined")
-    {
-        var id;
-        switch (name) {
-            case 'vongco':
-                id = "5dd246763e9623160c183e89";
-                break;
-            case 'vongcodoi':
-                id = "5dd246b92633e93ae8b84b2a";
-                break;
-        }
-        productService.findById(id)
-            .exec(function (err, list_products) {
-                if (err) { return next(err); }
-                //Successful, so render
-                res.render('products/productdetail', { title: 'Diamond ring 2', product_list: list_products });
-            });
-    }
-    else
-    {
-        productService.findByCatagory('necklaced')
-            .exec(function (err, list_products) {
-                if (err) { return next(err); }
-                //Successful, so render
-                res.render('products/necklaced', { title: 'Necklaced List', product_list: list_products });
-            });
-    }
-});
 
 /*// GET request for creating Product. NOTE This must come before route for id (i.e. display author).
 router.get('/product_create', product_controller.product_create_get());
