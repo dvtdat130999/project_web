@@ -16,54 +16,36 @@ exports.index = function(req, res) {
         res.render('index', { title: 'Customer', error: err, data: results });
     });
 };
-// Display list of all products.
-exports.product_list = function(req, res,next) {
-    product.find({},'name price')
-        .exec(function (err, list_products) {
-            if (err) { return next(err); }
-            //Successful, so render
-            res.render('products/list', { title: 'Product List', product_list: list_products });
+
+// Handle product update.
+exports.decreaseSumOfProduct = function(id){
+    console.log("decrease hello !!");
+
+    let sum;
+    product.findOne({ _id: id })
+        .then((doc) => {
+            if (doc) {
+                sum = doc.sum;
+                if(sum < 1)
+                    return false;
+                sum--;
+                product.update( {_id: new mongoose.Types.ObjectId(id)},{$set:{sum: sum}});
+
+                console.log("decrease success" + sum);
+                return true;
+            } else {
+                console.log("no data exist for this id");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
         });
-};
 
-// Display detail page for a specific product.
-exports.product_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: product detail: ' + req.params.id);
-};
+}
 
-// Display product create form on GET.
-exports.product_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: product create GET');
-};
-
-// Handle product create on POST.
-exports.product_create_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: product create POST');
-};
-
-// Display product delete form on GET.
-exports.product_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: product delete GET');
-};
-
-// Handle product delete on POST.
-exports.product_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: product delete POST');
-};
-
-// Display product update form on GET.
-exports.product_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: product update GET');
-};
-
-// Handle product update on POST.
-exports.product_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: product update POST');
-};
-
-exports.findByCatagory = (catagory) => {
+exports.findByCategory = (category) => {
     var type;
-    switch (catagory)
+    switch (category)
     {
         case 'watch' : {
             type = 1;

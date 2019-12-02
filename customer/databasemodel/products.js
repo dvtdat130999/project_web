@@ -24,6 +24,9 @@ var productSchema=new mongoose.Schema({
        type:Number,
 
     },
+    sum:{
+        type:Number,
+    },
     status:{
        type:[{
            type:String,
