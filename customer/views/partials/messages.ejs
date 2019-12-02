@@ -1,0 +1,36 @@
+<% if(typeof errors !="undefined"){%>
+    <%errors.forEach(function (error) {%>
+        <div class="control-group" style="color:red">
+
+            <strong style="text-align: center"><%= error.msg%></strong>
+
+        </div>
+
+<%});%>
+<%}%>
+
+<%if(success_msg!=''){%>
+    <div class="control-group" style="color:green">
+
+        <strong style="text-align: center">
+            <%= success_msg%>
+        </strong>
+
+    </div>
+<%} %>
+
+<%if(error_msg!=''){%>
+    <div class="control-group" style="color:red">
+
+        <strong style="text-align: center"><%= error_msg%></strong>
+
+    </div>
+<%}%>
+
+<%if(error!=''){%>
+    <div class="control-group" style="color:red">
+
+        <strong style="text-align: center"><%= error%></strong>
+
+    </div>
+<%}%>

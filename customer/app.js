@@ -7,9 +7,17 @@ var logger = require('morgan');
 var mongoose=require('mongoose');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var passport=require('passport');
+const session = require('express-session');
+var bodyParser = require('body-parser');
+const flash=require('connect-flash');
 
 var app = express();
+//Passport config
+require('./config/passport')(passport);
+
+
+
 //connect DB
 //options quan trọng là user với pass
 let options={
@@ -43,6 +51,33 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//body parser
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+
+//express session
+app.use(session({
+    secret: 'secret',
+    resave:true,
+    saveUninitialized:true
+
+}));
+
+//connect flash
+app.use(flash());
+
+//global vars
+app.use((req,res,next)=> {
+    res.locals.success_msg=req.flash('success_msg');
+    res.locals.error_msg=req.flash('error_msg');
+    res.locals.error=req.flash('error');
+
+    next();
+});
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 // catch 404 and forward to error handler

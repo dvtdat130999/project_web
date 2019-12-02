@@ -28,27 +28,34 @@ Lower Header Section
                 <li><a href="/">Trang chủ</a> <span class="divider">/</span></li>
                 <li class="active">Đăng nhập</li>
             </ul>
-            <h3> Đăng nhập</h3>
             <hr class="soft"/>
+            <div class="well">
 
-            <div class="row">
-                    <div class="well">
-                        <form>
+                        <form action="/login" method="post">
+                            <h3> Đăng nhập</h3>
+                            <% include ./partials/messages.ejs%>
+
                             <div class="control-group">
-                                <label class="control-label" for="inputEmail">Email</label>
+                                <label class="control-label" for="inputEmail">Tài khoản</label>
                                 <div class="controls">
-                                    <input class="span3"  type="text" placeholder="Email">
+                                    <input class="span3"  name="username"type="text" placeholder="Tài khoản">
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="inputPassword">Mật khẩu</label>
                                 <div class="controls">
-                                    <input type="password" class="span3" placeholder="Password">
+                                    <input type="password" name="password"class="span3" placeholder="Mật khẩu">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="controls">
+                                    <button type="submit" class="exclusive shopBtn">Đăng nhập</button> <a href="/forget">Quên mật khẩu</a>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="controls">
-                                    <button onclick="successLogin()"type="submit" class="exclusive shopBtn">Đăng nhập</button> <a href="/forget">Quên mật khẩu</a>
+                                    <strong>Chưa có tài khoản?</strong><a href="/register">Đăng ký</a>
                                 </div>
                             </div>
                         </form>
