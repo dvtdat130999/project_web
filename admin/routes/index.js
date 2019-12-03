@@ -4,9 +4,10 @@ const passport=require('passport');
 var user = require('../databasemodel/users');
 const bcrypt=require('bcryptjs');
 
+const {ensureAuthenticated}=require('../config/auth');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/',ensureAuthenticated, function(req, res, next) {
   res.render('index', { nameuser:req.user });
 });
 /* GET customer account page. */
