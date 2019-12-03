@@ -7,11 +7,17 @@ const bcrypt=require('bcryptjs');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { nameuser:req.user });
 });
 /* GET customer account page. */
 router.get('/account', function(req, res, next) {
   res.render('customer_account', { title: 'Express' });
+});
+/* get logout*/
+router.get('/logout', function(req, res, next) {
+  req.logout();
+  res.redirect('/');
+
 });
 /* GET shop list page. */
 router.get('/shop', function(req, res, next) {
@@ -21,12 +27,6 @@ router.get('/shop', function(req, res, next) {
 router.get('/login', function(req, res, next) {
   res.render('login', { title: 'Express' });
 });
-
-/* GET register page. */
-router.get('/register', function(req, res, next) {
-  res.render('register', { title: 'Express' });
-});
-
 router.post('/login', function(req, res, next) {
 
   passport.authenticate('local', { //chọn phương thức check là local => npm install passport-local
@@ -35,6 +35,138 @@ router.post('/login', function(req, res, next) {
     failureFlash:true
   })(req,res,next);
 });
+/* GET register page. */
+router.get('/register', function(req, res, next) {
+  res.render('register', { title: 'Express' });
+});
+
+
+
+router.post('/register', function(req, res, next) {
+  const{username,password,password2,name,address,phone,email}=req.body;
+  let errors=[];
+
+  //Check require field
+  if(!name || !email || !username|| !password||!address||!phone || !password2)
+  {
+    errors.push({msg:"Hãy nhập tất cả thông tin"});
+  }
+
+  //Check password
+  if(password!=password2)
+  {
+    errors.push({msg:"Mật khẩu nhập lại sai"});
+
+  }
+
+  //Check pass length
+  if(password.length<6)
+  {
+    errors.push({msg:"Mật khẩu phải ít nhất 6 ký tự"});
+
+  }
+
+
+
+  if(errors.length>0)
+  {
+    res.render('register',{
+      errors,
+      username,
+      password,
+      password2,
+      name,
+      address,
+
+      phone,
+      email
+    });
+  }
+  else {
+    //Check username and email existed
+
+    user.findOne({ username: username })
+        .then(data =>{
+          if(data)
+          {
+            errors.push({msg:"Tài khoản đã tồn tại"});
+
+            res.render('register',{
+
+              errors,
+              username,
+              password,
+              password2,
+              name,
+              address,
+
+              phone,
+              email
+            });
+          }
+          else
+          {
+            user.findOne({ email: email })
+                .then(data2=>{
+                  if(data2)
+                  {
+                    errors.push({msg:"Email đã sử dụng"});
+
+                    res.render('register',{
+
+                      errors,
+                      username,
+                      password,
+                      password2,
+                      name,
+                      address,
+
+                      phone,
+                      email
+                    });
+                  }
+                  else
+                  {
+                    const newUser = new user({
+                      username,
+                      password,
+                      name,
+                      address,
+
+                      phone,
+                      email
+                    });
+
+                    //Hash password
+                    bcrypt.genSalt(10,(err,salt)=>
+                        bcrypt.hash(newUser.password,salt,(err,hash)=>{
+                          if(err) throw  err;
+                          //Set password to hashed
+                          newUser.password=hash;
+                          newUser.save();
+                          req.flash('success_msg','Bạn đã đăng ký thành công');
+                          res.redirect('/');
+                        }));
+
+
+                  }
+
+                });
+
+          }
+
+        });
+
+
+
+
+
+
+  }
+
+
+});
+
 /* GET product list of shop page. */
 router.get('/products', function(req, res, next) {
   res.render('products', { title: 'Express' });

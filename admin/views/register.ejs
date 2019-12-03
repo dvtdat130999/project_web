@@ -28,42 +28,56 @@ Lower Header Section
 
 
             <div class="well">
-                <form class="form-horizontal" >
-                    <h3>Thông tin tài khoản</h3>
+                <form class="form-horizontal" action="/register" method="post">
+                    <h3>Đăng ký</h3>
+
+                    <% include ./partials/messages.ejs%>
                     <div class="control-group">
-                        <label class="control-label">Tên shop<sup>*</sup></label>
+                        <label class="control-label" for="inputEmail">Tài khoản <sup>*</sup></label>
                         <div class="controls">
-                            <input type="text" placeholder="">
+                            <input type="text" placeholder=""name="username"value="<%=typeof username !='undefined' ? username :''%>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Mật khẩu <sup>*</sup></label>
+                        <div class="controls">
+                            <input type="password" placeholder=""name="password" value="<%=typeof password !='undefined' ? password :''%>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Nhập lại mật khẩu <sup>*</sup></label>
+                        <div class="controls">
+                            <input type="password" placeholder=""name="password2"value="<%=typeof password2 !='undefined' ? password2 :''%>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputFname">Tên shop<sup>*</sup></label>
+                        <div class="controls">
+                            <input type="text" id="inputFname" placeholder=""name="name"value="<%=typeof name !='undefined' ? name :''%>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Địa chỉ <sup>*</sup></label>
+                        <div class="controls">
+                            <input type="text" placeholder=""name="address"value="<%=typeof address !='undefined' ? address :''%>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Số điện thoại <sup>*</sup></label>
+                        <div class="controls">
+                            <input type="number" placeholder=""name="phone"value="<%=typeof phone !='undefined' ? phone :''%>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Email <sup>*</sup></label>
+                        <div class="controls">
+                            <input type="text" placeholder=""name="email"value="<%=typeof email !='undefined' ? email :''%>">
                         </div>
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Quốc gia<sup>*</sup></label>
                         <div class="controls">
-                            <input type="text" placeholder="">
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Email<sup>*</sup></label>
-                        <div class="controls">
-                            <input type="text" placeholder="">
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Địa chỉ<sup>*</sup></label>
-                        <div class="controls">
-                            <input type="text" placeholder="">
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Số điện thoại<sup>*</sup></label>
-                        <div class="controls">
-                            <input type="text" placeholder="">
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <div class="controls">
-                            <input onclick="successUpdateAccount()" type="submit" name="submitAccount" value="Đồng ý" class="exclusive shopBtn">
+                            <button type="submit" class="exclusive shopBtn">Đăng ký</button> <a href="/login">Đăng nhập</a>
                         </div>
                     </div>
                 </form>
