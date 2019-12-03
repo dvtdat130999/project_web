@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include elements/tag_head.ejs%>
+</head>
+<body>
+<!--
+	Upper Header Section
+-->
+<% include elements/upper_header.ejs%>
+<!--
+Lower Header Section
+-->
+<div class="container">
+
+    <!--
+    Navigation Bar Section
+    -->
+    <% include elements/navbar.ejs%>
+    <!--
+    Body Section
+    -->
+    <div class="row">
+        <div class="span12">
+
+            <div class="well well-small">
+                <form action="/login" method="post">
+                    <h3> Đăng nhập</h3>
+                    <% include ./partials/messages.ejs%>
+
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Tài khoản</label>
+                        <div class="controls">
+                            <input class="span3"  name="username"type="text" placeholder="Tài khoản">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputPassword">Mật khẩu</label>
+                        <div class="controls">
+                            <input type="password" name="password"class="span3" placeholder="Mật khẩu">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <button type="submit" class="exclusive shopBtn">Đăng nhập</button> <a href="/forget">Quên mật khẩu</a>
+                        </div>
+                    </div>
+
+                </form>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

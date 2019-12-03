@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="" />
+    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../customer/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/app.js" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,13 +18,15 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.13.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../customer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\project_web\admin" />
+      <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\project_web\admin\views" />
       <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\express\Admin\views\elements" />
       <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\express\Admin\public" />
       <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\express\Admin\views" />
@@ -58,6 +62,7 @@
       <workItem from="1572653815459" duration="3672000" />
       <workItem from="1572665282260" duration="33000" />
       <workItem from="1573873117877" duration="62000" />
+      <workItem from="1575381486482" duration="1564000" />
     </task>
     <servers />
   </component>
