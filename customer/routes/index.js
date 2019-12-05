@@ -14,13 +14,13 @@ var async = require('async');
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    res.render('index', { nameuser:req.user });
+    res.render('index', { userdata:req.user });
 
 });
 
 /* get login page*/
 router.get('/login', function(req, res, next) {
-  res.render('login', );
+  res.render('login',{ userdata:req.user } );
 });
 
 router.post('/login', function(req, res, next) {
@@ -39,7 +39,7 @@ router.get('/logout', function(req, res, next) {
 });
 /* get register page*/
 router.get('/register', function(req, res, next) {
-  res.render('register');
+  res.render('register',{ userdata:req.user });
 });
 router.post('/register', function(req, res, next) {
     const{username,password,password2,name,address,phone,email}=req.body;
@@ -131,7 +131,6 @@ router.post('/register', function(req, res, next) {
                                     password,
                                     name,
                                     address,
-
                                     phone,
                                     email
                                 });
@@ -167,21 +166,21 @@ router.post('/register', function(req, res, next) {
 });
 /* get forget_password page*/
 router.get('/forget', function(req, res, next) {
-  res.render('forget_password', { title: 'Express' });
+  res.render('forget_password', { userdata:req.user });
 });
 /* get cart page*/
 router.get('/cart', function(req, res, next) {
-  res.render('cart', { title: 'Express' });
+  res.render('cart', { userdata:req.user });
 });
 
 /* get my account page*/
 router.get('/account', function(req, res, next) {
-  res.render('my_account', { title: 'Express' });
+  res.render('my_account', { userdata:req.user });
 });
 
 /* get ship information page*/
 router.get('/ship', function(req, res, next) {
-  res.render('ship', { title: 'Express' });
+  res.render('ship', { userdata:req.user });
 });
 
 /// PRODUCT ROUTES ///
@@ -198,7 +197,7 @@ router.get('/products',  function(req, res, next){
                 .exec(function (err, list_products) {
                     if (err) { return next(err); }
                     //Successful, so render
-                    res.render('products/productdetail', { title: 'Diamond ring 2', product_list: list_products });
+                    res.render('products/productdetail', { title: 'Diamond ring 2', product_list: list_products ,userdata:req.user});
                 });
         }
         else
@@ -207,7 +206,7 @@ router.get('/products',  function(req, res, next){
                 .exec(function (err, list_products) {
                     if (err) { return next(err); }
                     //Successful, so render
-                    res.render('products/list', { title: 'Watch List', product_list: list_products });
+                    res.render('products/list', { title: 'Watch List', product_list: list_products,userdata:req.user});
                 });
         }
     }
@@ -217,19 +216,19 @@ router.get('/products',  function(req, res, next){
             .exec(function (err, list_products) {
                 if (err) { return next(err); }
                 //Successful, so render
-                res.render('products/list', { product_list: list_products });
+                res.render('products/list', { product_list: list_products,userdata:req.user });
             });
     }
 });
 
 /* get product status page*/
 router.get('/status', function(req, res, next) {
-  res.render('status_products', { title: 'Express' });
+  res.render('status_products', {userdata:req.user});
 });
 
 /* get advanced searching page*/
 router.get('/advanced', function(req, res, next) {
-  res.render('advanced_searching', { title: 'Express' });
+  res.render('advanced_searching',{userdata:req.user});
 });
 
 //insert product

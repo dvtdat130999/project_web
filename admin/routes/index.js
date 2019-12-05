@@ -8,11 +8,11 @@ const {ensureAuthenticated}=require('../config/auth');
 
 /* GET home page. */
 router.get('/',ensureAuthenticated, function(req, res, next) {
-  res.render('index', { nameuser:req.user });
+  res.render('index', { userdata:req.user });
 });
 /* GET customer account page. */
-router.get('/account', function(req, res, next) {
-  res.render('customer_account', { title: 'Express' });
+router.get('/account',ensureAuthenticated, function(req, res, next) {
+  res.render('customer_account', { userdata:req.user });
 });
 /* get logout*/
 router.get('/logout', function(req, res, next) {
@@ -21,8 +21,8 @@ router.get('/logout', function(req, res, next) {
 
 });
 /* GET shop list page. */
-router.get('/shop', function(req, res, next) {
-  res.render('shop', { title: 'Express' });
+router.get('/shop',ensureAuthenticated, function(req, res, next) {
+  res.render('shop', { userdata:req.user });
 });
 /* GET login page. */
 router.get('/login', function(req, res, next) {
@@ -37,10 +37,15 @@ router.post('/login', function(req, res, next) {
   })(req,res,next);
 });
 /* GET register page. */
-router.get('/register', function(req, res, next) {
-  res.render('register', { title: 'Express' });
-});
+router.get('/register',ensureAuthenticated, function(req, res, next) {
+  res.render('register', { userdata:req.user });
 
+
+});
+/* GET forget password page. */
+router.get('/forget', function(req, res, next) {
+  res.render('forget_password', { userdata:req.user });
+});
 
 
 router.post('/register', function(req, res, next) {
@@ -71,6 +76,7 @@ router.post('/register', function(req, res, next) {
 
   if(errors.length>0)
   {
+
     res.render('register',{
       errors,
       username,
@@ -135,7 +141,8 @@ router.post('/register', function(req, res, next) {
                       address,
 
                       phone,
-                      email
+                      email,
+
                     });
 
                     //Hash password
@@ -169,48 +176,48 @@ router.post('/register', function(req, res, next) {
 });
 
 /* GET product list of shop page. */
-router.get('/products', function(req, res, next) {
-  res.render('products', { title: 'Express' });
+router.get('/products',ensureAuthenticated, function(req, res, next) {
+  res.render('products', { userdata:req.user });
 });
 
 /* GET sales page. */
-router.get('/sales', function(req, res, next) {
-  res.render('sales', { title: 'Express' });
+router.get('/sales',ensureAuthenticated, function(req, res, next) {
+  res.render('sales', { userdata:req.user });
 });
 
-router.get('/sales_year', function(req, res, next) {
-  res.render('sales', { title: 'Express' });
+router.get('/sales_year',ensureAuthenticated, function(req, res, next) {
+  res.render('sales', { userdata:req.user });
 });
 
-router.get('/sales_month', function(req, res, next) {
-  res.render('sales', { title: 'Express' });
+router.get('/sales_month',ensureAuthenticated, function(req, res, next) {
+  res.render('sales', { userdata:req.user });
 });
 
-router.get('/sales_week', function(req, res, next) {
-  res.render('sales', { title: 'Express' });
+router.get('/sales_week',ensureAuthenticated, function(req, res, next) {
+  res.render('sales', { userdata:req.user });
 });
 /* GET top-selling page. */
-router.get('/top_necklace', function(req, res, next) {
-  res.render('top_selling_necklace', { title: 'Express' });
+router.get('/top_necklace',ensureAuthenticated, function(req, res, next) {
+  res.render('top_selling_necklace', { userdata:req.user });
 });
 
 /* GET top-selling ring page. */
-router.get('/top_ring', function(req, res, next) {
-  res.render('top_selling_ring', { title: 'Express' });
+router.get('/top_ring',ensureAuthenticated, function(req, res, next) {
+  res.render('top_selling_ring', { userdata:req.user });
 });
 
 /* GET ring list page. */
-router.get('/ring', function(req, res, next) {
-  res.render('ring', { title: 'Express' });
+router.get('/ring',ensureAuthenticated, function(req, res, next) {
+  res.render('ring', { userdata:req.user });
 });
 
 /* GET bracelet list page. */
-router.get('/necklace', function(req, res, next) {
-  res.render('necklace', { title: 'Express' });
+router.get('/necklace',ensureAuthenticated, function(req, res, next) {
+  res.render('necklace', { userdata:req.user });
 });
 
 /* GET bill list page. */
-router.get('/bill', function(req, res, next) {
-  res.render('bill', { title: 'Express' });
+router.get('/bill',ensureAuthenticated, function(req, res, next) {
+  res.render('bill', { userdata:req.user });
 });
 module.exports = router;

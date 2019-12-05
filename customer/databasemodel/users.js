@@ -32,8 +32,12 @@ var userSchema=new mongoose.Schema({
     created_date:{
         type:Date,
         default:Date.now()
-    }
-
+    },
+    author:{
+        type:String,
+        default: 'customer',
+        required:true
+    },
 });
 
 

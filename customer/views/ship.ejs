@@ -8,7 +8,7 @@
 <!--
 	Upper Header Section
 -->
-<% include elements/upper_header.ejs%>
+<% include ./elements/upper_header.ejs%>
 <!--
 Lower Header Section
 -->
@@ -34,6 +34,8 @@ Lower Header Section
 
             <div class="well">
                 <form class="form-horizontal" >
+                    <%if(userdata){%>
+
                     <h3>Thông tin chi tiết giao hàng</h3>
                     <div class="control-group">
                         <label class="control-label">Thời gian<sup>*</sup></label>
@@ -56,6 +58,12 @@ Lower Header Section
                     </div>
                     <a href="/cart" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Giỏ hàng</a>
                     <a href="/status" class="shopBtn btn-large pull-right">Xem kết quả  <span class="icon-arrow-right"></span></a>
+                    <%}%>
+
+                        <%if(!userdata){%>
+                            <h3 style="color: red">Hãy đăng nhập để thực hiện tiếp</h3>
+
+                        <%}%>
 
                 </form>
             </div>

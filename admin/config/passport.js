@@ -15,7 +15,13 @@ module.exports=function (passport) {
                     if(err) throw  err;
                     if(isMatch)
                     {
-                        return done(null,user);
+                        if(user.author!='customer')
+                            return done(null,user);
+                        else
+                        {
+                            return done(null, false, { message: 'Tài khoản này không có quyền đăng nhập' });
+
+                        }
                     }
                     else
                     {
