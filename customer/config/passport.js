@@ -15,10 +15,17 @@ module.exports=function (passport) {
                     if(err) throw  err;
                     if(isMatch)
                     {
-                        return done(null,user);
+                        if(user.active==true ||user.author=='admin'||user.author=='shop')
+                            return done(null,user);
+                        else
+                        {
+                            return done(null, false, { message: 'Hãy kích hoạt tài khoản' });
+
+                        }
                     }
                     else
                     {
+
                         return done(null, false, { message: 'Sai mật khẩu' });
 
                     }

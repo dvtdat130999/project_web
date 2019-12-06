@@ -8,6 +8,8 @@ var user = require('../databasemodel/users');
 var popupTools = require('popup-tools');
 const bcrypt=require('bcryptjs');
 const {ensureAuthenticated}=require('../config/auth');
+const nodemailer=require('nodemailer');
+const randomstring=require('randomstring');
 
 var async = require('async');
 
@@ -37,8 +39,36 @@ router.get('/logout', function(req, res, next) {
     res.redirect('/');
 
 });
+/* get verify page*/
+router.get('/verify', function(req, res, next) {
+    res.render('verify',{ userdata:req.user } );
+
+
+});
+
+router.post('/verify', async(req, res, next) =>{
+    const{secretToken}=req.body;
+    const newUser=await user.findOne({secretToken:secretToken});
+    if(!newUser)
+    {
+        req.flash('error_msg','Không tìm được tài khoản thích hợp với mã');
+        res.redirect('/verify');
+        return;
+    }
+    newUser.active=true;
+    newUser.secretToken='';
+    await newUser.save();
+    req.flash('success_msg','Kích hoạt thành công, bạn có thể đăng nhập');
+    res.redirect('/verify');
+
+
+
+
+});
+
+
 /* get register page*/
-router.get('/register', function(req, res, next) {
+router.post('/register', function(req, res, next) {
   res.render('register',{ userdata:req.user });
 });
 router.post('/register', function(req, res, next) {
@@ -141,9 +171,38 @@ router.post('/register', function(req, res, next) {
                                     if(err) throw  err;
                                     //Set password to hashed
                                     newUser.password=hash;
+
+                                    //secret token for verify
+                                    newUser.secretToken=randomstring.generate();
+
                                     newUser.save();
-                                    req.flash('success_msg','Bạn đã đăng ký thành công');
-                                    res.redirect('/');
+
+                                    //send mail for verify
+                                    var transporter =  nodemailer.createTransport({ // config mail server
+                                        service: 'gmail',
+                                        auth: {
+                                            user: 'tdat130999@gmail.com',
+                                            pass: 'Dvtdat130999'
+                                        }
+                                    });
+                                    var mainOptions = { // thiết lập đối tượng, nội dung gửi mail
+                                        from: 'Admin project shop',
+                                        to: newUser.email,
+                                        subject: 'Kích hoạt tài khoản',
+                                        html: 'Chào '+newUser.name+'<br>'
+                                            +'Bạn cần nhập mã sau: '+newUser.secretToken+'<br>'
+                                            +'ở trang: '+'<a href="http://localhost:3000/verify">http://localhost:3000/verify</a>'
+                                    }
+                                    transporter.sendMail(mainOptions, function(error, info) {
+                                        if (error) { // nếu có lỗi
+                                            console.log(error);
+                                        } else { //nếu thành công
+                                            console.log('Email sent: ' + info.response);
+                                        }
+                                    });
+                                    req.flash('success_msg','Bạn đã đăng ký thành công, hãy vào email để kích hoạt tài khoản');
+                                    res.redirect('/register');
+
                                 }));
 
 
@@ -168,6 +227,75 @@ router.post('/register', function(req, res, next) {
 router.get('/forget', function(req, res, next) {
   res.render('forget_password', { userdata:req.user });
 });
+
+router.post('/forget', async(req, res, next) =>{
+    const{username,email}=req.body;
+
+    const newUser=await user.findOne({username:username,email:email});
+    if(!newUser)
+    {
+        req.flash('error_msg','Sai tài khoản hoặc email');
+        res.redirect('/forget');
+        return;
+    }
+    else
+    {
+        const newPassword=randomstring.generate();
+        newUser.password=newPassword;
+        //send mail for verify
+        var transporter =  nodemailer.createTransport({ // config mail server
+            service: 'gmail',
+            auth: {
+                user: 'tdat130999@gmail.com',
+                pass: 'Dvtdat130999'
+            }
+        });
+        var mainOptions = { // thiết lập đối tượng, nội dung gửi mail
+            from: 'Admin project shop',
+            to: newUser.email,
+            subject: 'Tạo mật khẩu mới',
+            html: 'Chào '+newUser.name+'<br>'
+                +'Mật khẩu mới của bạn là: '+newUser.password+'<br>'
+
+        }
+        transporter.sendMail(mainOptions, function(error, info) {
+            if (error) { // nếu có lỗi
+                console.log(error);
+            } else { //nếu thành công
+                console.log('Email sent: ' + info.response);
+            }
+        });
+
+        //Hash password
+        await bcrypt.genSalt(10, (err, salt) =>
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+                if (err) throw  err;
+                //Set password to hashed
+                newUser.password = hash;
+
+                console.log(hash);
+                newUser.save();
+
+
+                req.flash('success_msg', 'Tạo mật khẩu mới thành công, vào email để xem kết quả');
+                res.redirect('/forget');
+
+            }));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
 /* get cart page*/
 router.get('/cart', function(req, res, next) {
   res.render('cart', { userdata:req.user });

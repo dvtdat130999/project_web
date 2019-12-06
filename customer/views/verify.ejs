@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include elements/tag_head.ejs%>
+</head>
+<body>
+<!--
+	Upper Header Section
+-->
+<% include ./elements/upper_header.ejs%>
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <% include elements/lower_header.ejs%>
+
+    <!--
+    Navigation Bar Section
+    -->
+    <% include elements/navbar.ejs%>
+    <!--
+    Body Section
+    -->
+    <div class="row">
+        <% include elements/sidebar.ejs%>
+        <div class="span9">
+            <ul class="breadcrumb">
+                <li><a href="/">Trang chủ</a> <span class="divider">/</span></li>
+                <li class="active">Kích hoạt</li>
+            </ul>
+            <hr class="soft"/>
+            <div class="well">
+
+                <form action="/verify" method="post">
+                    <%include ./partials/messages.ejs%>
+
+                    <div class="control-group">
+                        <label class="control-label" for="secretToken">Mã</label>
+                        <div class="controls">
+                            <input class="span3"  name="secretToken"type="text" placeholder="">
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <button type="submit" class="exclusive shopBtn">Xác nhận</button> <a href="/login">Đăng nhập</a>
+                        </div>
+                    </div>
+
+                </form>
+
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <!--
+    Clients
+    -->
+    <% include elements/client.ejs%>
+    <!--
+    Footer
+    -->
+    <% include elements/footer.ejs%>
+
+</div><!-- /container -->
+
+<% include elements/copyright.ejs%>
+<a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
+<!-- Placed at the end of the document so the pages load faster -->
+<% include elements/script_end.ejs%>
+</div>
+</body>
+</html>

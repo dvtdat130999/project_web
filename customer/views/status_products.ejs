@@ -31,6 +31,7 @@ Lower Header Section
                 <li class="active">Trạng thái</li>
             </ul>
             <div class="well well-small">
+                <%if(userdata){%>
                 <h1>Trạng thái</h1>
                 <hr class="soften"/>
 
@@ -87,7 +88,11 @@ Lower Header Section
                     </tr>
                     </tbody>
                 </table><br/>
+                <%}%>
+                    <%if(!userdata){%>
+                        <h3 style="color: red">Hãy đăng nhập để thực hiện chức năng này</h3>
 
+                    <%}%>
 
 
                 <a href="/products" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Tiếp tục mua hàng </a>

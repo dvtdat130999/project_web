@@ -38,6 +38,13 @@ var userSchema=new mongoose.Schema({
         default: 'customer',
         required:true
     },
+    secretToken:{
+        type:String,
+    },
+    active:{
+        type:Boolean,
+        default:false
+    }
 });
 
 
