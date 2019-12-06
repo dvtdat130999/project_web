@@ -68,7 +68,7 @@ router.post('/verify', async(req, res, next) =>{
 
 
 /* get register page*/
-router.post('/register', function(req, res, next) {
+router.get('/register', function(req, res, next) {
   res.render('register',{ userdata:req.user });
 });
 router.post('/register', function(req, res, next) {
