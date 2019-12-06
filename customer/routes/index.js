@@ -283,13 +283,43 @@ router.post('/forget', async(req, res, next) =>{
             }));
     }
 
+});
+
+/* get change_password page*/
+router.get('/change_password',ensureAuthenticated, function(req, res, next) {
+    res.render('change_password', { userdata:req.user });
+});
+
+router.post('/change_password', async(req, res, next) =>{
+    const{password1,password2}=req.body;
+    const newUser=await user.findOne({username:req.user.username});
+
+    await bcrypt.compare(password1,newUser.password,(err,isMatch)=>{
+        if(err) throw  err;
+        if(isMatch)
+        {
+            //Hash password
+             bcrypt.genSalt(10, (err, salt) =>
+                bcrypt.hash(password2, salt, (err, hash) => {
+                    if (err) throw  err;
+                    //Set password to hashed
+                    newUser.password = hash;
+
+                    newUser.save();
 
 
+                    req.flash('success_msg', 'Tạo mật khẩu mới thành công, hãy thoát ra và đăng nhập lại để kiểm tra');
+                    res.redirect('/change_password');
 
+                }));
+        }
+        else
+        {
 
-
-
-
+            req.flash('error_msg', 'Sai mật khẩu cũ');
+            res.redirect('/change_password');
+        }
+    });
 
 
 
