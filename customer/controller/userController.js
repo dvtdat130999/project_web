@@ -2,6 +2,9 @@ const passport = require('passport');
 const userService = require('../models/userService');
 const user = require('../databasemodel/users');
 var async = require('async');
+const bcrypt=require('bcryptjs');
+const randomstring=require('randomstring');
+const nodemailer=require('nodemailer');
 
 exports.getAccount = (req, res, next) => res.render('my_account', { userdata:req.user });
 
