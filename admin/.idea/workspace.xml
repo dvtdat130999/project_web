@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../customer/config/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/config/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/databasemodel/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/databasemodel/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/views/advanced_searching.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/advanced_searching.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/views/cart.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/cart.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/views/elements/sidebar.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/elements/sidebar.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/views/elements/upper_header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/elements/upper_header.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/views/forget_password.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/forget_password.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/index.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/views/login.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/login.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/views/my_account.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/my_account.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/views/register.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/register.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/views/ship.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/ship.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/views/status_products.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/status_products.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../customer/controller/productController.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -80,6 +67,7 @@
       <workItem from="1575470756558" duration="2620000" />
       <workItem from="1575503925809" duration="51000" />
       <workItem from="1575558283298" duration="1528000" />
+      <workItem from="1575683397170" duration="652000" />
     </task>
     <servers />
   </component>

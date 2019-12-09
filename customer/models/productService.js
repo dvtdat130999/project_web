@@ -3,6 +3,7 @@ var category=require('../databasemodel/categories');
 var async = require('async');
 const mongoose = require('mongoose');
 
+//?
 exports.index = function(req, res) {
     async.parallel({
         product: function(callback) {
@@ -17,33 +18,10 @@ exports.index = function(req, res) {
     });
 };
 
-// Handle product update.
-exports.decreaseSumOfProduct = function(id){
-    console.log("decrease hello !!");
+//CREATE-none
 
-    let sum;
-    product.findOne({ _id: id })
-        .then((doc) => {
-            if (doc) {
-                sum = doc.sum;
-                if(sum < 1)
-                    return false;
-                sum--;
-                product.update( {_id: new mongoose.Types.ObjectId(id)},{$set:{sum: sum}});
-
-                console.log("decrease success" + sum);
-                return true;
-            } else {
-                console.log("no data exist for this id");
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-
-}
-
-exports.findByCategory = (category) => {
+//READ
+exports.getProductsByCategory = (category) => {
     var type;
     switch (category)
     {
@@ -71,6 +49,39 @@ exports.findByCategory = (category) => {
     return product.find({category: type});
 }
 
-exports.findById = (id) => {
+exports.getProductById = (id) => {
     return product.find({_id: new mongoose.Types.ObjectId(id)})
 }
+
+exports.getAllProducts = () => {
+    return product.find();
+}
+
+//UPDATE
+exports.decreaseSumOfProduct = function(id){
+    console.log("decrease hello !!");
+
+    let sum;
+    product.findOne({ _id: id })
+        .then((doc) => {
+            if (doc) {
+                sum = doc.sum;
+                if(sum < 1)
+                    return false;
+                sum--;
+                product.update( {_id: new mongoose.Types.ObjectId(id)},{$set:{sum: sum}});
+
+                console.log("decrease success" + sum);
+                return true;
+            } else {
+                console.log("no data exist for this id");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+}
+
+//DELETE-none
+
