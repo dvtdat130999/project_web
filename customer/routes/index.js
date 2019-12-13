@@ -31,7 +31,7 @@ router.post('/register', (req, res, next) => userController.postRegister(req, re
 /* get forget_password page*/
 router.get('/forget', (req, res, next) => userController.getForget(req, res, next));
 
-router.post('/forget', async(req, res, next) => await userController.postFotget(req, res, next));
+router.post('/forget', async(req, res, next) => await userController.postForget(req, res, next));
 
 /* get change_password page*/
 router.get('/change_password', ensureAuthenticated, function(req, res, next) {

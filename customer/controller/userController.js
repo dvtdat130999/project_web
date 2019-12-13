@@ -100,7 +100,7 @@ exports.postRegister = (req, res, next) => {
     }
 };
 
-exports.postFotget = async (req, res, next) => {
+exports.postForget = async (req, res, next) => {
     const{username,email}=req.body;
 
     const newUser = await userService.getUserByUsername(username);

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include elements/tag_head.ejs%>
+</head>
+<body>
+<!--
+	Upper Header Section
+-->
+<% include elements/upper_header.ejs%>
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <% include elements/lower_header.ejs%>
+
+    <!--
+    Navigation Bar Section
+    -->
+    <!--
+    Body Section
+    -->
+    <div class="row">
+        <% include elements/sidebar.ejs%>
+        <div class="span9">
+
+
+
+
+            <div class="well">
+                <form class="form-horizontal" >
+                    <%if(userdata.author!='admin'){%>
+
+                    <h3>Thông tin tài khoản</h3>
+
+                    <% include ./partials/messages.ejs%>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Tài khoản: <sup>*</sup></label>
+
+                        <div class="controls">
+                            <label class="control-label" for="inputEmail"><%accounts_customer.username%> </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Tên: <sup>*</sup></label>
+
+                        <div class="controls">
+                            <label class="control-label" for="inputEmail"><%accounts_customer.name%> </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Email: <sup>*</sup></label>
+
+                        <div class="controls">
+                            <label class="control-label" for="inputEmail"><%accounts_customer.email%> </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Điện thoại: <sup>*</sup></label>
+
+                        <div class="controls">
+                            <label class="control-label" for="inputEmail"><%accounts_customer.phone%> </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Quyền: <sup>*</sup></label>
+
+                        <div class="controls">
+                            <label class="control-label" for="inputEmail"><%accounts_customer.author%> </label>
+                        </div>
+                    </div>
+
+
+
+
+                </form>
+
+                <%}%>
+                <%if(userdata.author!='admin'){%>
+                    <h3 style="color: red">Bạn không có quyền tạo tài khoản</h3>
+
+                <%}%>
+            </div>
+
+
+        </div>
+
+        <!--
+
+
+ </div> //container
+
+  <% include elements/copyright.ejs%>
+  <a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
+  <-- Placed at the end of the document so the pages load faster -->
+        <% include elements/script_end.ejs%>
+    </div>
+</div>
+</body>
+</html>
