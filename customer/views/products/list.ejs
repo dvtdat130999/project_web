@@ -38,7 +38,7 @@ Lower Header Section
                                 <a href="<%= product.uriDetail %>"><img src='<%= product.thumbnail %>' alt=""></a>
                                 <div class="caption cntr">
                                     <p><%= product.name %></p>
-                                    <p><strong> <%= product.price %></strong></p>
+                                    <p><strong> <%= product.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+"đ" %></strong></p>
                                     <h4><a class="shopBtn" href="#" title="add to cart">Thêm vào giỏ </a></h4>
 
                                     <br class="clr">
@@ -53,6 +53,21 @@ Lower Header Section
 
 
             </div>
+
+            <ul class="pagination modal-3">
+                <%for (i=1;i<active.length;i++){
+                if (active[i]==="class=active"){%>
+                <li><a href="products?page=<%=i%><%= condition%>" class="prev">&laquo</a></li>
+                <%}}%>
+                <%for (i=0;i<active.length;i++){%>
+                <li> <a href="products?page=<%=i+1%><%= condition%>" <%= active[i]%>><%=i+1%></a></li>
+                <%}%>
+                <%for (i=0;i<active.length-1;i++){
+                if (active[i]==="class=active"){%>
+                <li><a href="products?page=<%=i+2%><%= condition%>" class="next">&raquo;</a></li>
+                <%}}%>
+
+            </ul>
 
             <!--<div class="row-fluid">
                 <ul class="thumbnails">

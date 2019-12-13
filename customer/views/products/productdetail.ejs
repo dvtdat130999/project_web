@@ -36,7 +36,7 @@ Lower Header Section
                         <div class="span7">
                             <h3><%= product.name %></h3>
                             <hr class="soft"/>
-                            <p> Giá: <%= product.price %></p>
+                            <p> Giá: <%= product.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+"đ" %></p>
                             <p> Giới thiệu: <%= product.description %></p>
                             <p> Trạng thái: <%= product.status %></p>
                             <button type="submit" class="shopBtn"><span class=" icon-shopping-cart"></span>Thêm vào giỏ</button>

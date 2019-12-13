@@ -61,6 +61,100 @@ hr.soften {margin: 8px 0;background: #DDD;}
 .caption p{margin:0}
 .caption h4{margin:0}
 .thumbnail .caption {padding: 9px;color: #555555;background: #F3F2F2;}
+
+.dropbtn {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    border: black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: orange;
+}
+
+.pagination {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin-top: 10px;
+}
+.pagination li {
+    display: inline;
+    text-align: center;
+}
+.pagination a {
+    float: left;
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 5px 12px;
+    color: black;
+    margin-left: -1px;
+    border: 1px solid transparent;
+    line-height: 1.5;
+}
+.pagination a.active {
+    cursor: default;
+}
+.pagination a:active {
+    outline: none;
+}
+
+.modal-3 a {
+    margin-left: 3px;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+}
+.modal-3 a:hover {
+    background-color: orange;
+}
+.modal-3 a.active, .modal-3 a:active {
+    background-color: darkorange;
+}
+
 .footer {background-color:#222; color:#eee; padding: 28px 8px 18px; margin-top: 18px;}
 .footer a{color:#bbb; font-size:12px;}
 .copyright {clear: both; padding: 8px; border-top: 1px solid #CCC; font-size: 13px; background: #f2f2f2; box-shadow: 0 0 3px #B1AFAF;}
