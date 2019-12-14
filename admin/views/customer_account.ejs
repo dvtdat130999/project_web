@@ -42,6 +42,7 @@ Lower Header Section
                     </thead>
 
                     <tbody>
+
                     <%account_list.forEach(function(account){%>
                         <tr>
                             <td>
@@ -66,8 +67,11 @@ Lower Header Section
                 <%}%>
 
                 <%if(userdata.author=='admin'){%>
+                <div class="control-group">
                     <a href="/locked_account" class="shopBtn btn-large pull-right">Khóa tài khoản </a>
                     <a href="/unlocked_account" class="shopBtn btn-large pull-left">Mở tài khoản </a>
+                </div>
+
                 <%}%>
 
 
