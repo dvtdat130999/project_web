@@ -65,9 +65,11 @@ Lower Header Section
                     <h3 style="color:red;">Bạn không có quyền này</h3>
                 <%}%>
 
+                <%if(userdata.author=='admin'){%>
+                    <a href="/locked_account" class="shopBtn btn-large pull-right">Khóa tài khoản </a>
+                    <a href="/unlocked_account" class="shopBtn btn-large pull-left">Mở tài khoản </a>
+                <%}%>
 
-                <a href="/locked_account" class="shopBtn btn-large pull-right">Khóa tài khoản </a>
-                <a href="/unlocked_account" class="shopBtn btn-large pull-left">Mở tài khoản </a>
 
 
             </div>

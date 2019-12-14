@@ -215,10 +215,14 @@ exports.postLocked=async (req, res, next) =>{
                 req.flash('error_msg', 'Không thể khóa tài khoản này');
                 res.redirect('/locked_account');
             }
-            user.locked=true;
-            user.save();
-            req.flash('success_msg', 'Khóa tài khoản thành công');
-            res.redirect('/locked_account');
+            else
+            {
+                user.locked=true;
+                user.save();
+                req.flash('success_msg', 'Khóa tài khoản thành công');
+                res.redirect('/locked_account');
+            }
+
         }
         else
         {

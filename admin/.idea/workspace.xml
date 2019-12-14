@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../customer/config/passport.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/config/passport.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/controller/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/controller/userController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/databasemodel/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/databasemodel/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/models/userService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/models/userService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/views/products/list.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/products/list.ejs" afterDir="false" />
-    </list>
+    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +69,7 @@
       <workItem from="1576222468100" duration="6578000" />
       <workItem from="1576240863554" duration="10710000" />
       <workItem from="1576281814540" duration="8515000" />
-      <workItem from="1576292903889" duration="269000" />
+      <workItem from="1576292903889" duration="827000" />
     </task>
     <servers />
   </component>
