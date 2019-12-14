@@ -28,58 +28,78 @@ Lower Header Section
 
 
             <div class="well">
-                <form class="form-horizontal" >
-                    <%if(userdata.author!='admin'){%>
+                <form class="form-horizontal"  >
+                    <%if(userdata.author=='admin'){%>
 
-                    <h3>Thông tin tài khoản</h3>
+                    <h2>Thông tin tài khoản</h2>
 
                     <% include ./partials/messages.ejs%>
+
                     <div class="control-group">
-                        <label class="control-label" for="inputEmail">Tài khoản: <sup>*</sup></label>
+                        <label class="control-label" for="inputEmail" style="font-size:16px;">Tài khoản: </label>
 
                         <div class="controls">
-                            <label class="control-label" for="inputEmail"><%accounts_customer.username%> </label>
+                            <label class="control-label" name="username"><%=account_list.username%> </label>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="inputEmail">Tên: <sup>*</sup></label>
+                        <label class="control-label" for="inputEmail"style="font-size:16px;">Tên: </label>
 
                         <div class="controls">
-                            <label class="control-label" for="inputEmail"><%accounts_customer.name%> </label>
+                            <label class="control-label" name="name"><%=account_list.name%> </label>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="inputEmail">Email: <sup>*</sup></label>
+                        <label class="control-label" for="inputEmail"style="font-size:16px;">Email: </label>
 
                         <div class="controls">
-                            <label class="control-label" for="inputEmail"><%accounts_customer.email%> </label>
+                            <label class="control-label" name="email"><%=account_list.email%> </label>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="inputEmail">Điện thoại: <sup>*</sup></label>
+                        <label class="control-label" for="inputEmail"style="font-size:16px;">Điện thoại: </label>
 
                         <div class="controls">
-                            <label class="control-label" for="inputEmail"><%accounts_customer.phone%> </label>
+                            <label class="control-label" name="phone"><%=account_list.phone%> </label>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="inputEmail">Quyền: <sup>*</sup></label>
+                        <label class="control-label" for="inputEmail"style="font-size:16px;">Địa chỉ: </label>
 
                         <div class="controls">
-                            <label class="control-label" for="inputEmail"><%accounts_customer.author%> </label>
+                            <label class="control-label" name="address"><%=account_list.address%> </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail"style="font-size:16px;">Quyền: </label>
+
+                        <div class="controls">
+                            <label class="control-label" name="author"><%=account_list.author%> </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail"style="font-size:16px;">Trạng thái: </label>
+
+                        <div class="controls">
+                            <%if(account_list.locked==true){%>
+                            <label class="control-label" name="author">Khóa </label>
+                            <%}%>
+                                <%if(account_list.locked==false){%>
+                                    <label class="control-label" name="author">Mở </label>
+                                <%}%>
                         </div>
                     </div>
 
 
+                    <%if(userdata.author!='admin'){%>
+                    <h3 style="color:red;">Bạn không có quyền này</h3>
+                    <%}%>
 
+                    <%}%>
 
                 </form>
 
-                <%}%>
-                <%if(userdata.author!='admin'){%>
-                    <h3 style="color: red">Bạn không có quyền tạo tài khoản</h3>
 
-                <%}%>
             </div>
 
 

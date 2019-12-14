@@ -39,6 +39,14 @@ var userSchema=new mongoose.Schema({
         default: 'shop',
         required:true
     },
+    uriDetail:{
+        type:String
+    },
+    locked:{
+        type:Boolean,
+        default:false
+    }
+
 });
 
 

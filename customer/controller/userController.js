@@ -80,13 +80,15 @@ exports.postRegister = (req, res, next) => {
 
                                 res.render('register', { errors, username, password, password2, name, address, phone, email });
                             } else {
+                                const uriDetail='/account?username='+username;
                                 const newUser = new user({
                                     username,
                                     password,
                                     name,
                                     address,
                                     phone,
-                                    email
+                                    email,
+                                    uriDetail
                                 });
 
                                 //Hash password
@@ -116,8 +118,8 @@ exports.postForget = async (req, res, next) => {
         var transporter = nodemailer.createTransport({ // config mail server
             service: 'gmail',
             auth: {
-                user: 'tdat130999@gmail.com',
-                pass: 'Dvtdat130999'
+                user: 'projectweb1920@gmail.com',
+                pass: 'webcuoiky1920'
             }
         });
         var mainOptions = { // thiết lập đối tượng, nội dung gửi mail

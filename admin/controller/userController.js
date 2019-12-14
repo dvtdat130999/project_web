@@ -9,31 +9,17 @@ const nodemailer=require('nodemailer');
 exports.getAccountList = (req, res, next) => {
     const username = req.query.username;
     if (typeof username !== "undefined") {
-        const id = req.query.id;
-        if (typeof id !== "undefined") {
-            userService.getUserByID(id)
-                .exec(function (err, accounts_customer) {
-                    if (err) {
-                        return next(err);
-                    }
-                    //Successful, so render
-                    res.render('detail_account', {
-                        title: 'Information of a customer',
-                        account_list: accounts_customer,
-                        userdata: req.user
-                    });
-                });
-        } else {
-            userService.getUserByUsername(username)
-                .exec(function (err, accounts_customer) {
-                    if (err) {
-                        return next(err);
-                    }
-                    //Successful, so render
-                    res.render('customer_account', {title: 'List customer', account_list: accounts_customer, userdata: req.user});
-                });
+
+        userService.getUserByUsername(username)
+            .exec(function (err, accounts_customer) {
+                if (err) {
+                    return next(err);
+                }
+                //Successful, so render
+                res.render('detail_account', {title: 'List customer', account_list: accounts_customer, userdata: req.user});
+            });
         }
-    } else {
+        else {
         userService.getAllAccount()
             .exec(function (err, accounts_customer) {
                 if (err) {
@@ -42,7 +28,8 @@ exports.getAccountList = (req, res, next) => {
                 //Successful, so render
                 res.render('customer_account', {account_list: accounts_customer, userdata: req.user});
             });
-    }
+        }
+
 
 };
 
@@ -67,20 +54,7 @@ exports.postLogin = (req, res, next) => {
     })(req, res, next);
 };
 
-exports.postVerify = async (req, res, next) => {
-    const {secretToken} = req.body;
-    const newUser = await userService.getUserBySecretToken(secretToken);
-    if (!newUser) {
-        req.flash('error_msg', 'Không tìm được tài khoản thích hợp với mã');
-        res.redirect('/verify');
-        return;
-    }
-    newUser.active = true;
-    newUser.secretToken = '';
-    await newUser.save();
-    req.flash('success_msg', 'Kích hoạt thành công, bạn có thể đăng nhập');
-    res.redirect('/verify');
-}
+
 
 exports.postRegister = (req, res, next) => {
     const {username, password, password2, name, address, phone, email} = req.body;
@@ -101,7 +75,7 @@ exports.postRegister = (req, res, next) => {
     }
 
     if (errors.length > 0) {
-        res.render('register', { errors, username, password, password2, name, address, phone, email });
+        res.render('register', { errors, username, password, password2, name, address, phone, email,userdata:req.user });
     } else {
         //Check username and email existed
         userService.getUserByUsername(username)
@@ -109,27 +83,29 @@ exports.postRegister = (req, res, next) => {
                 if (data) {
                     errors.push({msg: "Tài khoản đã tồn tại"});
 
-                    res.render('register', { errors, username, password, password2, name, address, phone, email });
+                    res.render('register', { errors, username, password, password2, name, address, phone, email,userdata:req.user });
                 } else {
                     userService.getUserByEmail(email)
                         .then(data2 => {
                             if (data2) {
                                 errors.push({msg: "Email đã sử dụng"});
 
-                                res.render('register', { errors, username, password, password2, name, address, phone, email });
+                                res.render('register', { errors, username, password, password2, name, address, phone, email,userdata:req.user });
                             } else {
+                                const uriDetail='/account?username='+username;
+
                                 const newUser = new user({
                                     username,
                                     password,
                                     name,
                                     address,
                                     phone,
-                                    email
+                                    email,
+                                    uriDetail
                                 });
 
                                 //Hash password
                                 userService.insertUser(newUser);
-                                req.flash('success_msg', 'Bạn đã đăng ký thành công, hãy vào email để kích hoạt tài khoản');
                                 res.redirect('/register');
                             }
                         });
@@ -154,8 +130,8 @@ exports.postForget = async (req, res, next) => {
         var transporter = nodemailer.createTransport({ // config mail server
             service: 'gmail',
             auth: {
-                user: 'tdat130999@gmail.com',
-                pass: 'Dvtdat130999'
+                user: 'projectweb1920@gmail.com',
+                pass: 'webcuoiky1920'
             }
         });
         var mainOptions = { // thiết lập đối tượng, nội dung gửi mail
@@ -218,4 +194,68 @@ exports.postChangePassword = async (req, res, next) => {
             res.redirect('/change_password');
         }
     });
-}
+};
+exports.getLocked=(req,res,next)=>{
+    res.render('lockedAccount',{userdata:req.user});
+};
+exports.postLocked=async (req, res, next) =>{
+    const{username}=req.body;
+    if(!username)
+    {
+        req.flash('error_msg', 'Hãy nhập tài khoản');
+        res.redirect('/locked_account');
+    }
+    else
+    {
+        const user= await userService.getUserByUsername(username);
+        if(user)
+        {
+            if(user.username=='admin')
+            {
+                req.flash('error_msg', 'Không thể khóa tài khoản này');
+                res.redirect('/locked_account');
+            }
+            user.locked=true;
+            user.save();
+            req.flash('success_msg', 'Khóa tài khoản thành công');
+            res.redirect('/locked_account');
+        }
+        else
+        {
+            req.flash('error_msg', 'Sai tài khoản');
+            res.redirect('/locked_account');
+        }
+    }
+
+};
+
+exports.getUnLocked=async(req,res,next)=>{
+    res.render('unlockedAccount',{userdata:req.user});
+};
+
+exports.postUnLocked= async (req, res, next) =>{
+    const{username}=req.body;
+    if(!username)
+    {
+        req.flash('error_msg', 'Hãy nhập tài khoản');
+        res.redirect('/unlocked_account');
+    }
+    else
+    {
+        const user= await userService.getUserByUsername(username);
+
+        if(user)
+        {
+            user.locked=false;
+            user.save();
+            req.flash('success_msg', 'Mở khóa tài khoản thành công');
+            res.redirect('/unlocked_account');
+        }
+        else
+        {
+            req.flash('error_msg', 'Sai tài khoản');
+            res.redirect('/unlocked_account');
+        }
+
+    }
+};

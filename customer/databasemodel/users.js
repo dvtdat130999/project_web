@@ -44,6 +44,14 @@ var userSchema=new mongoose.Schema({
     active:{
         type:Boolean,
         default:false
+    },
+    uriDetail:{
+        type:String,
+
+    },
+    locked:{
+        type:Boolean,
+        default:false
     }
 });
 

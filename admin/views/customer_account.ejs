@@ -24,7 +24,8 @@ Lower Header Section
     <div class="row">
         <div class="span12">
 
-            <div class="well well-small">
+            <div class="well well-large">
+                <%if(userdata.author=='admin'){%>
                 <h1>Thông tin tài khoản</h1>
                 <hr class="soften"/>
 
@@ -33,6 +34,7 @@ Lower Header Section
                     <thead>
                     <tr>
                         <th><h3>Tài khoản</h3></th>
+
                         <th><h3>Tên</h3></th>
                         <th><h3>Quyền</h3></th>
 
@@ -41,12 +43,16 @@ Lower Header Section
 
                     <tbody>
                     <%account_list.forEach(function(account){%>
-                    <tr>
-                        <td><a ><%= account.username %></a></td>
-                        <td><%= account.name %></td>
-                        <td><%= account.author %></td>
+                        <tr>
+                            <td>
+                                <a href="<%= account.uriDetail %>"><%= account.username %> </a>
+                            </td>
 
-                    </tr>
+                            <td><%= account.name %></td>
+                            <td><%= account.author %></td>
+
+
+                        </tr>
                     <% }); %>
 
 
@@ -54,8 +60,14 @@ Lower Header Section
 
                     </tbody>
                 </table><br/>
+                <%}%>
+                <%if(userdata.author!='admin'){%>
+                    <h3 style="color:red;">Bạn không có quyền này</h3>
+                <%}%>
 
 
+                <a href="/locked_account" class="shopBtn btn-large pull-right">Khóa tài khoản </a>
+                <a href="/unlocked_account" class="shopBtn btn-large pull-left">Mở tài khoản </a>
 
 
             </div>

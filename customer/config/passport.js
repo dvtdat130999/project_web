@@ -15,13 +15,22 @@ module.exports=function (passport) {
                     if(err) throw  err;
                     if(isMatch)
                     {
-                        if(user.active==true ||user.author=='admin'||user.author=='shop')
-                            return done(null,user);
-                        else
+                        if(user.locked==true)
                         {
-                            return done(null, false, { message: 'Hãy kích hoạt tài khoản' });
+                            return done(null, false, { message: 'Tài khoản này đã bị khóa' });
 
                         }
+                        else
+                        {
+                            if(user.active==true ||user.author=='admin'||user.author=='shop')
+                                return done(null,user);
+                            else
+                            {
+                                return done(null, false, { message: 'Hãy kích hoạt tài khoản' });
+
+                            }
+                        }
+
                     }
                     else
                     {

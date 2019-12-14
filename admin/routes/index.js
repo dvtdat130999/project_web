@@ -15,42 +15,72 @@ router.get('/',ensureAuthenticated, (req, res, next) =>{
 router.get('/account',ensureAuthenticated, (req, res, next) =>{
   userController.getAccountList(req,res,next);
 });
-/* get logout*/
-router.get('/logout', function(req, res, next) {
-  req.logout();
-  res.redirect('/');
 
+
+
+/* get logout*/
+router.get('/logout',ensureAuthenticated, (req, res, next) =>{
+  userController.getLogout(req,res,next);
 });
 /* GET shop list page. */
 router.get('/shop',ensureAuthenticated, function(req, res, next) {
   res.render('shop', { userdata:req.user });
 });
 /* GET login page. */
-router.get('/login', function(req, res, next) {
-  res.render('login', { userdata:req.user });
+router.get('/login', (req, res, next) =>{
+  userController.getLogin(req,res,next);
 });
+
 router.post('/login', function(req, res, next) {
 
-  passport.authenticate('local', { //chọn phương thức check là local => npm install passport-local
-    failureRedirect: '/login',  //nếu check không đúng thì redirect về link này
-    successRedirect: '/',
-    failureFlash:true
-  })(req,res,next);
+  userController.postLogin(req,res,next);
+
 });
 /* GET register page. */
-router.get('/register',ensureAuthenticated, function(req, res, next) {
-  res.render('register', { userdata:req.user });
+router.get('/register', ensureAuthenticated,(req, res, next)=> {
+
+  userController.getRegister(req,res,next);
+
+});
+router.post('/register',ensureAuthenticated, function(req, res, next) {
+  userController.postRegister(req,res,next);
 
 
 });
 /* GET forget password page. */
-router.get('/forget', function(req, res, next) {
-  res.render('forget_password', { userdata:req.user });
+router.get('/forget',(req, res, next)=> {
+
+  userController.getForget(req,res,next);
+
+});
+router.post('/forget',(req, res, next)=> {
+
+  userController.postForget(req,res,next);
+
+});
+/* GET lock account page. */
+router.get('/locked_account',ensureAuthenticated,(req, res, next)=> {
+
+  userController.getLocked(req,res,next);
+
+});
+router.post('/locked_account',ensureAuthenticated,(req, res, next)=> {
+
+  userController.postLocked(req,res,next);
+
+});
+/* GET unlock account page. */
+router.get('/unlocked_account',ensureAuthenticated,(req, res, next)=> {
+
+  userController.getUnLocked(req,res,next);
+
+});
+router.post('/unlocked_account',ensureAuthenticated,(req, res, next)=> {
+
+  userController.postUnLocked(req,res,next);
+
 });
 
-
-router.post('/register', (req, res, next) =>{userController.postRegister(req,res,next);
-});
 
 /* GET product list of shop page. */
 router.get('/products',ensureAuthenticated, function(req, res, next) {

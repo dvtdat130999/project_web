@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include elements/tag_head.ejs%>
+</head>
+<body>
+<!--
+	Upper Header Section
+-->
+<% include ./elements/upper_header.ejs%>
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <% include elements/lower_header.ejs%>
+
+    <!--
+    Navigation Bar Section
+    -->
+    <% include elements/navbar.ejs%>
+    <!--
+    Body Section
+    -->
+    <div class="row">
+        <% include elements/sidebar.ejs%>
+        <div class="span9">
+            <%if(userdata.author=='admin'){%>
+
+
+            <div class="well">
+
+                <form action="/unlocked_account" method="post">
+                    <%include ./partials/messages.ejs%>
+
+                    <div class="control-group">
+                        <label class="control-label" for="secretToken">Tài khoản</label>
+                        <div class="controls">
+                            <input class="span3"  name="username"type="text" placeholder=""value="<%=typeof username !='undefined' ? username :''%>">
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <button type="submit" class="exclusive shopBtn">Mở tài khoản</button>
+                        </div>
+                    </div>
+
+
+
+                </form>
+
+            </div>
+
+            <%}%>
+
+        </div>
+    </div>
+    <!--
+    Clients
+    -->
+    <!--
+    Footer
+    -->
+
+</div><!-- /container -->
+
+<a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
+<!-- Placed at the end of the document so the pages load faster -->
+<% include elements/script_end.ejs%>
+</div>
+</body>
+</html>
