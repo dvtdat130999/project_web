@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <% include elements/tag_head.ejs%>
+    <% include ./elements/tag_head.ejs%>
 </head>
 <body>
 <!--
@@ -31,7 +31,7 @@ Lower Header Section
             <hr class="soft"/>
             <div class="well">
 
-                        <form action="/login" method="post">
+                        <form action="/users/login" method="post">
                             <h3> Đăng nhập</h3>
                             <% include ./partials/messages.ejs%>
 
@@ -50,12 +50,12 @@ Lower Header Section
 
                             <div class="control-group">
                                 <div class="controls">
-                                    <button type="submit" class="exclusive shopBtn">Đăng nhập</button> <a href="/forget">Quên mật khẩu</a>
+                                    <button type="submit" class="exclusive shopBtn">Đăng nhập</button> <a href="/users/forget">Quên mật khẩu</a>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="controls">
-                                    <strong>Chưa có tài khoản?</strong><a href="/register">Đăng ký</a>
+                                    <strong>Chưa có tài khoản?</strong><a href="/users/register">Đăng ký</a>
                                 </div>
                             </div>
                         </form>

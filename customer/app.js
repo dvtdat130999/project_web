@@ -27,7 +27,9 @@ let options={
   pass: process.env.PASS
 };
 //đường dẫn tới database tên project ở mongoDB atlas (cloud)
-var uri= process.env.URL;
+var uri= process.env.URI;
+
+app.locals.addressHost = (process.env.ADDRESS_HOST || 'http://localhost:3000');
 
 //Use native Promises
 mongoose.Promise=global.Promise;
@@ -82,6 +84,7 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

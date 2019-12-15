@@ -13,13 +13,13 @@
                 </div>
                 <a class="active" href="/"> <span class="icon-home"></span> Trang chủ</a>
                 <%if(userdata){%>
-                    <a href="/account"><span class="icon-user"></span> Tài khoản</a>
+                    <a href="/users/account"><span class="icon-user"></span> Tài khoản</a>
 
-                    <a href="/logout"><span class="icon-lock"></span> Đăng xuất </a>
+                    <a href="/users/logout"><span class="icon-lock"></span> Đăng xuất </a>
                 <%}%>
                 <%if(!userdata){%>
-                    <a href="/register"><span class="icon-lock"></span> Đăng ký </a>
-                    <a href="/login"><span class="icon-lock"></span> Đăng nhập </a>
+                    <a href="/users/register"><span class="icon-lock"></span> Đăng ký </a>
+                    <a href="/users/login"><span class="icon-lock"></span> Đăng nhập </a>
 
                 <%}%>
                 <a href="/cart"><span class="icon-shopping-cart"></span> Giỏ hàng </a>

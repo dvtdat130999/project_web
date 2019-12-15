@@ -8,32 +8,12 @@
 <!--
 	Upper Header Section
 -->
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="topNav">
-        <div class="container">
-            <div class="alignR">
-                <div class="pull-left socialNw">
-                    <a href="#"><span class="icon-twitter"></span></a>
-                    <a href="#"><span class="icon-facebook"></span></a>
-                    <a href="#"><span class="icon-youtube"></span></a>
-                    <a href="#"><span class="icon-tumblr"></span></a>
-
-                </div>
-                <a class="active" href="/"> <span class="icon-home"></span> Trang chủ</a>
-                <a href="/register"><span class="icon-lock"></span> Đăng ký </a>
-                <a href="/login"><span class="icon-lock"></span> Đăng nhập </a>
-                <a href="/cart"><span class="icon-shopping-cart"></span> Giỏ hàng </a>
-
-            </div>
-        </div>
-    </div>
-</div>
+<% include ./elements/upper_header.ejs%>
 <!--
 Lower Header Section
 -->
 <div class="container">
     <% include elements/lower_header.ejs%>
-
 
     <!--
     Navigation Bar Section
@@ -53,7 +33,7 @@ Lower Header Section
             </ul>
             <hr class="soft"/>
             <div class="well">
-                <form class="form-horizontal" action="/register" method="post">
+                <form class="form-horizontal" action="/users/register" method="post">
                     <h3>Đăng ký</h3>
 
                     <% include ./partials/messages.ejs%>
@@ -102,7 +82,7 @@ Lower Header Section
 
                     <div class="control-group">
                         <div class="controls">
-                            <button type="submit" class="exclusive shopBtn">Đăng ký</button> <a href="/login">Đăng nhập</a>
+                            <button type="submit" class="exclusive shopBtn">Đăng ký</button> <a href="/users/login">Đăng nhập</a>
                         </div>
                     </div>
                 </form>

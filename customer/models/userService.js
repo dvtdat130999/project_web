@@ -30,7 +30,7 @@ exports.insertUser = (newUser)=> {
                 subject: 'Kích hoạt tài khoản',
                 html: 'Chào ' + newUser.name + '<br>'
                     + 'Bạn cần nhập mã sau: ' + newUser.secretToken + '<br>'
-                    + 'ở trang: ' + '<a href="http://localhost:3000/verify">http://localhost:3000/verify</a>'
+                    + 'ở trang: ' + '<a href="http://localhost:3000/users/verify">http://localhost:3000/users/verify</a>'
             }
             transporter.sendMail(mainOptions, function (error, info) {
                 if (error) { // nếu có lỗi

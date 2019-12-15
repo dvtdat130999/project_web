@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="" />
+    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../customer/.env" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/controller/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/controller/userController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/models/userService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/models/userService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/routes/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/change_password.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/change_password.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/elements/client.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/elements/client.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/elements/copyright.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/elements/copyright.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/elements/lower_header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/elements/lower_header.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/elements/script_end.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/elements/script_end.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/elements/sidebar.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/elements/sidebar.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/elements/tag_head.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/elements/tag_head.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/elements/upper_header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/elements/upper_header.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/forget_password.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/forget_password.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/login.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/login.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/my_account.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/my_account.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/register.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/register.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/verify.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/verify.ejs" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +90,7 @@
       <workItem from="1576240863554" duration="10710000" />
       <workItem from="1576281814540" duration="8515000" />
       <workItem from="1576292903889" duration="1452000" />
+      <workItem from="1576372589837" duration="2095000" />
     </task>
     <servers />
   </component>

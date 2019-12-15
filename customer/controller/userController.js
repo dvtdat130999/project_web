@@ -6,7 +6,23 @@ const bcrypt=require('bcryptjs');
 const randomstring=require('randomstring');
 const nodemailer=require('nodemailer');
 
-exports.getAccount = (req, res, next) => res.render('my_account', { userdata:req.user });
+exports.getAccount = (req, res, next) => res.render('my_account', { userdata: req.user });
+
+exports.postAccount = async (req, res, next) => {
+    const {name, address, phone} = req.body;
+
+    const newUser = await userService.getUserByUsername(req.user.username);
+
+    console.log("postpost" + name + address + phone);
+
+    newUser.name = name;
+    newUser.address = address;
+    newUser.phone = phone;
+
+    newUser.save();
+
+    res.redirect('/users/account');
+}
 
 exports.getLogin = (req, res, next) => res.render('login',{ userdata:req.user });
 
@@ -23,7 +39,7 @@ exports.getForget = (req, res, next) => res.render('forget_password', { userdata
 
 exports.postLogin = (req, res, next) => {
     passport.authenticate('local', { //chọn phương thức check là local => npm install passport-local
-        failureRedirect: '/login',  //nếu check không đúng thì redirect về link này
+        failureRedirect: '/users/login',  //nếu check không đúng thì redirect về link này
         successRedirect: '/',
         failureFlash: true
     })(req, res, next);
@@ -34,14 +50,14 @@ exports.postVerify = async (req, res, next) => {
     const newUser = await userService.getUserBySecretToken(secretToken);
     if (!newUser) {
         req.flash('error_msg', 'Không tìm được tài khoản thích hợp với mã');
-        res.redirect('/verify');
+        res.redirect('/users/verify');
         return;
     }
     newUser.active = true;
     newUser.secretToken = '';
     await newUser.save();
     req.flash('success_msg', 'Kích hoạt thành công, bạn có thể đăng nhập');
-    res.redirect('/verify');
+    res.redirect('/users/verify');
 }
 
 exports.postRegister = (req, res, next) => {
@@ -71,7 +87,7 @@ exports.postRegister = (req, res, next) => {
                 if (data) {
                     errors.push({msg: "Tài khoản đã tồn tại"});
 
-                    res.render('register', { errors, username, password, password2, name, address, phone, email });
+                    res.render('/users/register', { errors, username, password, password2, name, address, phone, email });
                 } else {
                     userService.getUserByEmail(email)
                         .then(data2 => {
@@ -94,7 +110,7 @@ exports.postRegister = (req, res, next) => {
                                 //Hash password
                                 userService.insertUser(newUser);
                                 req.flash('success_msg', 'Bạn đã đăng ký thành công, hãy vào email để kích hoạt tài khoản');
-                                res.redirect('/register');
+                                res.redirect('/users/register');
                             }
                         });
                 }
@@ -108,7 +124,7 @@ exports.postForget = async (req, res, next) => {
     const newUser = await userService.getUserByUsername(username);
     if(!newUser) {
         req.flash('error_msg', 'Sai tài khoản hoặc email');
-        res.redirect('/forget');
+        res.redirect('/users/forget');
         return;
     }
     else {
@@ -149,7 +165,7 @@ exports.postForget = async (req, res, next) => {
                 newUser.save();
 
                 req.flash('success_msg', 'Tạo mật khẩu mới thành công, vào email để xem kết quả');
-                res.redirect('/forget');
+                res.redirect('/users/forget');
 
             }));
     }
@@ -172,14 +188,14 @@ exports.postChangePassword = async (req, res, next) => {
 
                     newUser.save();
 
-                    req.flash('success_msg', 'Tạo mật khẩu mới thành công, hãy thoát ra và đăng nhập lại để kiểm tra');
-                    res.redirect('/change_password');
-
+                    req.flash('success_msg', 'Tạo mật khẩu mới thành công, mời bạn đăng nhập lại');
+                    req.logout();
+                    res.redirect('/users/login');
                 }));
         }
         else {
             req.flash('error_msg', 'Sai mật khẩu cũ');
-            res.redirect('/change_password');
+            res.redirect('/users/change_password');
         }
     });
 }

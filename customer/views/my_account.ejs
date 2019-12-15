@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <% include elements/tag_head.ejs%>
-
 </head>
-<body>
+<body onload="prepare()">
 <!--
 	Upper Header Section
 -->
@@ -34,44 +33,32 @@ Lower Header Section
 
 
             <div class="well">
-
-                <form class="form-horizontal" >
+                <button onclick="changeIn4()" class="exclusive shopBtn" id="changeIn4">Chỉnh sửa thông tin</button> 
+                <form class="form-horizontal" action="/users/account" method="post">
                     <h3>Thông tin tài khoản</h3>
                     <div class="control-group">
                         <label class="control-label">Tên<sup>*</sup></label>
                         <div class="controls">
-                            <input type="text" placeholder="">
+                            <input id="inputName" type="text" name="name" value="<%=userdata.name%>" readonly>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label">Nghề nghiệp<sup>*</sup></label>
-                        <div class="controls">
-                            <input type="text" placeholder="">
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Quốc gia<sup>*</sup></label>
-                        <div class="controls">
-                            <input type="text" placeholder="">
-                        </div>
-                    </div>
-
                     <div class="control-group">
                         <label class="control-label">Địa chỉ<sup>*</sup></label>
                         <div class="controls">
-                            <input type="text" placeholder="">
+                            <input id="inputAddress" type="text" name="address" value="<%=userdata.address%>" readonly>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Số điện thoại<sup>*</sup></label>
                         <div class="controls">
-                            <input type="text" placeholder="">
+                            <input id="inputPhone" type="text" name="phone" value="<%=userdata.phone%>" readonly>
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="controls">
-                            <input onclick="successUpdateAccount()" type="submit" name="submitAccount" value="Đống ý" class="exclusive shopBtn">
-                            <a href="/change_password">Đổi mật khẩu</a>
+                            <button id="buttonSubmit" type="submit" class="exclusive shopBtn">Đồng ý</button>
+                            <button onclick="cancelChange()" class="exclusive shopBtn" id="cancelChange">Hủy</button>
+                            <a id="changePassword" href="/users/change_password">Đổi mật khẩu</a>
                         </div>
                     </div>
                 </form>
