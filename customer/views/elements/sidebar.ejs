@@ -7,16 +7,220 @@
                 <a href="products?sort=high">Giá từ cao đến thấp</a>
             </div>
         </div>
-        <ul class="nav nav-list">
-            <li><a href="/products?category=watch"><span class="icon-chevron-right"></span>Đồng hồ</a></li>
-            <li><a href="/products?category=ring"><span class="icon-chevron-right"></span>Nhẫn</a></li>
-            <li><a href="/products?category=bracelet"><span class="icon-chevron-right"></span>Vòng tay</a></li>
-            <li><a href="/products?category=necklaced"><span class="icon-chevron-right"></span>Vòng cổ</a></li>
 
+        <%if (typeof checked==="undefined")
+        {
+            checked=[];
+            checked[4]="checked";
+            checked[9]="checked";
+            checked[12]="checked";
+            checked[17]="checked";
+        }%>
+        <hr>
+        <h2>Loại sản phẩm</h2>
+        <form>
+            <label class="container-radiobutton">
+                <input id="watch" type="radio" name="typeProduct" onclick="check()" <%=checked[0]%>> Đồng hồ<br>
+                <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobutton">
+                <input id="bracelet" type="radio" name="typeProduct" <%=checked[1]%>> Vòng tay<br>
+                <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobutton">
+                <input id="ring" type="radio" name="typeProduct" <%=checked[2]%>> Nhẫn<br>
+                <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobutton">
+                <input id="necklaced" type="radio" name="typeProduct" <%=checked[3]%>> Vòng cổ<br>
+                <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobutton">
+                <input id="AllCategory" type="radio" name="typeProduct" <%=checked[4]%>> Tất cả
+                <span class="checkmark"></span>
+            </label>
+        </form>
 
+        <h2>Thương hiệu</h2>
+        <form>
+            <label class="container-radiobutton">
+                <input id="luxury" type="radio" name="typeProduct" <%=checked[5]%>> Skymond Luxury<br>
+                <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobutton">
+                <input id="pnj" type="radio" name="typeProduct" <%=checked[6]%>> PNJ<br>
+                <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobutton">
+                <input id="doji" type="radio" name="typeProduct" <%=checked[7]%>> DOJI<br>
+                <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobutton">
+                <input id="sjc" type="radio" name="typeProduct" <%=checked[8]%>> SJC<br>
+                <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobutton">
+                <input id="AllTrademark" type="radio" name="typeProduct" <%=checked[9]%>> Tất cả
+                <span class="checkmark"></span>
+            </label>
+        </form>
 
-            <li style="border:0"> &nbsp;</li>
-        </ul>
+        <h2>Giới tính</h2>
+        <form>
+            <label class="container-radiobutton">
+                <input id="male" type="radio" name="typeProduct" <%=checked[10]%>> Phái nam<br>
+                <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobutton">
+                <input id="female" type="radio" name="typeProduct" <%=checked[11]%>> Phái nữ<br>
+                <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobutton">
+                <input id="AllSex" type="radio" name="typeProduct" <%=checked[12]%>> Tất cả
+                <span class="checkmark"></span>
+            </label>
+        </form>
+
+        <h2>Màu sắc</h2>
+        <form>
+            <label class="container-radiobutton">
+                <input id="yellow" type="radio" name="typeProduct" <%=checked[13]%>> Vàng<br>
+                <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobutton">
+                <input id="white" type="radio" name="typeProduct" <%=checked[14]%>> Trắng<br>
+                <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobutton">
+                <input id="violet" type="radio" name="typeProduct" <%=checked[15]%>> Tím<br>
+                <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobutton">
+                <input id="blue" type="radio" name="typeProduct" <%=checked[16]%>> Xanh dương<br>
+                <span class="checkmark"></span>
+            </label>
+            <label class="container-radiobutton">
+                <input id="AllColor" type="radio" name="typeProduct" <%=checked[17]%>> Tất cả
+                <span class="checkmark"></span>
+            </label>
+        </form>
+
+        <script>
+            function filterProduct() {
+                let query="";
+                let temp="";
+                if (document.getElementById("watch").checked===true)
+                {
+                    query="category=watch";
+                }
+                else if (document.getElementById("ring").checked===true)
+                {
+                    query="category=ring";
+                }
+                else if (document.getElementById("bracelet").checked===true)
+                {
+                    query="category=bracelet";
+                }
+                else if (document.getElementById("necklaced").checked===true)
+                {
+                    query="category=necklaced";
+                }
+
+                if (document.getElementById("luxury").checked===true)
+                {
+                    temp="trademark=luxury";
+                }
+                else if (document.getElementById("pnj").checked===true)
+                {
+                    temp="trademark=pnj";
+                }
+                else if (document.getElementById("doji").checked===true)
+                {
+                    temp="trademark=doji";
+                }
+                else if (document.getElementById("sjc").checked===true)
+                {
+                    temp="trademark=sjc";
+                }
+
+                if (temp!=="")
+                {
+                    if (query==="")
+                    {
+                        query=temp;
+                    }
+                    else
+                    {
+                        query=query+"&"+temp;
+                    }
+                    temp="";
+                }
+
+                if (document.getElementById("male").checked===true)
+                {
+                    temp="sex=male";
+                }
+                else if (document.getElementById("female").checked===true)
+                {
+                    temp="sex=female";
+                }
+
+                if (temp!=="")
+                {
+                    if (query==="")
+                    {
+                        query=temp;
+                    }
+                    else
+                    {
+                        query=query+"&"+temp;
+                    }
+                    temp="";
+                }
+
+                if (document.getElementById("yellow").checked===true)
+                {
+                    temp="color=yellow";
+                }
+                else if (document.getElementById("white").checked===true)
+                {
+                    temp="color=white";
+                }
+                else if (document.getElementById("violet").checked===true)
+                {
+                    temp="color=violet";
+                }
+                else if (document.getElementById("blue").checked===true)
+                {
+                    temp="color=blue";
+                }
+
+                if (temp!=="")
+                {
+                    if (query==="")
+                    {
+                        query=temp;
+                    }
+                    else
+                    {
+                        query=query+"&"+temp;
+                    }
+                }
+
+               if (query!=="")
+               {
+                   query="/products?"+query;
+               }
+               else
+               {
+                   query="/products";
+               }
+               location.href=query;
+            }
+        </script>
+
+        <button type="button" class="btn btn-warning" onclick="filterProduct() "><b>Lọc sản phẩm</b></button>
+
     </div>
 
     <div class="well well-small alert alert-warning cntr">

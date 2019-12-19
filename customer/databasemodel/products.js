@@ -24,6 +24,15 @@ var productSchema=new mongoose.Schema({
        type:Number,
 
     },
+    trademark:{
+      type:Number,
+    },
+    sex:{
+      type:Number,
+    },
+    color:{
+      type:Number,
+    },
     sum:{
         type:Number,
     },

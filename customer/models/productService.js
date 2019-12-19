@@ -21,7 +21,7 @@ exports.index = function(req, res) {
 //CREATE-none
 
 //READ
-exports.getProductsByCategory = (category) => {
+exports.getProductsByCategory = async function(category){
     var type;
     switch (category)
     {
@@ -45,8 +45,84 @@ exports.getProductsByCategory = (category) => {
             type = 0;
         }
     }
+    let result=await product.find({category: type});
+    return result;
+}
 
-    return product.find({category: type});
+exports.getProductsByTrademark = async function(trademark){
+    var type;
+    switch (trademark)
+    {
+        case 'luxury' : {
+            type = 1;
+            break;
+        }
+        case 'pnj' : {
+            type = 2;
+            break;
+        }
+        case 'doji' : {
+            type = 3;
+            break;
+        }
+        case 'sjc' : {
+            type = 4;
+            break;
+        }
+        default : {
+            type = 0;
+        }
+    }
+
+    return await product.find({trademark: type});
+}
+
+exports.getProductsBySex = async function(sex){
+    var type;
+    switch (sex)
+    {
+        case 'male' : {
+            type = 1;
+            break;
+        }
+        case 'female' : {
+            type = 2;
+            break;
+        }
+        default : {
+            type = 0;
+        }
+    }
+
+    return await product.find({sex: type});
+}
+
+exports.getProductsByColor = async function(color){
+    var type;
+    switch (color)
+    {
+        case 'yellow' : {
+            type = 1;
+            break;
+        }
+        case 'white' : {
+            type = 2;
+            break;
+        }
+        case 'violet' : {
+            type = 3;
+            break;
+        }
+        case 'blue' : {
+            type = 4;
+            break;
+        }
+        default : {
+            type = 0;
+        }
+    }
+
+    return await product.find({color: type});
 }
 
 exports.getProductById = (id) => {
