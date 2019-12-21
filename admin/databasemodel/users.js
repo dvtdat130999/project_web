@@ -28,6 +28,11 @@ var userSchema=new mongoose.Schema({
         required: true
     },
 
+    linkproducts:{
+        type: String,
+        required: true
+    },
+
 
     created_date:{
         type:Date,

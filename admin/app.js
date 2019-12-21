@@ -7,12 +7,15 @@ var mongoose=require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const productRouter = require('./routes/product')
 
 var passport=require('passport');
 const session = require('express-session');
 var bodyParser = require('body-parser');
 const flash=require('connect-flash');
 var app = express();
+
+require('dotenv').config();
 
 //Passport config
 require('./config/passport')(passport);
@@ -23,11 +26,11 @@ require('./config/passport')(passport);
 let options={
   db:{native_parser:true},
   server:{poolSize:5},
-  user:"tdat130999",
-  pass: "kamenrider130999"
+  user: process.env.USER,
+  pass: process.env.PASS
 };
 //đường dẫn tới database tên project ở mongoDB atlas (cloud)
-var uri= "mongodb+srv://ptudweb-projectck-mbe9q.mongodb.net/project";
+var uri= process.env.URL;
 
 //Use native Promises
 mongoose.Promise=global.Promise;
@@ -82,6 +85,7 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/products', productRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

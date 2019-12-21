@@ -26,35 +26,48 @@ Lower Header Section
         <div class="span12">
 
             <div class="well well-small">
-                <h1>Sản phẩm gian hàng<small class="pull-right"> 2 sản phẩm </small></h1>
+                <h1>Sản phẩm gian hàng<small class="pull-right"><%=products.length%> sản phẩm </small></h1>
                 <hr class="soften"/>
 
                 <table class="table table-bordered table-condensed">
                     <thead>
                     <tr>
-                        <th>Sản phẩm</th>
+                        <th>Ảnh</th>
+                        <th>Tên sản phẩm</th>
                         <th>Mô tả</th>
                         <th>Tình trạng</th>
                         <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <%if(userdata.author === 'shop'){%>
+                            <th>Chi tiết sản phẩm</th>
+                        <%}%>
+
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><img width="100" src="assets/img/e.jpg" alt=""></td>
+                    <%products.forEach(function(product){%>
+                        <tr>
+                            <td><img width="50" src="<%= product.thumbnail %>" alt=""><br>
+                            <td><%= product.name %></td>
+                            <td><%= product.description %></td>
+                            <td><%= product.status %></td>
+                            <td><%= product.price %></td>
+                            <td><%= product.quantity %></td>
+                            <%if(userdata.author === 'shop'){%>
+                                <td><a href="<%= product.uriDetail %>">chi tiết</a></td>
+                            <%}%>
+
+                        </tr>
+                    <% }); %>
+
+                    <!--<tr>
+                        <td><img width="100" src="" alt=""></td>
                         <td>Tên và mô tả<br>Carate : 22<br>Mẫu : n/a</td>
                         <td> Mới </td>
                         <td>$50.00</td>
+                        <td>$50.00</td>
 
-                    </tr>
-                    <tr>
-                        <td><img width="100" src="assets/img/f.jpg" alt=""></td>
-                        <td>Tên và mô tả<br>Carate : 24<br>Mẫu : n/a</td>
-                        <td> Mới </td>
-                        <td>$348.42</td>
-
-                    </tr>
-
-
+                    </tr>-->
                     </tbody>
                 </table><br/>
 

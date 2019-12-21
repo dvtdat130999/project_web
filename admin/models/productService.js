@@ -2,6 +2,13 @@ var product = require('../databasemodel/products');
 var category=require('../databasemodel/categories');
 var async = require('async');
 const mongoose = require('mongoose');
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+    cloud_name: 'dofdj0lqd',
+    api_key: '812485548823499',
+    api_secret: 'XFRmX3nAfmjO2Mvv2ynvfPfpm8s'
+});
 
 exports.index = function(req, res) {
     async.parallel({
@@ -74,3 +81,13 @@ exports.findByCategory = (category) => {
 exports.findById = (id) => {
     return product.find({_id: new mongoose.Types.ObjectId(id)})
 }
+
+exports.insertProduct = (name, description, price, quantity, category, color, trademark, sex, uriDetail, idshop,  pathImg) =>{
+    cloudinary.uploader.upload(pathImg, (error, result) => {
+        const thumbnail = result.url;
+        const newproduct = new product({name, price, description, thumbnail, category, quantity, sex, trademark, color, uriDetail, idshop});
+        newproduct.uriDetail = "/products?id=" + newproduct.id;
+        newproduct.save();
+    });
+};
+

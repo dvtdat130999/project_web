@@ -6,21 +6,33 @@ const bcrypt=require('bcryptjs');
 const randomstring=require('randomstring');
 const nodemailer=require('nodemailer');
 
-exports.getAccountList = (req, res, next) => {
+exports.getAccountList = async (req, res, next) => {
     const username = req.query.username;
     if (typeof username !== "undefined") {
-
-        userService.getUserByUsername(username)
+        /*userService.getUserByUsername(username)
             .exec(function (err, accounts_customer) {
                 if (err) {
                     return next(err);
                 }
                 //Successful, so render
-                res.render('detail_account', {title: 'List customer', account_list: accounts_customer, userdata: req.user});
-            });
-        }
-        else {
-        userService.getAllAccount()
+                res.render('detail_account', {
+                    title: 'List customer',
+                    account_list: accounts_customer,
+                    userdata: req.user
+                });
+            });*/
+
+        let accounts_customer;
+        accounts_customer = userService.getUserByUsername(username);
+
+        res.render('detail_account', {
+            title: 'List customer',
+            account_list: accounts_customer,
+            userdata: req.user
+        });
+    }
+    else {
+        userService.getAccount(req.user.author)
             .exec(function (err, accounts_customer) {
                 if (err) {
                     return next(err);
@@ -28,9 +40,7 @@ exports.getAccountList = (req, res, next) => {
                 //Successful, so render
                 res.render('customer_account', {account_list: accounts_customer, userdata: req.user});
             });
-        }
-
-
+    }
 };
 
 exports.getLogin = (req, res, next) => res.render('login',{ userdata:req.user });
@@ -48,13 +58,11 @@ exports.getForget = (req, res, next) => res.render('forget_password', { userdata
 
 exports.postLogin = (req, res, next) => {
     passport.authenticate('local', { //chọn phương thức check là local => npm install passport-local
-        failureRedirect: '/login',  //nếu check không đúng thì redirect về link này
+        failureRedirect: '/users/login',  //nếu check không đúng thì redirect về link này
         successRedirect: '/',
         failureFlash: true
     })(req, res, next);
 };
-
-
 
 exports.postRegister = (req, res, next) => {
     const {username, password, password2, name, address, phone, email} = req.body;
@@ -94,6 +102,7 @@ exports.postRegister = (req, res, next) => {
                             } else {
                                 const uriDetail='/account?username='+username;
 
+                                const linkproducts = "/";
                                 const newUser = new user({
                                     username,
                                     password,
@@ -101,12 +110,16 @@ exports.postRegister = (req, res, next) => {
                                     address,
                                     phone,
                                     email,
-                                    uriDetail
+                                    uriDetail,
+                                    linkproducts
                                 });
+
+                                newUser.linkproducts = "/products?shop=" + newUser.id;
 
                                 //Hash password
                                 userService.insertUser(newUser);
-                                res.redirect('/register');
+                                req.flash('success_msg', 'Tạo tài khoản thành công');
+                                res.redirect('/users/register');
                             }
                         });
                 }
@@ -120,7 +133,7 @@ exports.postForget = async (req, res, next) => {
     const newUser = await userService.getUserByUsername(username);
     if(!newUser) {
         req.flash('error_msg', 'Sai tài khoản hoặc email');
-        res.redirect('/forget');
+        res.redirect('/users/forget');
         return;
     }
     else {
@@ -161,11 +174,11 @@ exports.postForget = async (req, res, next) => {
                 newUser.save();
 
                 req.flash('success_msg', 'Tạo mật khẩu mới thành công, vào email để xem kết quả');
-                res.redirect('/forget');
+                res.redirect('/users/forget');
 
             }));
     }
-}
+};
 
 exports.postChangePassword = async (req, res, next) => {
     const{password1,password2}=req.body;
@@ -185,25 +198,27 @@ exports.postChangePassword = async (req, res, next) => {
                     newUser.save();
 
                     req.flash('success_msg', 'Tạo mật khẩu mới thành công, hãy thoát ra và đăng nhập lại để kiểm tra');
-                    res.redirect('/change_password');
+                    res.redirect('/users/change_password');
 
                 }));
         }
         else {
             req.flash('error_msg', 'Sai mật khẩu cũ');
-            res.redirect('/change_password');
+            res.redirect('/users/change_password');
         }
     });
 };
+
 exports.getLocked=(req,res,next)=>{
     res.render('lockedAccount',{userdata:req.user});
 };
+
 exports.postLocked=async (req, res, next) =>{
     const{username}=req.body;
     if(!username)
     {
         req.flash('error_msg', 'Hãy nhập tài khoản');
-        res.redirect('/locked_account');
+        res.redirect('/users/locked_account');
     }
     else
     {
@@ -213,21 +228,21 @@ exports.postLocked=async (req, res, next) =>{
             if(user.username=='admin')
             {
                 req.flash('error_msg', 'Không thể khóa tài khoản này');
-                res.redirect('/locked_account');
+                res.redirect('/users/locked_account');
             }
             else
             {
                 user.locked=true;
                 user.save();
                 req.flash('success_msg', 'Khóa tài khoản thành công');
-                res.redirect('/locked_account');
+                res.redirect('/users/locked_account');
             }
 
         }
         else
         {
             req.flash('error_msg', 'Sai tài khoản');
-            res.redirect('/locked_account');
+            res.redirect('/users/locked_account');
         }
     }
 
@@ -242,7 +257,7 @@ exports.postUnLocked= async (req, res, next) =>{
     if(!username)
     {
         req.flash('error_msg', 'Hãy nhập tài khoản');
-        res.redirect('/unlocked_account');
+        res.redirect('/users/unlocked_account');
     }
     else
     {
@@ -253,13 +268,23 @@ exports.postUnLocked= async (req, res, next) =>{
             user.locked=false;
             user.save();
             req.flash('success_msg', 'Mở khóa tài khoản thành công');
-            res.redirect('/unlocked_account');
+            res.redirect('/users/unlocked_account');
         }
         else
         {
             req.flash('error_msg', 'Sai tài khoản');
-            res.redirect('/unlocked_account');
+            res.redirect('/users/unlocked_account');
         }
 
     }
 };
+
+exports.getShop = (req, res, next) => {
+    if (req.user.author === 'admin') {
+        user.find({author: 'shop'}).then(data => {
+            res.render('shop', {userdata: req.user, shops: data});
+        })
+    } else {
+        res.redirect('/');
+    }
+}

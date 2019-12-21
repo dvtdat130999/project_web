@@ -47,20 +47,32 @@ exports.insertUser = (newUser)=> {
 
 
 //READ
-exports.getAllAccount = () => {
-    return user.find({});
+exports.getAccount = (author) => {
+    if(author === 'admin')
+        return user.find();
+    else
+        return user.find({author: 'customer'});
 };
+
 exports.getUserBySecretToken = (secretToken) => {
     return user.findOne({secretToken: secretToken});
 };
 
 exports.getUserByUsername = (username) => {
+    user.findOne({username: username}).exec(function (err, accounts_customer) {
+        if (err)
+            return err;
+
+        //Successful, so render
+        return accounts_customer;
+        });
     return user.findOne({username: username});
 };
 
 exports.getUserByID = (id) => {
     return user.findOne({_id: new mongoose.Types.ObjectId(id)});
 };
+
 exports.getUserByEmail = (email) => {
     return user.findOne({email: email});
 };

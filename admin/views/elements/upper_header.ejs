@@ -11,13 +11,13 @@
                     <b> Chào <%=userdata.username%></b>
                     <%}%>
                 </div>
+                <%if(userdata){%>
                 <a class="active" href="/"> <span class="icon-home"></span> Trang chủ</a>
-                <a href="/account"><span class="icon-user"></span> Tài khoản</a>
-                <a href="/register"><span class="icon-lock"></span> Đăng ký </a>
-                <a href="/logout"><span class="icon-lock"></span> Đăng xuất </a>
-
-
-
+                <%if(userdata.author === 'admin'){%>
+                    <a href="/users/register"><span class="icon-lock"></span> Đăng ký </a>
+                <%}%>
+                <a href="/users/logout"><span class="icon-lock"></span> Đăng xuất </a>
+                <%}%>
             </div>
         </div>
     </div>

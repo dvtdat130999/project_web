@@ -31,36 +31,22 @@ Lower Header Section
                 <table class="table table-bordered table-condensed">
                     <thead>
                     <tr>
-                        <th>Gian hàng</th>
-                        <th>Tên</th>
+                        <th>Tên gian hàng</th>
                         <th>Địa chỉ</th>
                         <th>Liên lạc</th>
+                        <th>Sản phẩm</th>
                     </tr>
                     </thead>
                     <tbody>
-
-                    <tr>
-                        <td><a href="/ring"><img width="80" src="assets/img/e.jpg" alt=""></a></td>
-                        <td>Cửa hàng nhẫn</td>
-                        <td> Quang trung </td>
-                        <td>0123456789 </td>
-                        <td><a href="/ring">Sản phẩm</a>
-
-                        <td><a href="/top_ring">Bán chạy</a>
-
-
-                    <tr>
-                        <td><a href="/necklace"><img href="/products"  width="80" src="assets/img/f.jpg" alt=""></a></td>
-                        <td>Cửa hàng vòng cổ</td>
-                        <td> Gò vấp </td>
-                        <td>0123456789 </td>
-                        <td><a href="/necklace">Sản phẩm</a>
-
-                        <td><a href="/top_necklace">Bán chạy</a>
-
-                    </tr>
+                    <%shops.forEach(function(shop){%>
+                        <tr>
+                            <td><%= shop.name %></td>
+                            <td><%= shop.address %></td>
+                            <td><%= shop.phone %></td>
+                            <td><a href="<%= shop.linkproducts %>">Xem sản phẩm</a></td>
+                        </tr>
+                    <% }); %>
                     </tbody>
-
                 </table><br/>
 
 

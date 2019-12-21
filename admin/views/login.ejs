@@ -7,7 +7,6 @@
 <!--
 	Upper Header Section
 -->
-<% include elements/upper_header.ejs%>
 
 <!--
 Lower Header Section
@@ -16,16 +15,15 @@ Lower Header Section
 
     <!--
     Navigation Bar Section
-    -->
-    <% include elements/navbar.ejs%>
-    <!--
+    --
+
     Body Section
     -->
     <div class="row">
         <div class="span12">
 
             <div class="well well-small">
-                <form action="/login" method="post">
+                <form action="/users/login" method="post">
                     <h3> Đăng nhập</h3>
                     <% include ./partials/messages.ejs%>
 

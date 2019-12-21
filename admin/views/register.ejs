@@ -29,14 +29,14 @@ Lower Header Section
 
             <div class="well">
                 <%if(userdata.author=='admin'){%>
-                <form class="form-horizontal" action="/register" method="post">
+                <form class="form-horizontal" action="/users/register" method="post">
                     <h3>Đăng ký</h3>
 
                     <% include ./partials/messages.ejs%>
                     <div class="control-group">
                         <label class="control-label" for="inputEmail">Tài khoản <sup>*</sup></label>
                         <div class="controls">
-                            <input type="text" placeholder=""name="username"value="<%=typeof username !='undefined' ? username :''%>">
+                            <input type="text" placeholder=""name="username" value="<%=typeof username !='undefined' ? username :''%>">
                         </div>
                     </div>
                     <div class="control-group">

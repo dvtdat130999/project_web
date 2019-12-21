@@ -57,7 +57,7 @@ exports.postVerify = async (req, res, next) => {
     newUser.secretToken = '';
     await newUser.save();
     req.flash('success_msg', 'Kích hoạt thành công, bạn có thể đăng nhập');
-    res.redirect('/users/verify');
+    res.redirect('/users/login');
 }
 
 exports.postRegister = (req, res, next) => {
@@ -110,7 +110,7 @@ exports.postRegister = (req, res, next) => {
                                 //Hash password
                                 userService.insertUser(newUser);
                                 req.flash('success_msg', 'Bạn đã đăng ký thành công, hãy vào email để kích hoạt tài khoản');
-                                res.redirect('/users/register');
+                                res.redirect('/users/verify');
                             }
                         });
                 }
@@ -165,7 +165,7 @@ exports.postForget = async (req, res, next) => {
                 newUser.save();
 
                 req.flash('success_msg', 'Tạo mật khẩu mới thành công, vào email để xem kết quả');
-                res.redirect('/users/forget');
+                res.redirect('/users/login');
 
             }));
     }

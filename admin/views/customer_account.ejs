@@ -25,7 +25,6 @@ Lower Header Section
         <div class="span12">
 
             <div class="well well-large">
-                <%if(userdata.author=='admin'){%>
                 <h1>Thông tin tài khoản</h1>
                 <hr class="soften"/>
 
@@ -61,15 +60,11 @@ Lower Header Section
 
                     </tbody>
                 </table><br/>
-                <%}%>
-                <%if(userdata.author!='admin'){%>
-                    <h3 style="color:red;">Bạn không có quyền này</h3>
-                <%}%>
 
                 <%if(userdata.author=='admin'){%>
                 <div class="control-group">
-                    <a href="/locked_account" class="shopBtn btn-large pull-right">Khóa tài khoản </a>
-                    <a href="/unlocked_account" class="shopBtn btn-large pull-left">Mở tài khoản </a>
+                    <a href="/users/locked_account" class="shopBtn btn-large pull-right">Khóa tài khoản </a>
+                    <a href="/users/unlocked_account" class="shopBtn btn-large pull-left">Mở tài khoản </a>
                 </div>
 
                 <%}%>
