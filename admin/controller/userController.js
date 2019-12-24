@@ -23,7 +23,7 @@ exports.getAccountList = async (req, res, next) => {
             });*/
 
         let accounts_customer;
-        accounts_customer = userService.getUserByUsername(username);
+        accounts_customer = await userService.getUserByUsername(username);
 
         res.render('detail_account', {
             title: 'List customer',
@@ -41,6 +41,8 @@ exports.getAccountList = async (req, res, next) => {
                 res.render('customer_account', {account_list: accounts_customer, userdata: req.user});
             });
     }
+
+    //res.send("ABC");
 };
 
 exports.getLogin = (req, res, next) => res.render('login',{ userdata:req.user });
