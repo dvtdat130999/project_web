@@ -9,7 +9,7 @@ const nodemailer=require('nodemailer');
 exports.getAccountList = async (req, res, next) => {
     const username = req.query.username;
     if (typeof username !== "undefined") {
-        /*userService.getUserByUsername(username)
+        userService.getUserByUsername(username)
             .exec(function (err, accounts_customer) {
                 if (err) {
                     return next(err);
@@ -20,16 +20,16 @@ exports.getAccountList = async (req, res, next) => {
                     account_list: accounts_customer,
                     userdata: req.user
                 });
-            });*/
+            });
 
-        let accounts_customer;
+        /*let accounts_customer;
         accounts_customer = userService.getUserByUsername(username);
 
         res.render('detail_account', {
             title: 'List customer',
             account_list: accounts_customer,
             userdata: req.user
-        });
+        });*/
     }
     else {
         userService.getAccount(req.user.author)
@@ -51,6 +51,8 @@ exports.getLogout = (req, res, next) => {
 };
 
 exports.getVerify = (req, res, next) => res.render('verify',{ userdata:req.user });
+exports.getMyAccount = (req, res, next) => res.render('my_account',{ userdata:req.user });
+exports.getChangeMyAccount = (req, res, next) => res.render('change_myaccount',{ userdata:req.user });
 
 exports.getRegister = (req, res, next) => res.render('register',{ userdata:req.user });
 
@@ -125,6 +127,23 @@ exports.postRegister = (req, res, next) => {
                 }
             });
     }
+};
+exports.postChangeMyAccount = async(req, res, next) => {
+    const { name, address, phone, email} = req.body;
+    const user=await userService.getUserByUsername(req.user.username);
+    if(name)
+        user.name=name;
+    if(address)
+        user.address=address;
+    if(phone)
+        user.phone=phone;
+    if(email)
+        user.email=email;
+    await user.save();
+
+
+    req.flash('success_msg', 'Thay đổi thành công');
+    res.redirect('/users/my_account');
 };
 
 exports.postForget = async (req, res, next) => {

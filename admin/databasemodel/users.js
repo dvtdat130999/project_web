@@ -30,7 +30,6 @@ var userSchema=new mongoose.Schema({
 
     linkproducts:{
         type: String,
-        required: true
     },
 
 

@@ -13,6 +13,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/account', ensureAuthenticated, userController.getAccountList);
+router.get('/my_account', ensureAuthenticated, userController.getMyAccount);
+
+//change account information
+router.get('/change_myaccount', ensureAuthenticated, userController.getChangeMyAccount);
+router.post('/change_myaccount', ensureAuthenticated, userController.postChangeMyAccount);
 
 /* get logout*/
 router.get('/logout', ensureAuthenticated, userController.getLogout);

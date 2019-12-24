@@ -20,8 +20,8 @@ exports.insertUser = (newUser)=> {
             var transporter = nodemailer.createTransport({ // config mail server
                 service: 'gmail',
                 auth: {
-                    user: 'tdat130999@gmail.com',
-                    pass: 'Dvtdat130999'
+                    user: 'projectweb1920@gmail.com',
+                    pass: 'webcuoiky1920'
                 }
             });
             var mainOptions = { // thiết lập đối tượng, nội dung gửi mail

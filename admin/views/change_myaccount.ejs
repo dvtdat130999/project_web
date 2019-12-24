@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include elements/tag_head.ejs%>
+</head>
+<body>
+<!--
+	Upper Header Section
+-->
+<% include elements/upper_header.ejs%>
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <% include elements/lower_header.ejs%>
+
+    <!--
+    Navigation Bar Section
+    -->
+    <!--
+    Body Section
+    -->
+    <div class="row">
+        <% include elements/sidebar.ejs%>
+        <div class="span9">
+
+
+
+
+            <div class="well">
+                <form class="form-horizontal" action="/users/change_myaccount" method="post">
+                    <h3>Thông tin cá nhân</h3>
+
+                    <% include ./partials/messages.ejs%>
+
+
+
+                    <div class="control-group">
+                        <label class="control-label" for="inputFname">Tên <sup>*</sup></label>
+                        <div class="controls">
+                            <input type="text" id="inputFname" placeholder="<%=userdata.name%>"name="name"value="<%=typeof name !='undefined' ? name :''%>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Địa chỉ <sup>*</sup></label>
+                        <div class="controls">
+                            <input type="text" placeholder="<%=userdata.address%>"name="address"value="<%=typeof address !='undefined' ? address :''%>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Số điện thoại <sup>*</sup></label>
+                        <div class="controls">
+                            <input type="number" placeholder="<%=userdata.phone%>"name="phone"value="<%=typeof phone !='undefined' ? phone :''%>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Email <sup>*</sup></label>
+                        <div class="controls">
+                            <input type="text" placeholder="<%=userdata.email%>"name="email"value="<%=typeof email !='undefined' ? email :''%>">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <button type="submit" class="exclusive shopBtn">Thay đổi</button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+        <!--
+
+
+ </div> //container
+
+  <% include elements/copyright.ejs%>
+  <a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
+  <-- Placed at the end of the document so the pages load faster -->
+        <% include elements/script_end.ejs%>
+    </div>
+</div>
+</body>
+</html>

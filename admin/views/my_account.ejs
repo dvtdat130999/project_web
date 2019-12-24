@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include elements/tag_head.ejs%>
+</head>
+<body>
+<!--
+	Upper Header Section
+-->
+<% include elements/upper_header.ejs%>
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <% include elements/lower_header.ejs%>
+
+    <!--
+    Navigation Bar Section
+    -->
+    <!--
+    Body Section
+    -->
+    <div class="row">
+        <% include elements/sidebar.ejs%>
+        <div class="span9">
+            <div class="well">
+                <form class="form-horizontal"  >
+
+                    <h2>Thông tin tài khoản</h2>
+
+                    <% include ./partials/messages.ejs%>
+
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail" style="font-size:16px;">Tài khoản: </label>
+
+                        <div class="controls">
+                            <label class="control-label" name="username"><%=userdata.username%> </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail"style="font-size:16px;">Tên: </label>
+
+                        <div class="controls">
+                            <label class="control-label" name="name"><%=userdata.name%> </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail"style="font-size:16px;">Email: </label>
+
+                        <div class="controls">
+                            <label class="control-label" name="email"><%=userdata.email%> </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail"style="font-size:16px;">Điện thoại: </label>
+
+                        <div class="controls">
+                            <label class="control-label" name="phone"><%=userdata.phone%> </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail"style="font-size:16px;">Địa chỉ: </label>
+
+                        <div class="controls">
+                            <label class="control-label" name="address"><%=userdata.address%> </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail"style="font-size:16px;">Quyền: </label>
+
+                        <div class="controls">
+                            <label class="control-label" name="author"><%=userdata.author%> </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail"style="font-size:16px;">Trạng thái: </label>
+
+                        <div class="controls">
+                            <%if(userdata.locked==true){%>
+                                <label class="control-label" name="author">Khóa </label>
+                            <%}%>
+                            <%if(userdata.locked==false){%>
+                                <label class="control-label" name="author">Mở </label>
+                            <%}%>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <a href="/users/change_myaccount" class="shopBtn btn-large ">Thay đổi</a>
+
+                        </div>
+                    </div>
+
+
+
+
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+        <!--
+
+
+ </div> //container
+
+  <% include elements/copyright.ejs%>
+  <a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
+  <-- Placed at the end of the document so the pages load faster -->
+        <% include elements/script_end.ejs%>
+    </div>
+</div>
+</body>
+</html>
