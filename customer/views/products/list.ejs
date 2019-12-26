@@ -30,6 +30,9 @@ Lower Header Section
             -->
             <div class="well well-small">
                 <h3>Sản phẩm </h3>
+                <%if (product_list.length===0){%>
+                    Không tìm thấy sản phẩm
+                <%}%>
                 <div class="row-fluid">
                     <% product_list.forEach(function(product) { %>
                         <ul class="thumbnails span4">

@@ -1,4 +1,5 @@
 const product = require('../databasemodel/products');
+const Comment=require('../databasemodel/comments');
 const productService = require('../models/productService');
 var async = require('async');
 
@@ -13,6 +14,37 @@ exports.getProduct = async (req, res, next) => {
     let arr=[];
     let checked_array=[];
     let condition="";
+    let numberOfProduct=9;
+
+    //Search product
+    let searchContent=req.query.search;
+    if (typeof searchContent !== "undefined")
+    {
+        product.find()
+            .exec(function (err, list_products) {
+                if (err) { return next(err); }
+                //Successful, so render
+                list_products=Search(searchContent,list_products);
+
+                if (typeof page==="undefined"){
+                    page="1";
+                }
+                let index=parseInt(page,10)-1;
+                let array2D = pageElementsArr(list_products,numberOfProduct);
+
+                for (i=0;i<array2D.length;i++)
+                {
+                    arr[i]="";
+                }
+                arr[index]="class=active";
+                if (typeof array2D[index]==="undefined")
+                {
+                    array2D[index]=[];
+                }
+                res.render('products/list', {checked: checked_array, product_list: array2D[index],userdata:req.user, active: arr, condition: condition, search: searchContent });
+            });
+        return;
+    }
 
     //Sort products
     const softby=req.query.sort;
@@ -29,7 +61,7 @@ exports.getProduct = async (req, res, next) => {
                     page="1";
                 }
                 let index=parseInt(page,10)-1;
-                let array2D = pageElementsArr(list_products,3);
+                let array2D = pageElementsArr(list_products,numberOfProduct);
                 for (i=0;i<array2D.length;i++)
                 {
                     arr[i]="";
@@ -58,7 +90,7 @@ exports.getProduct = async (req, res, next) => {
                     page="1";
                 }
                 let index=parseInt(page,10)-1;
-                let array2D = pageElementsArr(list_products,3);
+                let array2D = pageElementsArr(list_products,numberOfProduct);
                 for (i=0;i<array2D.length;i++)
                 {
                     arr[i]="";
@@ -82,11 +114,48 @@ exports.getProduct = async (req, res, next) => {
     const id = req.query.id;
     if(typeof id !== "undefined")
     {
+        //comment
+        const comment=req.query.comment;
+
+        if (typeof comment!=="undefined"){
+            let product_id=id;
+            const userName=req.query.username;
+            let time=new Date();
+            let content=comment;
+            const newComment=new Comment({product_id,userName,time,content});
+            let save = await newComment.save();
+        }
+
+        let result=await productService.getCommentsOfProduct(id);
+        let comments=[];
+        let n=result.length;
+        for (i=0;i<n;i++)
+        {
+            comments[n-1-i]=result[i];
+        }
+
+        if (typeof page==="undefined"){
+            page="1";
+        }
+        let index=parseInt(page,10)-1;
+        let array2D = pageElementsArr(comments,10);
+        for (i=0;i<array2D.length;i++)
+        {
+            arr[i]="";
+        }
+        arr[index]="class=active";
+        if (typeof array2D[index]==="undefined")
+        {
+            array2D[index]=[];
+        }
+        condition="&id="+id;
+        //console.log(array2D);
+
         productService.getProductById(id)
             .exec(function (err, list_products) {
                 if (err) { return next(err); }
                 //Successful, so render
-                res.render('products/productdetail', {checked: checked_array , product_list: list_products ,userdata:req.user, active: arr, condition: condition });
+                res.render('products/productdetail', {checked: checked_array , product_list: list_products ,userdata:req.user, active: arr, condition: condition, comments: array2D[index]});
             });
         return;
     }
@@ -148,7 +217,7 @@ exports.getProduct = async (req, res, next) => {
             page="1";
         }
         let index=parseInt(page,10)-1;
-        let array2D = pageElementsArr(result,3);
+        let array2D = pageElementsArr(result,numberOfProduct);
         for (i=0;i<array2D.length;i++)
         {
             arr[i]="";
@@ -170,7 +239,7 @@ exports.getProduct = async (req, res, next) => {
                     page="1";
                 }
                 let index=parseInt(page,10)-1;
-                let array2D = pageElementsArr(list_products,3);
+                let array2D = pageElementsArr(list_products,numberOfProduct);
                 for (i=0;i<array2D.length;i++)
                 {
                     arr[i]="";
@@ -187,8 +256,6 @@ exports.getProduct = async (req, res, next) => {
 }
 
 exports.getStatus = (req, res, next) => res.render('status_products', {userdata:req.user});
-
-exports.getAdvanced = (req, res, next) => res.render('advanced_searching',{userdata:req.user});
 
 ////////////////////////////////////////////////////////////////////////////
 //Helper
@@ -362,5 +429,25 @@ function intersect(array1, array2)
         }
     }
 
+    return result;
+}
+
+function Search(content, listProducts)
+{
+    let result=[];
+    let n=listProducts.length;
+    content=content.toLowerCase();
+    for (i=0;i<n;i++)
+    {
+        //console.log("=>"+listProducts[i].name);
+        let item=listProducts[i].name.toLowerCase();
+        let compare=item.search(content);
+        if (compare>=0)
+        {
+            //console.log("com: "+compare);
+            //console.log(listProducts[i]);
+            result.push(listProducts[i]);
+        }
+    }
     return result;
 }

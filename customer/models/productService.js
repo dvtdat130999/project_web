@@ -1,5 +1,6 @@
 var product = require('../databasemodel/products');
 var category=require('../databasemodel/categories');
+const Comment=require('../databasemodel/comments');
 var async = require('async');
 const mongoose = require('mongoose');
 
@@ -123,15 +124,19 @@ exports.getProductsByColor = async function(color){
     }
 
     return await product.find({color: type});
-}
+};
 
 exports.getProductById = (id) => {
-    return product.find({_id: new mongoose.Types.ObjectId(id)})
-}
+    return product.find({_id: new mongoose.Types.ObjectId(id)});
+};
 
-exports.getAllProducts = () => {
-    return product.find();
-}
+exports.getAllProducts = async function() {
+    return await product.find();
+};
+
+exports.getCommentsOfProduct=async function(ID_product){
+    return await Comment.find({product_id: ID_product});
+};
 
 //UPDATE
 exports.decreaseSumOfProduct = function(id){

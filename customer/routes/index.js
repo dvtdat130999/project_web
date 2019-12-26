@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 const {ensureAuthenticated}=require('../config/auth');
 
-const productController = require('../controller/productController')
-const userController = require('../controller/userController')
+const productController = require('../controller/productController');
+const userController = require('../controller/userController');
 
 var async = require('async');
 
@@ -25,8 +25,5 @@ router.get('/products', productController.getProduct);
 
 /* get product status page*/
 router.get('/status', productController.getStatus);
-
-/* get advanced searching page*/
-router.get('/advanced', productController.getAdvanced);
 
 module.exports = router;

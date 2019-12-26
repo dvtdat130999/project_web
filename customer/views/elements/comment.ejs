@@ -1,0 +1,127 @@
+<div class="row bootstrap snippets">
+    <div class="col-md-6 col-md-offset-2 col-sm-12">
+        <div class="comment-wrapper">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>Bình luận</b>
+                </div>
+                <div class="panel-body">
+                    <textarea id="CommentBox" class="form-control" placeholder="Hãy nêu suy nghĩ của bạn về sản phẩm..." rows="3"></textarea>
+                    <br>
+                    <%let username="";
+                    if(userdata){
+                        username=userdata.name;
+                    }else{
+                        username="visitor";
+                    }%>
+                    <script>
+                        function PostComment() {
+                            let query="/products?id="
+                            query += "<%=product_list[0]._id%>";
+                            query+="&username=";
+                            query+="<%=username%>";
+                            query+="&comment=";
+                            query+=document.getElementById("CommentBox").value;
+                            location.href=query;
+                        }
+                    </script>
+                    <button id="PostButton" type="button" onclick="PostComment()" class="btn btn-info pull-right">Đăng bình luận</button>
+                    <div class="clearfix"></div>
+                    <hr>
+
+                    <% if(typeof comments==="undefined"){
+                        comments=[];
+                    }%>
+                    <%let avatar=[];
+                        avatar.push("https://bootdey.com/img/Content/user_1.jpg");
+                        avatar.push("https://bootdey.com/img/Content/user_2.jpg");
+                        avatar.push("https://bootdey.com/img/Content/user_3.jpg");%>
+                    <ul class="media-list">
+                        <%for (i=0;i<comments.length;i++) {%>
+                        <li class="media">
+                                    <a href="#" class="pull-left">
+                                        <% let index=0;
+                                        if(comments[i].userName==="visitor"){
+                                            index=(comments.length-i)%3;
+                                        }else {
+                                            index=comments[i].userName.length%3;
+                                        }%>
+                                    <img src="<%=avatar[index]%>" alt="" class="img-circle">
+                                    </a>
+                                    <div class="media-body">
+                                    <span class="text-muted pull-right">
+                                    <small class="text-muted"><%=comments[i].time%></small>
+                            </span>
+                            <strong class="text-success"><%=comments[i].userName%></strong>
+                                    <p>
+                                    <%=comments[i].content%>
+                                    </p>
+                                    </div>
+                                    </li>
+                        <%}%>
+                        <!--<li class="media">
+                            <a href="#" class="pull-left">
+                                <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
+                            </a>
+                            <div class="media-body">
+                                <span class="text-muted pull-right">
+                                    <small class="text-muted">30 min ago</small>
+                                </span>
+                                <strong class="text-success">@MartinoMont</strong>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Lorem ipsum dolor sit amet, <a href="#">#consecteturadipiscing </a>.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <a href="#" class="pull-left">
+                                <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" class="img-circle">
+                            </a>
+                            <div class="media-body">
+                                <span class="text-muted pull-right">
+                                    <small class="text-muted">30 min ago</small>
+                                </span>
+                                <strong class="text-success">@LaurenceCorreil</strong>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Lorem ipsum dolor <a href="#">#ipsumdolor </a>adipiscing elit.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <a href="#" class="pull-left">
+                                <img src="https://bootdey.com/img/Content/user_3.jpg" alt="" class="img-circle">
+                            </a>
+                            <div class="media-body">
+                                <span class="text-muted pull-right">
+                                    <small class="text-muted">30 min ago</small>
+                                </span>
+                                <strong class="text-success">@JohnNida</strong>
+                                <p>
+                                    Lorem ipsum dolor <a href="#">#sitamet</a> sit amet, consectetur adipiscing elit.
+                                </p>
+                            </div>
+                        </li>-->
+                    </ul>
+
+                    <ul class="pagination modal-3">
+                        <%for (i=1;i<active.length;i++){
+                        if (active[i]==="class=active"){%>
+                        <li><a href="products?page=<%=i%><%= condition%>" class="prev">&laquo</a></li>
+                        <%}}%>
+                        <%for (i=0;i<active.length;i++){%>
+                        <li> <a href="products?page=<%=i+1%><%= condition%>" <%= active[i]%>><%=i+1%></a></li>
+                        <%}%>
+                        <%for (i=0;i<active.length-1;i++){
+                        if (active[i]==="class=active"){%>
+                        <li><a href="products?page=<%=i+2%><%= condition%>" class="next">&raquo;</a></li>
+                        <%}}%>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
