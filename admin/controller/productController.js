@@ -42,7 +42,7 @@ exports.getProducts = (req, res, next) => {
             }
 
             let color;
-            switch (data[0].category) {
+            switch (data[0].color) {
                 case 1:
                     color = 'Vàng';
                     break;
@@ -60,7 +60,7 @@ exports.getProducts = (req, res, next) => {
             }
 
             let trademark;
-            switch (data[0].category) {
+            switch (data[0].trademark) {
                 case 1:
                     trademark = 'Skymond Luxury';
                     break;
@@ -78,7 +78,7 @@ exports.getProducts = (req, res, next) => {
             }
 
             let sex;
-            switch (data[0].category) {
+            switch (data[0].sex) {
                 case 1:
                     sex = 'Nam';
                     break;
@@ -210,9 +210,8 @@ exports.postUpload = async (req, res, next)=> {
 
 exports.postUpdate = (req, res, next) =>{
     const form = new Formidable();
-    //res.send('products');
 
-    form.parse(req, (err, fields, files) => {
+    form.parse(req, async (err, fields, files) => {
         const id = fields.id;
         const name = fields.name;
         const description = fields.description;
@@ -284,30 +283,34 @@ exports.postUpdate = (req, res, next) =>{
             default:
                 sex = 3;
         }
-        product.findById({_id: new mongoose.Types.ObjectId(id)}).then(data=>{
-            data.name = name;
-            data.price = price;
-            data.description = description;
-            data.quantity = quantity;
-            data.sex = sex;
-            data.category = category;
-            data.color = color;
-            data.trademark = trademark;
+        const productEdit = await product.findOne({_id: new mongoose.Types.ObjectId(id)});
 
-            data.save();
+        productEdit.name = name;
+        productEdit.price = price;
+        productEdit.description = description;
+        productEdit.quantity = quantity;
+        productEdit.sex = sex;
+        productEdit.category = category;
+        productEdit.color = color;
+        productEdit.trademark = trademark;
 
+        //Kiểm tra xem người dùng có tải hình mới lên hay không
+        if(files.thumbnail.name !== ''){
+            cloudinary.uploader.upload(files.thumbnail.path, (error, result) => {
+                const thumbnail = result.url;
+                productEdit.thumbnail = thumbnail;
+                productEdit.save();
+                req.flash('success_msg', 'Chỉnh sử thông tin sản phẩm thành công');
+                res.redirect('/products');
+            });
+        }
+        else
+        {
+            productEdit.save();
             req.flash('success_msg', 'Chỉnh sử thông tin sản phẩm thành công');
             res.redirect('/products');
-        });
+        }
 
-        /*cloudinary.uploader.upload(files.thumbnail.path, (error, result) => {
-            const thumbnail = result.url;
-            const newproduct = new product({name, price, description, thumbnail, category, quantity, sex, trademark, color, uriDetail, idshop});
-            newproduct.uriDetail = "/products?id=" + newproduct.id;
-            newproduct.save();
-            req.flash('success_msg', 'Thêm sản phẩm thành công');
-            res.redirect('/products/upload');
-        });*/
     });
 };
 ////////////////////////////////////////////////////////////////////////////
