@@ -4,7 +4,7 @@
     <% include ../elements/tag_head.ejs%>
 
 </head>
-<body>
+<body onload="loadItem()">
 <!--
 	Upper Header Section
 -->
@@ -42,17 +42,21 @@ Lower Header Section
                                 <div class="caption cntr">
                                     <p><%= product.name %></p>
                                     <p><strong> <%= product.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+"đ" %></strong></p>
-                                    <h4><a class="shopBtn" href="#" title="add to cart">Thêm vào giỏ </a></h4>
-
+                                    <%click="";
+                                        ref="href=javascript:window.location.href='/tags.html#{{ tag[0] }}-ref'; hide_others()";
+                                        if (userdata)
+                                        {
+                                            hef="href=#";
+                                        }else{
+                                            click="onclick=shop('"+product._id+"')";
+                                        }%>
+                                    <h4><a class="shopBtn" <%=ref%> <%=click%> title="add to cart">Thêm vào giỏ </a></h4>
                                     <br class="clr">
                                 </div>
                             </div>
-
                         </ul>
                     <% }); %>
                 </div>
-
-
 
 
             </div>

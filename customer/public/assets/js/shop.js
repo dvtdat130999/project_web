@@ -32,3 +32,30 @@ $('.thumbnail').mouseleave(function() {
 	});
 
 });
+
+function loadItem() {
+	let item = document.getElementById("item");
+	let loadItem=localStorage.getItem("item");
+	let loadListItem=localStorage.getItem("listItem");
+	if (loadItem===null)
+	{
+		loadItem=0;
+		localStorage.setItem("item",loadItem);
+		localStorage.setItem("listItem","");
+	}
+	item.innerText=" Giỏ hàng ("+loadItem+")";
+	document.getElementById("listItem").value=loadListItem;
+}
+
+function shop(id) {
+	let item = document.getElementById("item");
+	let loadItem=localStorage.getItem("item");
+	let loadListItem=localStorage.getItem("listItem");
+	loadItem++;
+	loadListItem=loadListItem+"-"+id;
+	localStorage.setItem("item",loadItem);
+	localStorage.setItem("listItem",loadListItem);
+	item.innerText=" Giỏ hàng ("+loadItem+")";
+	document.getElementById("listItem").value=loadListItem;
+	//window.location.reload(true);
+}

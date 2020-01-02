@@ -12,8 +12,8 @@ router.get('/', productController.getIndex);
 
 
 
-/* get cart page*/
-router.get('/cart', productController.getCart);
+/* get cart page - post list item*/
+router.post('/cart', productController.getCart);
 
 /* get ship information page*/
 router.get('/ship', productController.getShip);

@@ -225,6 +225,15 @@ hr.soften {margin: 8px 0;background: #DDD;}
     margin-left: 20px;
 }
 
+.cartInfo{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.sumPrice{
+    font-size: 20px;
+}
+
 .footer {background-color:#222; color:#eee; padding: 28px 8px 18px; margin-top: 18px;}
 .footer a{color:#bbb; font-size:12px;}
 .copyright {clear: both; padding: 8px; border-top: 1px solid #CCC; font-size: 13px; background: #f2f2f2; box-shadow: 0 0 3px #B1AFAF;}
