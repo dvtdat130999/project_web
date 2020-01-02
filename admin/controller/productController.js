@@ -13,9 +13,8 @@ cloudinary.config({
     api_secret: 'XFRmX3nAfmjO2Mvv2ynvfPfpm8s'
 });
 
-exports.getProducts = (req, res, next) => {
+exports.getProducts = async (req, res, next) => {
     const id = req.query.id;
-
     if (typeof id !== "undefined") {
         productService.findById(id).exec((err, data) => {
             //res.send(util.inspect({data: data}));
@@ -101,9 +100,13 @@ exports.getProducts = (req, res, next) => {
 
         if (typeof idshop === "undefined")
             idshop = req.user.id;
-        product.find({idshop: idshop}).then(data => {
-            res.render('products', {userdata: req.user, products: data});
-        })
+
+        const data = await product.find({idshop: idshop});
+        res.render('products', {userdata: req.user, products: data, active:"home"});
+
+        /*product.find({idshop: idshop}).then(data => {
+            res.render('products', {userdata: req.user, products: data, active:"home"});
+        })*/
     }
 
 

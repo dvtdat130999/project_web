@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include elements/tag_head.ejs%>
+</head>
+<body>
+<!--
+	Upper Header Section
+-->
+<% include elements/upper_header.ejs%>
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <% include elements/lower_header.ejs%>
+
+    <!--
+    Navigation Bar Section
+    -->
+    <%include elements/navbar.ejs%>
+    <!--
+    Body Section
+    -->
+    <div class="row">
+        <div id="sidebar" class="span3">
+            <div class="well well-small">
+                <ul class="nav nav-list">
+                    <li><a href="/bill"><span class="icon-chevron-right"></span>Đã giao</a></li>
+                    <li><a href="/bill"><span class="icon-chevron-right"></span>Chưa giao</a></li>
+                    <li><a href="/bill"><span class="icon-chevron-right"></span>Đang giao</a></li>
+                    <li style="border:0"> &nbsp;</li>
+                </ul>
+            </div>
+        </div>
+        <div class="span9">
+            <div class="well well-small">
+                <hr class="soften"/>
+                    <table class="table table-bordered table-condensed">
+
+                        <tbody>
+                        <tr>
+                            <td class="tieude" rowspan="6"><img src="<%= order.thumbnail %>"></td>
+                            <td class="tieude"><b>Tên sản phẩm</b></td>
+                            <td><%= order.nameProduct %></td>
+
+                        </tr>
+                        <tr>
+                            <td class="tieude"><b>Số lượng</b></td>
+                            <td><%= order.quantity %></td>
+
+                        </tr>
+                        <tr>
+                            <td class="tieude" style="color: red"><b>Số lượng trong kho</b></td>
+                            <td style="color: red; font-weight: bold"><%= order.quantityInStoreHouse %></td>
+
+                        </tr>
+                        <tr>
+                            <td class="tieude"><b>Tên khách hàng</b></td>
+                            <td><%= order.nameUser %></td>
+
+                        </tr>
+                        <tr>
+                            <td class="tieude"><b>Địa chỉ giao hàng</b></td>
+                            <td><%= order.addressDelivery %></td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="tieude"><b>SĐT</b></td>
+                            <td><%= order.phoneNumber %></td>
+
+                        </tr>
+
+                        <%if(order.quantity > order.quantityInStoreHouse){%>
+                            <td colspan="3" class="warning-quantity">KHÔNG ĐỦ SẢN PHẨM ĐỂ GIAO HÀNG</td>
+                        <%};%>%>
+
+                        </tbody>
+                    </table>
+
+                    <div class="control-group">
+                        <%if(order.quantity <= order.quantityInStoreHouse){%>
+                        <a href="<%= order.accept %>" class="shopBtn btn-large">Xác nhận </a>
+                        <%};%>%>
+
+                        <a href="<%= order.cancel %>" class="shopBtn btn-large">Hủy </a>
+                    </div>
+
+            </div>
+
+        </div>
+
+        <!--
+
+
+ </div> //container
+
+  <% include elements/copyright.ejs%>
+  <a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
+  <-- Placed at the end of the document so the pages load faster -->
+        <% include elements/script_end.ejs%>
+    </div>
+
+</div>
+</body>
+</html>
