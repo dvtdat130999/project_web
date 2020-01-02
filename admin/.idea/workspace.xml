@@ -45,6 +45,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.11.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.13.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/assets/css" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -55,11 +57,11 @@
       <recent name="C:\Users\Asus\Desktop\project_web\admin\views" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Asus\Desktop\web\project_web\admin\public\assets\css" />
       <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\project_web\admin\controller" />
       <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\project_web\admin\views" />
       <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\project_web\admin" />
       <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\express\Admin\views\elements" />
-      <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\express\Admin\public" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -114,6 +116,8 @@
       <workItem from="1577416494652" duration="2240000" />
       <workItem from="1577968186664" duration="706000" />
       <workItem from="1577972569873" duration="1127000" />
+      <workItem from="1577761856801" duration="7457000" />
+      <workItem from="1577849728193" duration="18981000" />
     </task>
     <servers />
   </component>

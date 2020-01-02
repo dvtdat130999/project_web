@@ -22,36 +22,31 @@ Lower Header Section
     Body Section
     -->
     <div class="row">
-        <div class="span12">
 
-            <div class="well well-small">
-                <h1>Thông tin gian hàng</h1>
-                <hr class="soften"/>
+        <div class="well well-small">
+            <h1>Thông tin gian hàng</h1>
+            <hr class="soften"/>
 
-                <table class="table table-bordered table-condensed">
-                    <thead>
+            <table class="table table-bordered table-condensed">
+                <thead>
+                <tr>
+                    <th>Tên gian hàng</th>
+                    <th>Địa chỉ</th>
+                    <th>Liên lạc</th>
+                    <th>Sản phẩm</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%shops.forEach(function(shop){%>
                     <tr>
-                        <th>Tên gian hàng</th>
-                        <th>Địa chỉ</th>
-                        <th>Liên lạc</th>
-                        <th>Sản phẩm</th>
+                        <td><%= shop.name %></td>
+                        <td><%= shop.address %></td>
+                        <td><%= shop.phone %></td>
+                        <td><a href="<%= shop.linkproducts %>">Xem sản phẩm</a></td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <%shops.forEach(function(shop){%>
-                        <tr>
-                            <td><%= shop.name %></td>
-                            <td><%= shop.address %></td>
-                            <td><%= shop.phone %></td>
-                            <td><a href="<%= shop.linkproducts %>">Xem sản phẩm</a></td>
-                        </tr>
-                    <% }); %>
-                    </tbody>
-                </table><br/>
-
-
-
-            </div>
+                <% }); %>
+                </tbody>
+            </table><br/>
         </div>
     </div>
 

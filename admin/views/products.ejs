@@ -23,58 +23,47 @@ Lower Header Section
     Body Section
     -->
     <div class="row">
-        <div class="span12">
 
-            <div class="well well-small">
-                <h1>Sản phẩm gian hàng<small class="pull-right"><%=products.length%> sản phẩm </small></h1>
-                <hr class="soften"/>
+        <div class="well well-small">
+            <h1>Sản phẩm gian hàng<small class="pull-right"><%=products.length%> sản phẩm </small></h1>
+            <hr class="soften"/>
 
-                <table class="table table-bordered table-condensed">
-                    <thead>
+            <table class="table table-bordered table-condensed">
+                <thead>
+                <tr>
+                    <th>Ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Mô tả</th>
+                    <th>Tình trạng</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <%if(userdata.author === 'shop'){%>
+                        <th>Chi tiết sản phẩm</th>
+                    <%}%>
+
+                </tr>
+                </thead>
+                <tbody>
+                <%products.forEach(function(product){%>
                     <tr>
-                        <th>Ảnh</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Mô tả</th>
-                        <th>Tình trạng</th>
-                        <th>Đơn giá</th>
-                        <th>Số lượng</th>
+                        <td><img width="50" src="<%= product.thumbnail %>" alt=""><br>
+                        <td><%= product.name %></td>
+                        <td><%= product.description %></td>
+                        <td><%= product.status %></td>
+                        <td><%= product.price %></td>
+                        <td><%= product.quantity %></td>
                         <%if(userdata.author === 'shop'){%>
-                            <th>Chi tiết sản phẩm</th>
+                            <td><a href="<%= product.uriDetail %>">chi tiết</a></td>
                         <%}%>
 
                     </tr>
-                    </thead>
-                    <tbody>
-                    <%products.forEach(function(product){%>
-                        <tr>
-                            <td><img width="50" src="<%= product.thumbnail %>" alt=""><br>
-                            <td><%= product.name %></td>
-                            <td><%= product.description %></td>
-                            <td><%= product.status %></td>
-                            <td><%= product.price %></td>
-                            <td><%= product.quantity %></td>
-                            <%if(userdata.author === 'shop'){%>
-                                <td><a href="<%= product.uriDetail %>">chi tiết</a></td>
-                            <%}%>
-
-                        </tr>
-                    <% }); %>
-
-                    <!--<tr>
-                        <td><img width="100" src="" alt=""></td>
-                        <td>Tên và mô tả<br>Carate : 22<br>Mẫu : n/a</td>
-                        <td> Mới </td>
-                        <td>$50.00</td>
-                        <td>$50.00</td>
-
-                    </tr>-->
-                    </tbody>
-                </table><br/>
+                <% }); %>
+                </tbody>
+            </table><br/>
 
 
 
 
-            </div>
         </div>
 
         <!--
@@ -82,10 +71,10 @@ Lower Header Section
 
     </div><-- /container -->
 
-    <% include elements/copyright.ejs%>
-    <a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
-    <!-- Placed at the end of the document so the pages load faster -->
-    <% include elements/script_end.ejs%>
-</div>
+        <% include elements/copyright.ejs%>
+        <a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
+        <!-- Placed at the end of the document so the pages load faster -->
+        <% include elements/script_end.ejs%>
+    </div>
 </body>
 </html>
