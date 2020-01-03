@@ -38,8 +38,42 @@ Lower Header Section
                             <p> Giá: <%= product.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+"đ" %></p>
                             <p> Giới thiệu: <%= product.description %></p>
                             <p> Trạng thái: <%= product.status %></p>
-                            <button type="submit" onclick=shop("<%=product._id%>") class="shopBtn"><span class=" icon-shopping-cart"></span>Thêm vào giỏ</button>
+                            <p>Số lượng:
+                                <input class="input-number" style="max-width:34px" placeholder="1" id="number<%=product._id%>" size="16" type="text" value="1">
+                                <button class="btn-number" type="button" onclick="removeProduct()"> - </button>
+                                <button class="btn-number" type="button" onclick="addProduct()"> + </button>
+                            </p>
 
+                            <button type="submit" onclick="MultiAddCart()" class="shopBtn"><span class=" icon-shopping-cart"></span>Thêm vào giỏ</button>
+                            <script>
+                                function addProduct() {
+                                    document.getElementById("number<%=product._id%>").value++;
+                                }
+
+                                function removeProduct() {
+                                    let number = document.getElementById("number<%=product._id%>");
+                                    if (number.value>0)
+                                    {
+                                        number.value--;
+                                    }
+                                }
+
+                                function MultiAddCart() {
+                                    let number=parseInt(document.getElementById("number<%=product._id%>").value);
+                                    let item = document.getElementById("item");
+                                    let loadItem=localStorage.getItem("item");
+                                    let loadListItem=localStorage.getItem("listItem");
+                                    for (let i=0;i<number;i++)
+                                    {
+                                        loadItem++;
+                                        loadListItem=loadListItem+"-"+"<%=product._id%>";
+                                    }
+                                    localStorage.setItem("item",loadItem);
+                                    localStorage.setItem("listItem",loadListItem);
+                                    alert("Bạn đã mua "+number+" sản phẩm "+"<%=product.name%>");
+                                    item.innerText=" Giỏ hàng ("+loadItem+")";
+                                }
+                            </script>
 
                         </div>
                             </div>

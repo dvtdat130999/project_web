@@ -23,6 +23,9 @@ router.get('/ship', productController.getShip);
 // GET request for list of all Product.
 router.get('/products', productController.getProduct);
 
+//Post Comment to server
+router.post('/products', productController.postComment);
+
 /* get product status page*/
 router.get('/status', productController.getStatus);
 

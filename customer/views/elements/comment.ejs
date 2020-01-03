@@ -6,26 +6,19 @@
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b>Bình luận</b>
                 </div>
                 <div class="panel-body">
-                    <textarea id="CommentBox" class="form-control" placeholder="Hãy nêu suy nghĩ của bạn về sản phẩm..." rows="3"></textarea>
-                    <br>
                     <%let username="";
                     if(userdata){
                         username=userdata.name;
                     }else{
                         username="visitor";
                     }%>
-                    <script>
-                        function PostComment() {
-                            let query="/products?id="
-                            query += "<%=product_list[0]._id%>";
-                            query+="&username=";
-                            query+="<%=username%>";
-                            query+="&comment=";
-                            query+=document.getElementById("CommentBox").value;
-                            location.href=query;
-                        }
-                    </script>
-                    <button id="PostButton" type="button" onclick="PostComment()" class="btn btn-info pull-right">Đăng bình luận</button>
+                    <form action="/products?id=<%=product_list[0]._id%>" id="CommentForm" enctype="multipart/form-data" method="post">
+                        <textarea id="CommentBox" name="CommentBox" class="form-control" placeholder="Hãy nêu suy nghĩ của bạn về sản phẩm..." rows="3"></textarea>
+                        <input type="hidden" name="username" value="<%=username%>"/>
+                    </form>
+                    <br>
+
+                    <button id="PostButton" type="button" onclick="document.getElementById('CommentForm').submit()" class="btn btn-info pull-right">Đăng bình luận</button>
                     <div class="clearfix"></div>
                     <hr>
 

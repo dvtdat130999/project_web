@@ -62,6 +62,18 @@ hr.soften {margin: 8px 0;background: #DDD;}
 .caption h4{margin:0}
 .thumbnail .caption {padding: 9px;color: #555555;background: #F3F2F2;}
 
+.btn-number{
+    font-size: 25px;
+    height: 30px;
+    width: 30px;
+    margin-bottom: 10px;
+}
+
+.input-number{
+    width: 30px;
+    text-align: center;
+}
+
 .dropbtn {
     background-color: white;
     color: black;

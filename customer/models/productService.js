@@ -1,6 +1,7 @@
 var product = require('../databasemodel/products');
 var category=require('../databasemodel/categories');
 const Comment=require('../databasemodel/comments');
+const cart=require('../databasemodel/cart');
 var async = require('async');
 const mongoose = require('mongoose');
 
@@ -136,6 +137,10 @@ exports.getAllProducts = async function() {
 
 exports.getCommentsOfProduct=async function(ID_product){
     return await Comment.find({product_id: ID_product});
+};
+
+exports.getCartOfUser=async function(username){
+    return await cart.find({user: username});
 };
 
 //UPDATE

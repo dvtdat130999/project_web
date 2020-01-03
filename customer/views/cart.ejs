@@ -35,7 +35,7 @@ Lower Header Section
                 for (let i=0;i<number.length;i++){
                     num+=number[i];
                 }%>
-                <h1>Thông tin giỏ hàng<small class="pull-right"> <%=num%> sản phẩm</small></h1>
+                <h1>Thông tin giỏ hàng<small class="pull-right" id="NumberOfProduct"><%=num%> sản phẩm</small></h1>
                 <hr class="soften"/>
 
                 <table class="table table-bordered table-condensed">
@@ -58,20 +58,24 @@ Lower Header Section
                         <td><%= product.name%></td>
                         <td><%= product.description%></td>
                         <td><%= product.status%></td>
+                        <input id="price<%=product._id%>" type="hidden" value="<%=product.price%>"/>
                         <td><%= product.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') +"đ"%></td>
                         <td>
-                        <input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text" value="<%= number[i]%>">
+                        <input class="span1" style="max-width:34px" placeholder="1" id="number<%=product._id%>" size="16" type="text" value="<%= number[i]%>" readonly>
                                 <div class="input-append">
-                                <button class="btn btn-mini" type="button">-</button><button class="btn btn-mini" type="button"> + </button><button class="btn btn-mini btn-danger" type="button"><span class="icon-remove"></span></button>
+                                <button class="btn btn-mini" type="button" onclick="removeItem('<%=product._id%>')">-</button>
+                                    <button class="btn btn-mini" type="button" onclick="shop('<%=product._id%>')"> + </button>
+                                    <button class="btn btn-mini btn-danger" type="button" onclick="removeAllItem('<%=product._id%>')"><span class="icon-remove"></span></button>
                         </div>
                         </td>
-                        <td><%= (product.price*number[i]).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') +"đ"%></td>
+                        <td id="sum<%=product._id%>"><%= (product.price*number[i]).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') +"đ"%></td>
                     </tr>
                     <%sum+=product.price*number[i++];});%>
 
                     <tr>
                         <td colspan="6" class="alignR sumPrice">Tổng tiền:	</td>
-                        <td class="sumPrice"><%=sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') +"đ";%></td>
+                        <input id="sum" type="hidden" value="<%=sum%>"/>
+                        <td class="sumPrice" id="sumPrice"><%=sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') +"đ";%></td>
                     </tr>
                     </tbody>
                 </table><br/>
