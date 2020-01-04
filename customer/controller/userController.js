@@ -170,6 +170,7 @@ exports.postForget = async (req, res, next) => {
             }));
     }
 }
+exports.getChangePassword = (req, res, next) => res.render('change_password', { userdata:req.user });
 
 exports.postChangePassword = async (req, res, next) => {
     const{password1,password2}=req.body;

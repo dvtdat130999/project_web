@@ -139,8 +139,7 @@ exports.postChangeMyAccount = async(req, res, next) => {
         user.address=address;
     if(phone)
         user.phone=phone;
-    if(email)
-        user.email=email;
+
     await user.save();
 
 
@@ -200,6 +199,8 @@ exports.postForget = async (req, res, next) => {
             }));
     }
 };
+
+exports.getChangePassword = (req, res, next) => res.render('change_password', { userdata:req.user });
 
 exports.postChangePassword = async (req, res, next) => {
     const{password1,password2}=req.body;

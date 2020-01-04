@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="" />
+    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../customer/controller/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/controller/userController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/forget_password.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/forget_password.ejs" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,22 +26,22 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.13.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/views/elements" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\project_web\admin\views\elements" />
+      <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\project_web\admin\views" />
+      <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\project_web\admin\controller" />
+      <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\project_web\admin" />
+      <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\express\Admin\views\elements" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Asus\Desktop\web\project_web\admin\views" />
       <recent name="C:\Users\Asus\Desktop\project_web\admin\views" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\project_web\admin\controller" />
-      <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\project_web\admin\views" />
-      <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\project_web\admin" />
-      <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\express\Admin\views\elements" />
-      <recent name="F:\Bai_hoc\Nam_3\HK1\PTUDW\express\Admin\public" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -91,6 +94,7 @@
       <workItem from="1577167435975" duration="5453000" />
       <workItem from="1577350780677" duration="4125000" />
       <workItem from="1577416494652" duration="2240000" />
+      <workItem from="1578149314552" duration="4275000" />
     </task>
     <servers />
   </component>

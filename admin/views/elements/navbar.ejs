@@ -8,17 +8,29 @@
         </a>
         <div class="nav-collapse">
           <ul class="nav">
-            <li class="active"><a href="/">Trang chủ	</a></li>
-            <li class=""><a href="/sales">Doanh số</a></li>
-            <%if(userdata.author === 'admin'){%>
-              <li class=""><a href="/shop">Gian hàng</a></li>
-            <%}%>
-            <li class=""><a href="/users/account">Danh sách tài khoản</a></li>
-            <li class=""><a href="/bill">Đơn hàng</a></li>
-            <%if(userdata.author === 'shop'){%>
-              <li class=""><a href="/products/upload">Thêm sản phẩm</a></li>
-            <%}%>
+            <li class=""><a href="/">Trang chủ	</a></li>
+            <li class=""><a href="/products">Sản phẩm</a></li>
+
           </ul>
+
+          <script>
+            function QuerySearch()
+            {
+              let Content=document.getElementById("SearchContent").value;
+              let query="/products?search="+Content;
+              location.href=query;
+            }
+          </script>
+
+          <%if(typeof search==="undefined"){
+            search="";
+          }%>
+
+          <form action="javascript:QuerySearch()" class="navbar-search pull-left">
+            <input id="SearchContent" type="text" placeholder="Tìm kiếm sản phẩm" class="search-query span2" value="<%=search%>"/>
+            <button type="button" class="btn-warning" onclick="QuerySearch()"><b>Tìm Kiếm</b></button>
+          </form>
+
         </div>
       </div>
     </div>
