@@ -1,12 +1,64 @@
 const product = require('../databasemodel/products');
 const Comment=require('../databasemodel/comments');
+const Cart=require('../databasemodel/cart');
+const Formidable = require('formidable');
 const productService = require('../models/productService');
 var async = require('async');
 
-exports.getIndex = (req, res, next) =>  res.render('index', { userdata:req.user });
+exports.getIndex = (req, res, next) =>  {
+    res.render('index', { userdata:req.user });
+};
 
-exports.getCart = (req, res, next) => res.render('cart', { userdata:req.user });
+exports.getCart = async (req, res, next) =>{
+    const form = new Formidable();
+    //console.log("Here");
+    form.parse(req, async (err, fields, files) => {
+        //console.log("=>");
+        let stringItem=fields.listItem;
+        let arrayItem=stringItem.split('-');
+        arrayItem.shift();     //Loại bỏ phần tử đầu tiên
 
+        //Nếu đã đăng nhập
+        if (req.user)
+        {
+            let username=req.user.username;
+            let cart = await productService.getCartOfUser(username);
+            console.log(cart);
+            if (cart.length===0)
+            {
+                const newCart=new Cart({user:username, amount: arrayItem.length, listItem: arrayItem});
+                await newCart.save();
+
+            }
+        }
+        else
+        {
+            //Gộp 2 giỏ hàng
+        }
+        console.log("pass");
+
+        let arrayProduct=[];
+        let number=[];
+        let n=arrayItem.length;
+        for (let i=0;i<n;i++)
+        {
+            let index=CheckExist(arrayItem[i],arrayProduct);
+            if (index===-1)
+            {
+                arrayProduct.push(arrayItem[i]);
+                number.push(1);
+            }
+            else
+            {
+                number[index]++;
+            }
+        }
+
+        let listProduct = await getMoreProductByID(arrayProduct);
+        //console.log(listProduct);
+        res.render('cart', { userdata:req.user, product_list: listProduct, number: number });
+    });
+};
 exports.getShip = (req, res, next) => res.render('ship', { userdata:req.user });
 
 exports.getProduct = async (req, res, next) => {
@@ -114,17 +166,8 @@ exports.getProduct = async (req, res, next) => {
     const id = req.query.id;
     if(typeof id !== "undefined")
     {
-        //comment
+        //Load comment
         const comment=req.query.comment;
-
-        if (typeof comment!=="undefined"){
-            let product_id=id;
-            const userName=req.query.username;
-            let time=new Date();
-            let content=comment;
-            const newComment=new Comment({product_id,userName,time,content});
-            let save = await newComment.save();
-        }
 
         let result=await productService.getCommentsOfProduct(id);
         let comments=[];
@@ -253,7 +296,62 @@ exports.getProduct = async (req, res, next) => {
                 res.render('products/list', {checked: checked_array, product_list: array2D[index],userdata:req.user, active: arr, condition: condition });
             });
     }
-}
+};
+
+exports.postComment = async (req,res,next)=>{
+    let checked_array=[];
+    let id=req.query.id;
+    if(typeof id !== "undefined")
+    {
+        const form = new Formidable();
+        //console.log("Here");
+        form.parse(req, async (err, fields, files) => {
+            //console.log("=>"+fields.CommentBox);
+            const comment=fields.CommentBox;
+
+            if (typeof comment!=="undefined"){
+                let product_id=id;
+                const userName=fields.username;
+                let time=new Date();
+                const newComment=new Comment({product_id,userName,time,content: comment});
+                let save = await newComment.save();
+            }
+
+            let result=await productService.getCommentsOfProduct(id);
+            let comments=[];
+            let n=result.length;
+            for (i=0;i<n;i++)
+            {
+                comments[n-1-i]=result[i];
+            }
+
+            if (typeof page==="undefined"){
+                page="1";
+            }
+            let index=parseInt(page,10)-1;
+            let array2D = pageElementsArr(comments,10);
+            let arr=[];
+            for (i=0;i<array2D.length;i++)
+            {
+                arr[i]="";
+            }
+            arr[index]="class=active";
+            if (typeof array2D[index]==="undefined")
+            {
+                array2D[index]=[];
+            }
+            condition="&id="+id;
+            //console.log(array2D);
+
+            productService.getProductById(id)
+                .exec(function (err, list_products) {
+                    if (err) { return next(err); }
+                    //Successful, so render
+                    res.render('products/productdetail', {checked: checked_array , product_list: list_products ,userdata:req.user, active: arr, condition: condition, comments: array2D[index]});
+                });
+        });
+    }
+};
 
 exports.getStatus = (req, res, next) => res.render('status_products', {userdata:req.user});
 
@@ -450,4 +548,30 @@ function Search(content, listProducts)
         }
     }
     return result;
+}
+
+/**
+ * @return {number}
+ */
+function CheckExist(item, arrayItem) {
+    let n=arrayItem.length;
+    for (let i=0;i<n;i++)
+    {
+        if (arrayItem[i]===item)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+async function getMoreProductByID(arrayID) {
+    let listProduct=[];
+    let n=arrayID.length;
+    for (let i=0;i<n;i++)
+    {
+        let product = await productService.getProductById(arrayID[i]);
+        listProduct.push(product[0]);
+    }
+    return listProduct;
 }

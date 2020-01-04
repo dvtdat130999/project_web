@@ -8,8 +8,51 @@
         </a>
         <div class="nav-collapse">
           <ul class="nav">
+
             <li class=""><a href="/">Trang chủ	</a></li>
             <li class=""><a href="/products">Sản phẩm</a></li>
+
+
+            <%if(active === "home"){%>
+              <li class="active"><a href="/">Trang chủ	</a></li>
+            <%}else{%>
+              <li><a href="/">Trang chủ	</a></li>
+            <%}%>
+
+              <%if(active === "sales"){%>
+                <li class="active"><a href="/sales">Doanh số</a></li>
+              <%}else{%>
+                <li><a href="/sales">Doanh số</a></li>
+              <%}%>
+
+              <%if(userdata.author === 'admin'){%>
+              <%if(active === "shop"){%>
+                <li class="active"><a href="/shop">Gian hàng</a></li>
+              <%}else{%>
+                <li><a href="/shop">Gian hàng</a></li>
+              <%}%>
+              <%}%>
+
+              <%if(active === "account"){%>
+                <li class="active"><a href="/users/account">Danh sách tài khoản</a></li>
+              <%}else{%>
+                <li><a href="/users/account">Danh sách tài khoản</a></li>
+              <%}%>
+
+              <%if(active === "order"){%>
+                <li class="active"><a href="/bill">Đơn hàng</a></li>
+              <%}else{%>
+                <li><a href="/order">Đơn hàng</a></li>
+              <%}%>
+
+              <%if(userdata.author === 'shop'){%>
+              <%if(active === "home"){%>
+                <li class="active"><a href="/products/upload">Thêm sản phẩm</a></li>
+              <%}else{%>
+                <li><a href="/products/upload">Thêm sản phẩm</a></li>
+              <%}%>
+              <%}%>
+
 
           </ul>
 

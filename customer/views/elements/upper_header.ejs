@@ -11,18 +11,23 @@
                     <b> Chào <%=userdata.name%></b>
                     <%}%>
                 </div>
-                <a class="active" href="/"> <span class="icon-home"></span> Trang chủ</a>
-                <%if(userdata){%>
-                    <a href="/users/account"><span class="icon-user"></span> Tài khoản</a>
+                <form action="/cart" id="myform" enctype="multipart/form-data" method="post" hidden>
+                    <input type="text" id="listItem" name="listItem"/>
+                </form>
+                    <a class="active" href="/"> <span class="icon-home"></span> Trang chủ</a>
+                    <%if(userdata){%>
+                        <a href="/users/account"><span class="icon-user"></span> Tài khoản</a>
 
-                    <a href="/users/logout"><span class="icon-lock"></span> Đăng xuất </a>
-                <%}%>
-                <%if(!userdata){%>
-                    <a href="/users/register"><span class="icon-lock"></span> Đăng ký </a>
-                    <a href="/users/login"><span class="icon-lock"></span> Đăng nhập </a>
+                        <a href="/users/logout"><span class="icon-lock"></span> Đăng xuất </a>
+                    <%}%>
+                    <%if(!userdata){%>
+                        <a href="/users/register"><span class="icon-lock"></span> Đăng ký </a>
+                        <a href="/users/login"><span class="icon-lock"></span> Đăng nhập </a>
 
-                <%}%>
-                <a href="/cart"><span class="icon-shopping-cart"></span> Giỏ hàng </a>
+                    <%}%>
+
+                    <a href="#" onclick="document.getElementById('myform').submit()"><span class="icon-shopping-cart cartInfo" id="item"> Giỏ hàng (0)</span></a>
+
 
             </div>
         </div>

@@ -108,3 +108,58 @@ hr.soften {margin: 8px 0;background: #DDD;}
 .gotop:hover {color: #fff;text-decoration: none;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px;}
 #gototop{margin-top:1px;}
 #footerMenu a{ font-size:12px; text-transform:lowercase}
+
+.row{
+    margin: 10px;
+}
+.col-md-2 {
+    text-align: right;
+}
+
+.control-group{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.table{
+    width: 100%;
+    margin-bottom: 5px;
+    border:2px solid black;
+}
+
+.tieude{
+    width: 15%;
+}
+
+.nameProduct{
+    width: 23%;
+}
+
+.quantity{
+    width: 12%;
+    text-align: center;
+}
+
+.addressDelivery{
+    width: 55%;
+}
+
+.detail{
+    width: 10%;
+}
+
+.header-table{
+    text-align: center !important;
+}
+
+.btn{
+    background: red;
+    pointer-events: none;
+}
+
+.warning-quantity{
+    text-align: center !important;
+    color: red;
+    font-weight: bold;
+    font-size: larger;
+}

@@ -12,8 +12,8 @@ router.get('/', productController.getIndex);
 
 
 
-/* get cart page*/
-router.get('/cart', productController.getCart);
+/* get cart page - post list item*/
+router.post('/cart', productController.getCart);
 
 /* get ship information page*/
 router.get('/ship', productController.getShip);
@@ -22,6 +22,9 @@ router.get('/ship', productController.getShip);
 
 // GET request for list of all Product.
 router.get('/products', productController.getProduct);
+
+//Post Comment to server
+router.post('/products', productController.postComment);
 
 /* get product status page*/
 router.get('/status', productController.getStatus);

@@ -25,13 +25,8 @@ Lower Header Section
         <div id="sidebar" class="span3">
             <div class="well well-small">
                 <ul class="nav nav-list">
-                    <li><a href="/bill"><span class="icon-chevron-right"></span>Đã giao</a></li>
-                    <li><a href="/bill"><span class="icon-chevron-right"></span>Chưa giao</a></li>
-                    <li><a href="/bill"><span class="icon-chevron-right"></span>Đang giao</a></li>
-
-
-
-
+                    <li><a href="/bill"><span class="icon-chevron-right active"></span>Chưa xác nhận</a></li>
+                    <li><a href="/bill"><span class="icon-chevron-right"></span>Đã xác nhận</a></li>
                     <li style="border:0"> &nbsp;</li>
                 </ul>
             </div>
@@ -39,56 +34,33 @@ Lower Header Section
         <div class="span9">
             <div class="well well-small">
                 <hr class="soften"/>
+                    <table class="table table-bordered table-condensed">
 
-                <table class="table table-bordered table-condensed">
-                    <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>Tên hàng</th>
-                        <th>Số lượng</th>
-                        <th>Đơn giá</th>
-                        <th>Người mua</th>
-                        <th>Địa chỉ</th>
+                        <tbody>
+                        <tr>
+                            <th colspan="4" class="header-table">
+                                Danh sách đơn đặt hàng cần xác nhận
+                            </th>
+                        </tr>
 
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Nhẫn kim cương</td>
-                        <td>1</td>
-                        <td>10 000 $ </td>
-                        <td>jojo</td>
-                        <td>Hà Nội</td>
+                        <tr>
+                            <th><b>Tên sản phẩm</b></th>
+                            <th><b>Số lượng</b></th>
+                            <th><b>Địa chỉ giao hàng</b></th>
+                            <th>Chi tiết</th>
 
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Vòng cổ đôi</td>
-                        <td>1</td>
+                        </tr>
+                        <%orders.forEach(function(order){%>
+                        <tr>
+                            <td class="nameProduct"><%= order.nameProduct %></td>
+                            <td class="quantity"><%= order.quantity%></td>
+                            <td class="addressDelivery"><%= order.addressDelivery %></td>
+                            <td class="detail"><a href="<%= order.urlDetail%>%>"><i>chi tiết</i></a></td>
 
-                        <td>400$ </td>
-
-                        <td>dio </td>
-                        <td>Huế</td>
-
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Vòng cổ</td>
-                        <td>3</td>
-                        <td>348.42$</td>
-                        <td>hi </td>
-                        <td>Hồ Chí Minh</td>
-
-                    </tr>
-
-                    </tbody>
-                </table><br/>
-
-
-
-
+                        </tr>
+                        <%});%>
+                        </tbody>
+                    </table>
             </div>
 
         </div>

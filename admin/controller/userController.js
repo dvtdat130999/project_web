@@ -39,7 +39,7 @@ exports.getAccountList = async (req, res, next) => {
                     return next(err);
                 }
                 //Successful, so render
-                res.render('customer_account', {account_list: accounts_customer, userdata: req.user});
+                res.render('customer_account', {account_list: accounts_customer, userdata: req.user, active:"account"});
             });
     }
 
@@ -304,7 +304,7 @@ exports.postUnLocked= async (req, res, next) =>{
 exports.getShop = (req, res, next) => {
     if (req.user.author === 'admin') {
         user.find({author: 'shop'}).then(data => {
-            res.render('shop', {userdata: req.user, shops: data});
+            res.render('shop', {userdata: req.user, shops: data, active: "shop"});
         })
     } else {
         res.redirect('/');
