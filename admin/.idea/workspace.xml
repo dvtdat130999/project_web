@@ -2,19 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../customer/databasemodel/order.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../customer/controller/productController.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/controller/productController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/controller/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/controller/userController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../customer/public/assets/js/shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/public/assets/js/shop.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../customer/public/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/public/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../customer/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/routes/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../customer/views/cart.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/cart.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../customer/views/change_password.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/change_password.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/elements/comment.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/elements/comment.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../customer/views/elements/tag_head.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/elements/tag_head.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../customer/views/elements/upper_header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/elements/upper_header.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../customer/views/forget_password.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/forget_password.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../customer/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/index.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../customer/views/login.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/login.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../customer/views/my_account.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/my_account.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../customer/views/products/detail.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/products/detail.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../customer/views/products/list.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/products/list.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../customer/views/products/productdetail.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/products/productdetail.ejs" afterDir="false" />
@@ -43,10 +45,8 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="javascript.nodejs.core.library.configured.version" value="12.11.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.13.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/assets/css" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -118,6 +118,8 @@
       <workItem from="1577972569873" duration="1127000" />
       <workItem from="1577761856801" duration="7457000" />
       <workItem from="1577849728193" duration="18981000" />
+      <workItem from="1578232808409" duration="25000" />
+      <workItem from="1578234423468" duration="7000" />
     </task>
     <servers />
   </component>

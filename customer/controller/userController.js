@@ -1,12 +1,17 @@
 const passport = require('passport');
 const userService = require('../models/userService');
+const productService = require('../models/productService');
 const user = require('../databasemodel/users');
+const Cart=require('../databasemodel/cart');
 var async = require('async');
 const bcrypt=require('bcryptjs');
 const randomstring=require('randomstring');
 const nodemailer=require('nodemailer');
 
-exports.getAccount = (req, res, next) => res.render('my_account', { userdata: req.user });
+exports.getAccount = async (req, res, next) =>{
+    let amount= await getAmount(req.user);
+    res.render('my_account', { userdata: req.user, amountItem: amount });
+};
 
 exports.postAccount = async (req, res, next) => {
     const {name, address, phone} = req.body;
@@ -24,24 +29,75 @@ exports.postAccount = async (req, res, next) => {
     res.redirect('/users/account');
 }
 
-exports.getLogin = (req, res, next) => res.render('login',{ userdata:req.user });
+exports.getLogin = async (req, res, next) =>{
+    let amount= await getAmount(req.user);
+    res.render('login',{ userdata:req.user, msg: req.query.msg, amountItem:amount });
+};
 
 exports.getLogout = (req, res, next) => {
     req.logout();
     res.redirect('/');
 };
 
-exports.getVerify = (req, res, next) => res.render('verify',{ userdata:req.user });
+exports.getVerify = async (req, res, next) =>{
+    let amount= await getAmount(req.user);
+    res.render('verify',{ userdata:req.user, amountItem: amount });
+};
 
-exports.getRegister = (req, res, next) => res.render('register',{ userdata:req.user });
+exports.getRegister = async (req, res, next) =>{
+    let amount= await getAmount(req.user);
+    res.render('register',{ userdata:req.user, amountItem: amount });
+};
 
-exports.getForget = (req, res, next) => res.render('forget_password', { userdata:req.user });
+exports.getForget = async (req, res, next) =>{
+    let amount= await getAmount(req.user);
+    res.render('forget_password', { userdata:req.user, amountItem: amount });
+};
 
 exports.postLogin = (req, res, next) => {
-    passport.authenticate('local', { //chọn phương thức check là local => npm install passport-local
-        failureRedirect: '/users/login',  //nếu check không đúng thì redirect về link này
-        successRedirect: '/',
-        failureFlash: true
+    //chọn phương thức check là local => npm install passport-local
+    passport.authenticate('local',function(err, user, info) {
+        if (err) { return next(err); }
+        if (!user) { return res.redirect('/users/login?msg=fail'); }   //nếu check không đúng thì redirect về link này
+        req.logIn(user, async function(err) {
+            if (err) { return next(err); }
+
+            let stringItem=req.body.StringItem;
+            if (stringItem!==null && stringItem.length>0)
+            {
+                let arrayItem=stringItem.split('-');
+                arrayItem.shift();     //Loại bỏ phần tử đầu tiên
+
+                let username=req.user.username;
+                let cart = await productService.getCartOfUser(username);
+                console.log(cart);
+                if (cart.length===0)    //Giỏ hàng chưa tồn tại
+                {
+                    const newCart=new Cart({user:username, amount: arrayItem.length, listItem: arrayItem});
+                    await newCart.save();
+
+                }
+                else
+                {
+                    //Gộp 2 giỏ hàng.
+                    let idCart=cart[0]._id;
+                    let arrayProduct=cart[0].listItem;
+                    console.log(arrayProduct);
+                    for (let i=0;i<arrayItem.length;i++)
+                    {
+                        arrayProduct.push(arrayItem[i]);
+                    }
+                    console.log(arrayProduct);
+                    await Cart.updateOne({ _id: idCart },
+                        {
+                            amount: arrayProduct.length,
+                            listItem: arrayProduct
+                        });
+                }
+            }
+
+            return res.redirect('/');
+        });
     })(req, res, next);
 };
 
@@ -198,4 +254,20 @@ exports.postChangePassword = async (req, res, next) => {
             res.redirect('/users/change_password');
         }
     });
+}
+
+async function getAmount(user) {
+    if (user)
+    {
+        let cart = await productService.getCartOfUser(user.username);
+        if (cart.length>0)
+        {
+            return cart[0].amount;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    return -1;
 }

@@ -44,11 +44,14 @@
         alert("Mật khẩu mới đã được gửi tới mail của bạn!");
     }
 
-    function prepare() {
+    function prepare(userdata) {
         document.getElementById('buttonSubmit').style.display = 'none';
         document.getElementById('changePassword').style.display = 'none';
         document.getElementById('cancelChange').style.display = 'none';
-        loadItem();
+        if (!userdata)
+        {
+            loadItem();
+        }
     }
     
     function changeIn4() {

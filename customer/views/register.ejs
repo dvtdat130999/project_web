@@ -4,7 +4,7 @@
     <% include elements/tag_head.ejs%>
 
 </head>
-<body onload="loadItem()">
+<body <%if (!userdata) {%>onload="loadItem()"<%}%>>
 <!--
 	Upper Header Section
 -->

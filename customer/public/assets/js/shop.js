@@ -47,6 +47,11 @@ function loadItem() {
 	document.getElementById("listItem").value=loadListItem;
 }
 
+function resetLocalData() {
+	localStorage.setItem("item",0);
+	localStorage.setItem("listItem","");
+}
+
 /*Tính toán tổng tiền. type là loại hàm (1:Add, 2:remove, 3:removeAll)*/
 function Caculate(id, type, numberPre) {
 	let price=document.getElementById("price"+id).value;
@@ -87,19 +92,26 @@ function shop(id) {
 	document.getElementById("listItem").value=loadListItem;
 
 	let number=document.getElementById("number"+id);
-	number.value=parseInt(number.value)+1;
-
-	document.getElementById("NumberOfProduct").innerText=loadItem+" sản phẩm";
-	Caculate(id,1,0);
+	if (number!==null)
+	{
+		number.value=parseInt(number.value)+1;
+		document.getElementById("NumberOfProduct").innerText=loadItem+" sản phẩm";
+		Caculate(id,1,0);
+	}
+	else{
+		alert("Sản phẩm đã được cho vào giỏ hàng");
+	}
 }
 
 function removeItem(id) {
 	let item = document.getElementById("item");
 	let loadItem=localStorage.getItem("item");
 	let loadListItem=localStorage.getItem("listItem");
-	if (loadItem>0)
+	let number=document.getElementById("number"+id);
+	if (number.value>0)
 	{
 		loadItem--;
+		number.value=number.value-1;
 	}
 	else
 	{
@@ -117,8 +129,6 @@ function removeItem(id) {
 	item.innerText=" Giỏ hàng ("+loadItem+")";
 	document.getElementById("listItem").value=stringItem;
 
-	let number=document.getElementById("number"+id);
-	number.value=number.value-1;
 	document.getElementById("NumberOfProduct").innerText=loadItem+" sản phẩm";
 	Caculate(id,2,0);
 }

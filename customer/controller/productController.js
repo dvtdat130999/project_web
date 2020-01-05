@@ -1,12 +1,14 @@
 const product = require('../databasemodel/products');
 const Comment=require('../databasemodel/comments');
 const Cart=require('../databasemodel/cart');
+const Order=require('../databasemodel/order');
 const Formidable = require('formidable');
 const productService = require('../models/productService');
 var async = require('async');
 
-exports.getIndex = (req, res, next) =>  {
-    res.render('index', { userdata:req.user });
+exports.getIndex = async (req, res, next) =>  {
+    let amount= await getAmount(req.user);
+    res.render('index', { userdata:req.user, amountItem: amount });
 };
 
 exports.getCart = async (req, res, next) =>{
@@ -14,29 +16,25 @@ exports.getCart = async (req, res, next) =>{
     //console.log("Here");
     form.parse(req, async (err, fields, files) => {
         //console.log("=>");
-        let stringItem=fields.listItem;
-        let arrayItem=stringItem.split('-');
-        arrayItem.shift();     //Loại bỏ phần tử đầu tiên
-
-        //Nếu đã đăng nhập
+        let arrayItem=[];
         if (req.user)
         {
-            let username=req.user.username;
-            let cart = await productService.getCartOfUser(username);
-            console.log(cart);
-            if (cart.length===0)
+            let cart = await productService.getCartOfUser(req.user.username);
+            if (typeof cart[0]==="undefined")
             {
-                const newCart=new Cart({user:username, amount: arrayItem.length, listItem: arrayItem});
-                await newCart.save();
-
+                arrayItem=[];
+            }
+            else
+            {
+                arrayItem=cart[0].listItem;
             }
         }
         else
         {
-            //Gộp 2 giỏ hàng
+            let stringItem=fields.listItem;
+            arrayItem=stringItem.split('-');
+            arrayItem.shift();     //Loại bỏ phần tử đầu tiên
         }
-        console.log("pass");
-
         let arrayProduct=[];
         let number=[];
         let n=arrayItem.length;
@@ -56,10 +54,38 @@ exports.getCart = async (req, res, next) =>{
 
         let listProduct = await getMoreProductByID(arrayProduct);
         //console.log(listProduct);
-        res.render('cart', { userdata:req.user, product_list: listProduct, number: number });
+        let amount= await getAmount(req.user);
+        res.render('cart', { userdata:req.user, product_list: listProduct, number: number, amountItem: amount });
     });
 };
-exports.getShip = (req, res, next) => res.render('ship', { userdata:req.user });
+exports.saveCart=async (req,res,next)=>{
+    let arrayItem=[];
+    let stringItem=req.body.stringItem;
+    arrayItem=stringItem.split('-');
+    arrayItem.shift();     //Loại bỏ phần tử đầu tiên
+
+    let username=req.user.username;
+    let cart = await productService.getCartOfUser(username);
+    //Lưu giỏ hàng
+    let idCart=cart[0]._id;
+    await Cart.updateOne({ _id: idCart },
+        {
+            amount: arrayItem.length,
+            listItem: arrayItem
+        });
+    if (req.body.pay==='1')
+    {
+        res.redirect('/ship');
+    }
+    else
+    {
+        res.redirect('/products');
+    }
+};
+exports.getShip = async (req, res, next) =>{
+    let amount= await getAmount(req.user);
+    res.render('ship', { userdata:req.user, amountItem: amount });
+};
 
 exports.getProduct = async (req, res, next) => {
     let page=req.query.page;
@@ -73,7 +99,7 @@ exports.getProduct = async (req, res, next) => {
     if (typeof searchContent !== "undefined")
     {
         product.find()
-            .exec(function (err, list_products) {
+            .exec( async function (err, list_products) {
                 if (err) { return next(err); }
                 //Successful, so render
                 list_products=Search(searchContent,list_products);
@@ -93,7 +119,8 @@ exports.getProduct = async (req, res, next) => {
                 {
                     array2D[index]=[];
                 }
-                res.render('products/list', {checked: checked_array, product_list: array2D[index],userdata:req.user, active: arr, condition: condition, search: searchContent });
+                let amount= await getAmount(req.user);
+                res.render('products/list', {checked: checked_array, product_list: array2D[index],userdata:req.user, active: arr, condition: condition, search: searchContent, amountItem: amount });
             });
         return;
     }
@@ -103,7 +130,7 @@ exports.getProduct = async (req, res, next) => {
     if (softby==="low")
     {
         product.find()
-            .exec(function (err, list_products) {
+            .exec(async function (err, list_products) {
                 if (err) { return next(err); }
                 //Successful, so render
                 list_products.sort(function(a,b){
@@ -124,14 +151,15 @@ exports.getProduct = async (req, res, next) => {
                     array2D[index]=[];
                 }
                 condition="&sort=low";
-                res.render('products/list', {checked: checked_array, product_list: array2D[index],userdata:req.user, active: arr, condition: condition});
+                let amount= await getAmount(req.user);
+                res.render('products/list', {checked: checked_array, product_list: array2D[index],userdata:req.user, active: arr, condition: condition, amountItem: amount});
             });
         return;
     }
     else if(softby==="high")
     {
         product.find()
-            .exec(function (err, list_products) {
+            .exec(async function (err, list_products) {
                 if (err) { return next(err); }
                 //Successful, so render
                 list_products.sort(function(a,b){
@@ -153,7 +181,8 @@ exports.getProduct = async (req, res, next) => {
                     array2D[index]=[];
                 }
                 condition="&sort=high";
-                res.render('products/list', {checked: checked_array, product_list: array2D[index],userdata:req.user, active: arr, condition: condition  });
+                let amount= await getAmount(req.user);
+                res.render('products/list', {checked: checked_array, product_list: array2D[index],userdata:req.user, active: arr, condition: condition, amountItem: amount  });
             });
         return;
     }
@@ -195,10 +224,11 @@ exports.getProduct = async (req, res, next) => {
         //console.log(array2D);
 
         productService.getProductById(id)
-            .exec(function (err, list_products) {
+            .exec( async function (err, list_products) {
                 if (err) { return next(err); }
                 //Successful, so render
-                res.render('products/productdetail', {checked: checked_array , product_list: list_products ,userdata:req.user, active: arr, condition: condition, comments: array2D[index]});
+                let amount= await getAmount(req.user);
+                res.render('products/productdetail', {checked: checked_array , product_list: list_products ,userdata:req.user, active: arr, condition: condition, comments: array2D[index], amountItem: amount});
             });
         return;
     }
@@ -270,12 +300,13 @@ exports.getProduct = async (req, res, next) => {
         {
             array2D[index]=[];
         }
-        res.render('products/list', { checked: checked_array, product_list: result,userdata:req.user, active: arr, condition: condition });
+        let amount= await getAmount(req.user);
+        res.render('products/list', { checked: checked_array, product_list: result,userdata:req.user, active: arr, condition: condition, amountItem: amount });
     }
     else
     {
         product.find()
-            .exec(function (err, list_products) {
+            .exec(async function (err, list_products) {
                 if (err) { return next(err); }
                 //Successful, so render
                 if (typeof page==="undefined"){
@@ -292,8 +323,8 @@ exports.getProduct = async (req, res, next) => {
                 {
                     array2D[index]=[];
                 }
-
-                res.render('products/list', {checked: checked_array, product_list: array2D[index],userdata:req.user, active: arr, condition: condition });
+                let amount= await getAmount(req.user);
+                res.render('products/list', {checked: checked_array, product_list: array2D[index],userdata:req.user, active: arr, condition: condition, amountItem: amount });
             });
     }
 };
@@ -344,16 +375,97 @@ exports.postComment = async (req,res,next)=>{
             //console.log(array2D);
 
             productService.getProductById(id)
-                .exec(function (err, list_products) {
+                .exec(async function (err, list_products) {
                     if (err) { return next(err); }
                     //Successful, so render
-                    res.render('products/productdetail', {checked: checked_array , product_list: list_products ,userdata:req.user, active: arr, condition: condition, comments: array2D[index]});
+                    let amount= await getAmount(req.user);
+                    res.render('products/productdetail', {checked: checked_array , product_list: list_products ,userdata:req.user, active: arr, condition: condition, comments: array2D[index], amountItem: amount});
                 });
         });
     }
 };
 
-exports.getStatus = (req, res, next) => res.render('status_products', {userdata:req.user});
+exports.shopping= async (req,res,next)=>{
+    //console.log("+===> "+req.body.shopProduct);
+    let shopProduct=req.body.shopProduct;
+    let amount=parseInt(req.body.shopAmount);
+    let username=req.user.username;
+    let cart = await productService.getCartOfUser(username);
+    //console.log(cart);
+    if (cart.length===0)    //Giỏ hàng chưa tồn tại
+    {
+        let arrayItem=[];
+        for (let i=0;i<amount;i++)
+        {
+            arrayItem.push(shopProduct);
+        }
+        const newCart=new Cart({user:username, amount: arrayItem.length, listItem: arrayItem});
+        await newCart.save();
+    }
+    else
+    {
+        //Gộp 2 giỏ hàng.
+        let idCart=cart[0]._id;
+        let arrayProduct=cart[0].listItem;
+        //console.log(arrayProduct);
+        for (let i=0;i<amount;i++)
+        {
+            arrayProduct.push(shopProduct);
+        }
+        //console.log(arrayProduct);
+        await Cart.updateOne({ _id: idCart },
+            {
+                amount: arrayProduct.length,
+                listItem: arrayProduct
+            });
+    }
+};
+
+exports.getStatus = async (req, res, next) =>{
+    //Lấy ID người dùng
+    let idUser=req.user._id;
+    //lấy địa chỉ
+    let address=req.body.address;
+    //Lấy ngày hiện tại
+    let now=new Date();
+    let day=now.getDate();
+    let month=now.getMonth()+1;
+    let year=now.getFullYear();
+    //lấy thông tin cart
+    let cart = await productService.getCartOfUser(req.user.username);
+    let arrayItem=cart[0].listItem;
+    //chuyển thành 2 mảng
+    let arrayProduct=[];
+    let number=[];
+    let n=arrayItem.length;
+    for (let i=0;i<n;i++)
+    {
+        let index=CheckExist(arrayItem[i],arrayProduct);
+        if (index===-1)
+        {
+            arrayProduct.push(arrayItem[i]);
+            number.push(1);
+        }
+        else
+        {
+            number[index]++;
+        }
+    }
+
+    let listProduct = await getMoreProductByID(arrayProduct);
+    //Mỗi sản phẩm lưu thành 1 order
+    for (let i=0; i<listProduct.length;i++)
+    {
+        let order=new Order({idShop: listProduct[i].idshop, idUser: idUser, idProduct: listProduct[i]._id,
+            nameProduct: listProduct[i].name, quantity: number[i], addressDelivery: address, confirm: 0,
+            daySale: day, monthSale: month, yearSale: year});
+        await order.save();
+    }
+    //Xóa cart => amount = 0
+    await Cart.deleteOne({user: cart[0].user});
+
+    res.render('status_products', {userdata:req.user, amountItem: 0});
+};
 
 ////////////////////////////////////////////////////////////////////////////
 //Helper
@@ -574,4 +686,20 @@ async function getMoreProductByID(arrayID) {
         listProduct.push(product[0]);
     }
     return listProduct;
+}
+
+async function getAmount(user) {
+    if (user)
+    {
+        let cart = await productService.getCartOfUser(user.username);
+        if (cart.length>0)
+        {
+            return cart[0].amount;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    return -1;
 }

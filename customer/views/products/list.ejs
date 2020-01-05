@@ -4,7 +4,7 @@
     <% include ../elements/tag_head.ejs%>
 
 </head>
-<body onload="loadItem()">
+<body <%if (!userdata) {%>onload="loadItem()"<%}%>>
 <!--
 	Upper Header Section
 -->
@@ -42,20 +42,31 @@ Lower Header Section
                                 <div class="caption cntr">
                                     <p><%= product.name %></p>
                                     <p><strong> <%= product.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+"đ" %></strong></p>
+                                    <form action="/products/shopping" id="shopform<%=product._id%>"  method="post" hidden>
+                                        <input type="text" id="shopProduct" name="shopProduct" value="<%=product._id%>"/>
+                                        <input type="number" name="shopAmount" value="1"/>
+                                    </form>
                                     <%click="";
-                                        ref="href=javascript:window.location.href='/tags.html#{{ tag[0] }}-ref'; hide_others()";
+                                        // ref="href=javascript:window.location.href='/tags.html#{{ tag[0] }}-ref'; hide_others()";
                                         if (userdata)
                                         {
-                                            hef="href=#";
+                                            click="onclick=shopping('shopform"+product._id+"')";
                                         }else{
                                             click="onclick=shop('"+product._id+"')";
                                         }%>
-                                    <h4><a class="shopBtn" <%=ref%> <%=click%> title="add to cart">Thêm vào giỏ </a></h4>
+                                    <h4><button class="shopBtn" <%=click%> title="add to cart">Thêm vào giỏ </button></h4>
                                     <br class="clr">
                                 </div>
                             </div>
                         </ul>
                     <% }); %>
+                    <script>
+                        function shopping(id) {
+                            document.getElementById(id).submit();
+                            alert("Sản phẩm đã được cho vào giỏ hàng");
+                            location.href="javascript:window.location.reload(false)";
+                        }
+                    </script>
                 </div>
 
 
