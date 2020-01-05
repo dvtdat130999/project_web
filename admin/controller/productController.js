@@ -92,7 +92,7 @@ exports.getProducts = async (req, res, next) => {
             const thumbnail = data[0].thumbnail;
 
             res.render('updateproduct', {userdata: req.user, id: id, nameproduct: nameproduct, price: price, description: description,
-                thumbnail: thumbnail, category: category, quantity: quantity, sex: sex, trademark: trademark, color: color});
+                thumbnail: thumbnail, category: category, quantity: quantity, sex: sex, trademark: trademark, color: color, active:"product"});
         });
     }
     else{
@@ -102,19 +102,13 @@ exports.getProducts = async (req, res, next) => {
             idshop = req.user.id;
 
         const data = await product.find({idshop: idshop});
-        res.render('products', {userdata: req.user, products: data, active:"home"});
-
-        /*product.find({idshop: idshop}).then(data => {
-            res.render('products', {userdata: req.user, products: data, active:"home"});
-        })*/
+        res.render('products', {userdata: req.user, products: data, active:"product"});
     }
-
-
 }
 
 exports.getUpload = (req, res, next)=>{
     if(req.user.author === 'shop')
-        res.render('newproduct', {userdata: req.user});
+        res.render('newproduct', {userdata: req.user, active: "upload"});
     else
         res.redirect('/');
 }

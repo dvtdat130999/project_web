@@ -22,11 +22,13 @@ Lower Header Section
     Body Section
     -->
     <div class="row">
-        <% include elements/sidebar.ejs%>
-        <div class="span9">
+
+        <%include elements/navbar.ejs%>
+        <div class="span3"></div>
+        <div class="span9" style="margin: auto">
             <div class="well">
                 <form class="form-horizontal" action="/products/update" enctype="multipart/form-data" method="post">
-                    <h3>Chỉnh sửa thông tin sản phẩm</h3>
+                    <h3 style="text-align: center; font-weight: bold; color: red; font-size: x-large">CHỈNH SỬA THÔNG TIN SẢN PHẨM</h3>
                     <% include ./partials/messages.ejs%>
 
                     <div class="control-group">

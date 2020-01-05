@@ -44,4 +44,93 @@
         alert("Mật khẩu mới đã được gửi tới mail của bạn!");
     }
 
+    function createElement(option) {
+        const parent = document.getElementById("input-data");
+
+        const elementInput = document.createElement("input");
+        elementInput.setAttribute("id", option);
+        elementInput.setAttribute("name", option);
+        elementInput.setAttribute("type", "number");
+        elementInput.setAttribute("required", "true");
+        elementInput.style.width = "80px";
+        elementInput.style.height = "30px";
+        elementInput.style.marginRight = "10px";
+
+        const elementLabel = document.createElement("label");
+        elementLabel.setAttribute("id", "label-for-" + option);
+
+        let textInner;
+        switch (option) {
+            case "day":
+                textInner="Ngày ";
+                break;
+            case "week":
+                textInner="Tuần ";
+                break;
+            case "month":
+                textInner="Tháng ";
+                break;
+            case "quarter":
+                textInner="Quý ";
+                break;
+            case "year":
+                textInner="Năm ";
+                break;
+        }
+        elementLabel.innerText = textInner;
+        elementLabel.setAttribute("for", option);
+
+        parent.appendChild(elementLabel);
+        parent.appendChild(elementInput);
+    }
+
+    function f() {
+        const selected = document.getElementById("choice").value;
+
+        document.getElementById("input-data").remove();
+        const elementDiv = document.createElement("div");
+        elementDiv.setAttribute("id", "input-data");
+        document.getElementById("div-input").appendChild(elementDiv);
+        switch (selected) {
+            case 'year':
+                createElement('year');
+                document.getElementById("label-for-sortby").hidden=false;
+                document.getElementById("sortby").hidden=false;
+                break;
+            case 'quarter':
+                createElement('quarter');
+                createElement('year');
+                document.getElementById("label-for-sortby").hidden=false;
+                document.getElementById("sortby").hidden=false;
+                break;
+            case 'month':
+                createElement('month');
+                createElement('year');
+                document.getElementById("label-for-sortby").hidden=false;
+                document.getElementById("sortby").hidden=false;
+                break;
+            case 'week':
+                createElement('week');
+                createElement('month');
+                createElement('year');
+                document.getElementById("label-for-sortby").hidden=false;
+                document.getElementById("sortby").hidden=false;
+                break;
+            case 'day':
+                createElement('day');
+                createElement('month');
+                createElement('year');
+                document.getElementById("label-for-sortby").hidden=false;
+                document.getElementById("sortby").hidden=false;
+                break;
+            case 'top10':
+                document.getElementById("label-for-sortby").hidden=true;
+                document.getElementById("sortby").hidden=true;
+                break;
+            default:
+                document.getElementById("label-for-sortby").hidden=false;
+                document.getElementById("sortby").hidden=false;
+                break;
+        }
+    }
 </script>

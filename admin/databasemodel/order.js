@@ -29,7 +29,7 @@ var orderSchema=new mongoose.Schema({
         type: Number
     },
     confirm:{
-        type: Boolean
+        type: Number
     }
 });
 

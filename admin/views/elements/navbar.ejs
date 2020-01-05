@@ -9,8 +9,6 @@
         <div class="nav-collapse">
           <ul class="nav">
 
-            <li class=""><a href="/">Trang chủ	</a></li>
-            <li class=""><a href="/products">Sản phẩm</a></li>
 
 
             <%if(active === "home"){%>
@@ -18,6 +16,13 @@
             <%}else{%>
               <li><a href="/">Trang chủ	</a></li>
             <%}%>
+
+              <%if(active === "product"){%>
+                <li class="active"><a href="/products">Sản phẩm</a></li>
+              <%}else{%>
+                <li><a href="/products">Sản phẩm</a></li>
+              <%}%>
+
 
               <%if(active === "sales"){%>
                 <li class="active"><a href="/sales">Doanh số</a></li>
@@ -46,7 +51,7 @@
               <%}%>
 
               <%if(userdata.author === 'shop'){%>
-              <%if(active === "home"){%>
+              <%if(active === "upload"){%>
                 <li class="active"><a href="/products/upload">Thêm sản phẩm</a></li>
               <%}else{%>
                 <li><a href="/products/upload">Thêm sản phẩm</a></li>

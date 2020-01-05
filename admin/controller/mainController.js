@@ -7,6 +7,6 @@ exports.getIndex = (req, res, next) =>  {
         if(req.user.author === 'admin')
             res.redirect('/shop');
         else
-            res.redirect('/products')
+            res.redirect('/sales')
     }
 }
