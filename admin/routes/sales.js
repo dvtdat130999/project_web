@@ -44,7 +44,7 @@ router.get('/',ensureAuthenticated, async (req, res, next) => {
 
     switch (statistical) {
         case "year":
-            bills = await order.find({yearSale: year, confirm: 2});
+            bills = await order.find({yearSale: year, confirm: 2, idShop: req.user.id});
             titleTable = "THỐNG KÊ NĂM " + year;
             break;
         case "quarter":
@@ -52,11 +52,11 @@ router.get('/',ensureAuthenticated, async (req, res, next) => {
             arrayMonth[0] += (quarter - 1) * 3;
             arrayMonth[1] += (quarter - 1) * 3;
             arrayMonth[2] += (quarter - 1) * 3;
-            bills = await order.find({monthSale: arrayMonth, yearSale: year, confirm: 2});
+            bills = await order.find({monthSale: arrayMonth, yearSale: year, confirm: 2, idShop: req.user.id});
             titleTable = "THÓNG KÊ QUÝ " + quarter + " NĂM " + year;
             break;
         case "month":
-            bills = await order.find({monthSale: month, yearSale: year, confirm: 2});
+            bills = await order.find({monthSale: month, yearSale: year, confirm: 2, idShop: req.user.id});
             titleTable = "THỐNG KÊ THÁNG " + month + " NĂM " + year;
             break;
         case "week":
@@ -70,11 +70,11 @@ router.get('/',ensureAuthenticated, async (req, res, next) => {
                 arrayDayOfWeek.push(i);
             }
 
-            bills = await order.find({monthSale: month, daySale: arrayDayOfWeek, yearSale: year, confirm: 2});
+            bills = await order.find({monthSale: month, daySale: arrayDayOfWeek, yearSale: year, confirm: 2, idShop: req.user.id});
             titleTable = "THỐNG KÊ TUẦN " + week + " THÁNG " + month + " NĂM " + year;
             break;
         case "day":
-            bills = await order.find({yearSale: year, daySale: day, monthSale: month, confirm: 2});
+            bills = await order.find({yearSale: year, daySale: day, monthSale: month, confirm: 2, idShop: req.user.id});
             titleTable = "THỐNG KÊ NGÀY " + day + " THÁNG " + month + " NĂM " + year;
             break;
         case "7day":
@@ -83,18 +83,16 @@ router.get('/',ensureAuthenticated, async (req, res, next) => {
             let monthNow = nowDate.getMonth() + 1;
             let dayNow = nowDate.getDate();
 
-            const newbill = await order.findOne({
+            let newbill = await order.find({
                 yearSale: yearNow,
                 daySale: dayNow,
                 monthSale: monthNow,
                 confirm: 2
             });
-            if (newbill !== null) {
-                bills.push(newbill);
-            }
 
             if (newbill !== null) {
-                bills.push(newbill);
+                for(const bill of newbill)
+                    bills.push(bill);
             }
 
             for (let i = 1; i < 7; i++) {
@@ -110,7 +108,7 @@ router.get('/',ensureAuthenticated, async (req, res, next) => {
                     dayNow = daysInMonth[monthNow];
                 }
 
-                const newbill = await order.findOne({
+                newbill = await order.find({
                     yearSale: yearNow,
                     daySale: dayNow,
                     monthSale: monthNow,
@@ -118,7 +116,8 @@ router.get('/',ensureAuthenticated, async (req, res, next) => {
                 });
 
                 if (newbill !== null) {
-                    bills.push(newbill);
+                    for(const bill of newbill)
+                        bills.push(bill);
                 }
             }
 
@@ -126,7 +125,7 @@ router.get('/',ensureAuthenticated, async (req, res, next) => {
                 + nowDate.getDate() + "/" + (nowDate.getMonth() + 1) + "/" + nowDate.getFullYear() + ")";
             break;
         case 'top10':
-            bills = await order.find({confirm: 2});
+            bills = await order.find({confirm: 2, idShop: req.user.id});
             titleTable = "THỐNG KÊ TOP 10 SẢN PHẨM BÁN CHẠY NHẤT"
             break;
     }
