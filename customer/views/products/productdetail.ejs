@@ -4,7 +4,7 @@
     <% include ../elements/tag_head.ejs%>
 
 </head>
-<body onload="loadItem()">
+<body <%if (!userdata) {%>onload="loadItem()"<%}%>>
 <!--
 	Upper Header Section
 -->
@@ -43,8 +43,19 @@ Lower Header Section
                                 <button class="btn-number" type="button" onclick="removeProduct()"> - </button>
                                 <button class="btn-number" type="button" onclick="addProduct()"> + </button>
                             </p>
-
-                            <button type="submit" onclick="MultiAddCart()" class="shopBtn"><span class=" icon-shopping-cart"></span>Thêm vào giỏ</button>
+                            <%click="";
+                                // ref="href=javascript:window.location.href='/tags.html#{{ tag[0] }}-ref'; hide_others()";
+                                if (userdata)
+                                {
+                                    click="onclick=MultiAddCartOnline()";
+                                }else{
+                                    click="onclick=MultiAddCart()";
+                                }%>
+                            <form action="/products/shopping" id="shopform"  method="post" hidden>
+                                <input type="text" id="shopProduct" name="shopProduct" value="<%=product._id%>"/>
+                                <input type="number" id="shopAmount" name="shopAmount"/>
+                            </form>
+                            <button type="submit" <%=click%> class="shopBtn"><span class=" icon-shopping-cart"></span>Thêm vào giỏ</button>
                             <script>
                                 function addProduct() {
                                     document.getElementById("number<%=product._id%>").value++;
@@ -70,8 +81,16 @@ Lower Header Section
                                     }
                                     localStorage.setItem("item",loadItem);
                                     localStorage.setItem("listItem",loadListItem);
-                                    alert("Bạn đã mua "+number+" sản phẩm "+"<%=product.name%>");
+                                    alert("Bạn đã cho "+number+" sản phẩm "+"<%=product.name%>"+" vào giỏ hàng");
                                     item.innerText=" Giỏ hàng ("+loadItem+")";
+                                }
+
+                                function MultiAddCartOnline() {
+                                    let number=parseInt(document.getElementById("number<%=product._id%>").value);
+                                    document.getElementById("shopAmount").value=document.getElementById("number<%=product._id%>").value;
+                                    document.getElementById("shopform").submit();
+                                    alert("Bạn đã cho "+number+" sản phẩm "+"<%=product.name%>"+" vào giỏ hàng");
+                                    location.href="javascript:window.location.reload(false)";
                                 }
                             </script>
 

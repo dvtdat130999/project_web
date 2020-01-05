@@ -4,7 +4,7 @@
     <% include elements/tag_head.ejs%>
 
 </head>
-<body onload="loadItem()">
+<body <%if (!userdata) {%>onload="loadItem()"<%}%>>
 <!--
 	Upper Header Section
 -->
@@ -63,14 +63,69 @@ Lower Header Section
                         <td>
                         <input class="span1" style="max-width:34px" placeholder="1" id="number<%=product._id%>" size="16" type="text" value="<%= number[i]%>" readonly>
                                 <div class="input-append">
-                                <button class="btn btn-mini" type="button" onclick="removeItem('<%=product._id%>')">-</button>
-                                    <button class="btn btn-mini" type="button" onclick="shop('<%=product._id%>')"> + </button>
-                                    <button class="btn btn-mini btn-danger" type="button" onclick="removeAllItem('<%=product._id%>')"><span class="icon-remove"></span></button>
+                                <button class="btn btn-mini" type="button" <%if (!userdata){%> onclick="removeItem('<%=product._id%>')" <%}else{%> onclick="removeItemOnline('<%=product._id%>')"<%}%>>-</button>
+                                    <button class="btn btn-mini" type="button" <%if (!userdata){%> onclick="shop('<%=product._id%>')" <%}else{%> onclick="shopOnline('<%=product._id%>')"<%}%>> + </button>
+                                    <button class="btn btn-mini btn-danger" type="button" <%if (!userdata){%> onclick="removeAllItem('<%=product._id%>')" <%}else{%> onclick="removeAllItemOnline('<%=product._id%>')"<%}%>><span class="icon-remove"></span></button>
+
                         </div>
                         </td>
                         <td id="sum<%=product._id%>"><%= (product.price*number[i]).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') +"đ"%></td>
                     </tr>
                     <%sum+=product.price*number[i++];});%>
+
+                    <script>
+                        function removeItemOnline(id) {
+                            let item = document.getElementById("item");
+                            let AmountOfItem=parseInt(document.getElementById("amountInCart").value);
+                            let number=document.getElementById("number"+id);
+                            if (number.value>0)
+                            {
+                                number.value=number.value-1;
+                                AmountOfItem--;
+                            }
+                            else
+                            {
+                                return;
+                            }
+
+                            document.getElementById("NumberOfProduct").innerText=AmountOfItem+" sản phẩm";
+                            item.innerText=" Giỏ hàng ("+AmountOfItem+")";
+                            document.getElementById("amountInCart").value=AmountOfItem;
+
+                            Caculate(id,2,0);
+                        }
+
+                        function shopOnline(id) {
+                            let item = document.getElementById("item");
+                            let AmountOfItem=parseInt(document.getElementById("amountInCart").value);
+                            let number=document.getElementById("number"+id);
+
+                            number.value=parseInt(number.value)+1;
+                            AmountOfItem++;
+
+                            document.getElementById("NumberOfProduct").innerText=AmountOfItem+" sản phẩm";
+                            item.innerText=" Giỏ hàng ("+AmountOfItem+")";
+                            document.getElementById("amountInCart").value=AmountOfItem;
+
+                            Caculate(id,1,0);
+                        }
+
+                        function removeAllItemOnline(id) {
+                            let item = document.getElementById("item");
+                            let AmountOfItem=parseInt(document.getElementById("amountInCart").value);
+                            let number=document.getElementById("number"+id);
+                            let numberPre=number.value;
+
+                            number.value=0;
+                            AmountOfItem=AmountOfItem-numberPre;
+
+                            document.getElementById("NumberOfProduct").innerText=AmountOfItem+" sản phẩm";
+                            item.innerText=" Giỏ hàng ("+AmountOfItem+")";
+                            document.getElementById("amountInCart").value=AmountOfItem;
+
+                            Caculate(id,3,numberPre);
+                        }
+                    </script>
 
                     <tr>
                         <td colspan="6" class="alignR sumPrice">Tổng tiền:	</td>
@@ -96,13 +151,46 @@ Lower Header Section
                     </tbody>
                 </table>
                 <a href="/products" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Tiếp tục mua hàng </a>
-                <%let ship="/users/login";
-                if (userdata)
-                {
-                    ship='/ship';
-                }%>
-                <a href="<%=ship%>" class="shopBtn btn-large pull-right">Tiếp <span class="icon-arrow-right"></span></a>
+                <%if(userdata){%>
+                <form action="/savecart" id="saveCartForm" method="post" hidden>
+                    <input type="text" id="stringItem" name="stringItem"/>
+                    <input type="number" id="pay" name="pay"/>
+                </form>
+                    <button class="shopBtn btn-large pagination-right" onclick="SaveCart(0)">Lưu lại giỏ hàng</button>
+                <script>
+                    function SaveCart(pay) {
 
+                        let arrayItem=[];
+                        let number=[];
+                        <%product_list.forEach(function (product) {%>
+                        arrayItem.push('<%=product._id%>');
+                        number.push(document.getElementById('number<%=product._id%>').value);
+                        <%})%>
+                        if (pay===1 && arrayItem.length===0)
+                        {
+                            alert("Giỏ hàng trống");
+                            return;
+                        }
+                        let stringItem="";
+                        for (let i=0;i<arrayItem.length;i++)
+                        {
+                            //alert(number[i]);
+                            for (let j=0;j<parseInt(number[i]);j++)
+                            {
+                                stringItem=stringItem+"-"+arrayItem[i];
+                            }
+                        }
+                        document.getElementById('stringItem').value=stringItem;
+                        document.getElementById('pay').value=pay;
+                        document.getElementById('saveCartForm').submit();
+                        if (pay===0)
+                        {
+                            alert("Lưu giỏ hàng thành công");
+                        }
+                    }
+                </script>
+                <%}%>
+                <button <%if (userdata){%>onclick="SaveCart(1)"<%}else{%>onclick="location.href='/users/login'"<%}%> class="shopBtn btn-large pull-right">Tiếp <span class="icon-arrow-right"></span></button>
             </div>
         </div>
     </div>

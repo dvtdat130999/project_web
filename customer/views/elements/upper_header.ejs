@@ -26,8 +26,10 @@
 
                     <%}%>
 
-                    <a href="#" onclick="document.getElementById('myform').submit()"><span class="icon-shopping-cart cartInfo" id="item"> Giỏ hàng (0)</span></a>
-
+                    <a href="#" onclick="document.getElementById('myform').submit()"><span class="icon-shopping-cart cartInfo" id="item"> Giỏ hàng (<%if (!userdata || typeof amountItem==="undefined"){%>0<%}else{%><%=amountItem%><%}%>)</span></a>
+                <%if (userdata && typeof amountItem!=="undefined"){%>
+                <input type="hidden" id="amountInCart" value="<%= amountItem %>"/>
+                <%}%>
 
             </div>
         </div>

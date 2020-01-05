@@ -4,7 +4,7 @@
     <% include elements/tag_head.ejs%>
 
 </head>
-<body onload="loadItem()">
+<body <%if (!userdata) {%>onload="loadItem()"<%}%>>
 <!--
 	Upper Header Section
 -->
@@ -33,31 +33,24 @@ Lower Header Section
             <hr class="soft"/>
 
             <div class="well">
-                <form class="form-horizontal" >
+                <form class="form-horizontal" action="/status" method="post">
                     <%if(userdata){%>
 
                     <h3>Thông tin chi tiết giao hàng</h3>
                     <div class="control-group">
-                        <label class="control-label">Thời gian<sup>*</sup></label>
+                        <label class="control-label">Địa chỉ giao hàng<sup>*</sup></label>
                         <div class="controls">
-                            <input type="text" placeholder="">
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Cách giao hàng<sup>*</sup></label>
-                        <div class="controls">
-                            <input type="text" placeholder="">
+                            <input class="input-address" name="address" type="text" placeholder="Nhập địa chỉ"/>
                         </div>
                     </div>
 
                     <div class="control-group">
                         <div class="controls">
-                            <input onclick="successShip()" type="submit" name="submitAccount" value="Đồng ý" class="shopBtn exclusive">
+                            <input type="submit" name="submitAccount" value="Đồng ý" class="shopBtn exclusive">
                         </div>
 
                     </div>
                     <a href="/cart" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Giỏ hàng</a>
-                    <a href="/status" class="shopBtn btn-large pull-right">Xem kết quả  <span class="icon-arrow-right"></span></a>
                     <%}%>
 
                         <%if(!userdata){%>

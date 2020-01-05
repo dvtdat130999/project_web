@@ -3,7 +3,7 @@
 <head>
     <% include ./elements/tag_head.ejs%>
 </head>
-<body onload="loadItem()">
+<body <%if (!userdata) {%>onload="loadItem()"<%}%>>
 <!--
 	Upper Header Section
 -->
@@ -32,9 +32,15 @@ Lower Header Section
             <div class="well">
 
                         <form action="/users/login" method="post">
+                            <input type="hidden" id="StringItem" name="StringItem"/>
+                            <script>
+                                document.getElementById("StringItem").value=localStorage.getItem("listItem");
+                            </script>
                             <h3> Đăng nhập</h3>
                             <% include ./partials/messages.ejs%>
-
+                            <%if (typeof msg!=="undefined"){%>
+                                <div style="color: red">Sai tài khoản hoặc mật khẩu</div>
+                            <%}%>
                             <div class="control-group">
                                 <label class="control-label" for="inputEmail">Tài khoản</label>
                                 <div class="controls">

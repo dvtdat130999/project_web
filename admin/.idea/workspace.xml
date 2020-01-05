@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="" />
+    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../customer/databasemodel/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/databasemodel/products.js" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,12 +24,8 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="javascript.nodejs.core.library.configured.version" value="12.13.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/views/elements" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.11.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="javascript.nodejs.core.library.configured.version" value="12.13.0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/assets/css" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -102,7 +100,10 @@
       <workItem from="1577972569873" duration="1127000" />
       <workItem from="1577761856801" duration="7457000" />
       <workItem from="1577849728193" duration="18981000" />
+      <workItem from="1578232808409" duration="25000" />
+      <workItem from="1578234423468" duration="7000" />
       <workItem from="1578143853900" duration="6374000" />
+      <workItem from="1578239199530" duration="123000" />
     </task>
     <servers />
   </component>
