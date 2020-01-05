@@ -9,6 +9,10 @@
         <div class="nav-collapse">
           <ul class="nav">
 
+            <li class=""><a href="/">Trang chủ	</a></li>
+            <li class=""><a href="/products">Sản phẩm</a></li>
+
+
             <%if(active === "home"){%>
               <li class="active"><a href="/">Trang chủ	</a></li>
             <%}else{%>
@@ -49,7 +53,27 @@
               <%}%>
               <%}%>
 
+
           </ul>
+
+          <script>
+            function QuerySearch()
+            {
+              let Content=document.getElementById("SearchContent").value;
+              let query="/products?search="+Content;
+              location.href=query;
+            }
+          </script>
+
+          <%if(typeof search==="undefined"){
+            search="";
+          }%>
+
+          <form action="javascript:QuerySearch()" class="navbar-search pull-left">
+            <input id="SearchContent" type="text" placeholder="Tìm kiếm sản phẩm" class="search-query span2" value="<%=search%>"/>
+            <button type="button" class="btn-warning" onclick="QuerySearch()"><b>Tìm Kiếm</b></button>
+          </form>
+
         </div>
       </div>
     </div>

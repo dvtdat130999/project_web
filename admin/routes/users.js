@@ -38,7 +38,10 @@ router.post('/forget', userController.postForget);
 router.get('/locked_account', ensureAuthenticated, userController.getLocked);
 
 router.post('/locked_account', ensureAuthenticated, userController.postLocked);
+/* get change_password page*/
+router.get('/change_password',userController.getChangePassword);
 
+router.post('/change_password', userController.postChangePassword);
 /* GET unlock account page. */
 router.get('/unlocked_account', ensureAuthenticated, userController.getUnLocked);
 
