@@ -5,6 +5,6 @@ const orderController = require('../controller/orderController');
 const {ensureAuthenticated}=require('../config/auth');
 
 
-router.get('/', orderController.getOrder);
+router.get('/', ensureAuthenticated, orderController.getOrder);
 
 module.exports = router;

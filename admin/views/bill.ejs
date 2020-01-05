@@ -21,12 +21,13 @@ Lower Header Section
     <!--
     Body Section
     -->
+
     <div class="row">
         <div id="sidebar" class="span3">
             <div class="well well-small">
                 <ul class="nav nav-list">
-                    <li><a href="/bill"><span class="icon-chevron-right active"></span>Chưa xác nhận</a></li>
-                    <li><a href="/bill"><span class="icon-chevron-right"></span>Đã xác nhận</a></li>
+                    <li><a href="/order"><span class="icon-chevron-right active"></span>Chưa xác nhận</a></li>
+                    <li><a href="/order?confirmOrder=false"><span class="icon-chevron-right"></span>Đã xác nhận</a></li>
                     <li style="border:0"> &nbsp;</li>
                 </ul>
             </div>
@@ -34,12 +35,13 @@ Lower Header Section
         <div class="span9">
             <div class="well well-small">
                 <hr class="soften"/>
+                <%include partials/messages.ejs%>
                     <table class="table table-bordered table-condensed">
 
                         <tbody>
                         <tr>
                             <th colspan="4" class="header-table">
-                                Danh sách đơn đặt hàng cần xác nhận
+                                DANH SÁCH ĐƠN ĐẶT HÀNG CẦN XÁC NHẬN
                             </th>
                         </tr>
 
@@ -59,6 +61,14 @@ Lower Header Section
 
                         </tr>
                         <%});%>
+                        <%if(orders.length === 0){%>
+                            <tr>
+                                <th colspan="4" class="header-table" style="color: red">
+                                    Không có đơn đặt hàng nào cần xác nhận
+                                </th>
+                            </tr>
+                        <%};%>
+
                         </tbody>
                     </table>
             </div>

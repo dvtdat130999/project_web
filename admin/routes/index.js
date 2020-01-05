@@ -16,9 +16,6 @@ router.get('/shop', ensureAuthenticated, userController.getShop);
 /* GET product list of shop page. */
 
 /* GET sales page. */
-router.get('/sales',ensureAuthenticated, function(req, res, next) {
-  res.render('sales', { userdata:req.user, active:"sales" });
-});
 
 router.get('/sales_year',ensureAuthenticated, function(req, res, next) {
   res.render('sales', { userdata:req.user });

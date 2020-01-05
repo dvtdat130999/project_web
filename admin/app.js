@@ -7,8 +7,9 @@ var mongoose=require('mongoose');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const productRouter = require('./routes/product')
+const productRouter = require('./routes/product');
 const orderRouter = require('./routes/order');
+const saleRouter = require('./routes/sales');
 
 const passport=require('passport');
 const session = require('express-session');
@@ -88,6 +89,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productRouter);
 app.use('/order', orderRouter);
+app.use('/sales', saleRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

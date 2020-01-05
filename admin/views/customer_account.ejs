@@ -22,49 +22,47 @@ Lower Header Section
     Body Section
     -->
     <div class="row">
-        <div class="span12">
 
-            <div class="well well-large">
-                <h1>Thông tin tài khoản</h1>
-                <hr class="soften"/>
+        <div class="well well-large">
+            <h1>Thông tin tài khoản</h1>
+            <hr class="soften"/>
 
-                <table class="table table-bordered table-condensed">
+            <table class="table table-bordered table-condensed">
 
-                    <thead>
+                <thead>
+                <tr>
+                    <th><h3>Tài khoản</h3></th>
+
+                    <th><h3>Tên</h3></th>
+                    <th><h3>Quyền</h3></th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <%account_list.forEach(function(account){%>
                     <tr>
-                        <th><h3>Tài khoản</h3></th>
+                        <td>
+                            <a href="<%= account.uriDetail %>"><%= account.username %> </a>
+                        </td>
 
-                        <th><h3>Tên</h3></th>
-                        <th><h3>Quyền</h3></th>
+                        <td><%= account.name %></td>
+                        <td><%= account.author %></td>
+
 
                     </tr>
-                    </thead>
+                <% }); %>
+                </tbody>
+            </table><br/>
 
-                    <tbody>
+            <%if(userdata.author=='admin'){%>
+                <div class="control-group">
+                    <a href="/users/locked_account" class="shopBtn btn-large pull-right">Khóa tài khoản </a>
+                    <a href="/users/unlocked_account" class="shopBtn btn-large pull-left">Mở tài khoản </a>
+                </div>
 
-                    <%account_list.forEach(function(account){%>
-                        <tr>
-                            <td>
-                                <a href="<%= account.uriDetail %>"><%= account.username %> </a>
-                            </td>
-
-                            <td><%= account.name %></td>
-                            <td><%= account.author %></td>
-
-
-                        </tr>
-                    <% }); %>
-                    </tbody>
-                </table><br/>
-
-                <%if(userdata.author=='admin'){%>
-                    <div class="control-group">
-                        <a href="/users/locked_account" class="shopBtn btn-large pull-right">Khóa tài khoản </a>
-                        <a href="/users/unlocked_account" class="shopBtn btn-large pull-left">Mở tài khoản </a>
-                    </div>
-
-                <%}%>
-            </div>
+            <%}%>
         </div>
     </div>
 
