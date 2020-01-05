@@ -19,8 +19,14 @@ var orderSchema=new mongoose.Schema({
     addressDelivery:{
         type:String
     },
-    dateSale:{
-        type: String
+    daySale:{
+        type: Number
+    },
+    monthSale:{
+        type: Number
+    },
+    yearSale:{
+        type: Number
     },
     confirm:{
         type: Boolean

@@ -4,6 +4,8 @@
     <% include elements/tag_head.ejs%>
 </head>
 <body>
+
+
 <!--
 	Upper Header Section
 -->
@@ -21,71 +23,86 @@ Lower Header Section
     <!--
     Body Section
     -->
+
     <div class="row">
-        <div id="sidebar" class="span3">
-            <div class="well well-small">
-                <ul class="nav nav-list">
-                    <li><a href="/bill"><span class="icon-chevron-right"></span>Đã giao</a></li>
-                    <li><a href="/bill"><span class="icon-chevron-right"></span>Chưa giao</a></li>
-                    <li><a href="/bill"><span class="icon-chevron-right"></span>Đang giao</a></li>
-                    <li style="border:0"> &nbsp;</li>
-                </ul>
-            </div>
+        <div id="sidebar" class="span2">
+
         </div>
         <div class="span9">
             <div class="well well-small">
                 <hr class="soften"/>
-                    <table class="table table-bordered table-condensed">
+                <table class="table table-bordered table-condensed">
 
-                        <tbody>
-                        <tr>
-                            <td class="tieude" rowspan="6"><img src="<%= order.thumbnail %>"></td>
-                            <td class="tieude"><b>Tên sản phẩm</b></td>
-                            <td><%= order.nameProduct %></td>
+                    <tbody>
+                    <tr>
+                        <td class="tieude" rowspan="7"><img src="<%= order.thumbnail %>"></td>
+                        <td class="tieude"><b>Tên sản phẩm</b></td>
+                        <td><%= order.nameProduct %></td>
 
-                        </tr>
-                        <tr>
-                            <td class="tieude"><b>Số lượng</b></td>
-                            <td><%= order.quantity %></td>
+                    </tr>
+                    <tr>
+                        <td class="tieude"><b>Số lượng</b></td>
+                        <td><%= order.quantity %></td>
 
-                        </tr>
-                        <tr>
+                    </tr>
+                    <tr>
+                        <%if(order.confirm == false){%>
                             <td class="tieude" style="color: red"><b>Số lượng trong kho</b></td>
                             <td style="color: red; font-weight: bold"><%= order.quantityInStoreHouse %></td>
+                        <%};%>
 
-                        </tr>
-                        <tr>
-                            <td class="tieude"><b>Tên khách hàng</b></td>
-                            <td><%= order.nameUser %></td>
+                    </tr>
+                    <tr>
+                        <td class="tieude"><b>Tên khách hàng</b></td>
+                        <td><%= order.nameUser %></td>
 
-                        </tr>
-                        <tr>
-                            <td class="tieude"><b>Địa chỉ giao hàng</b></td>
-                            <td><%= order.addressDelivery %></td>
+                    </tr>
+                    <tr>
+                        <td class="tieude"><b>Địa chỉ giao hàng</b></td>
+                        <td><%= order.addressDelivery %></td>
 
-                        </tr>
+                    </tr>
 
-                        <tr>
-                            <td class="tieude"><b>SĐT</b></td>
-                            <td><%= order.phoneNumber %></td>
+                    <tr>
+                        <td class="tieude"><b>SĐT</b></td>
+                        <td><%= order.phoneNumber %></td>
 
-                        </tr>
+                    </tr>
 
-                        <%if(order.quantity > order.quantityInStoreHouse){%>
-                            <td colspan="3" class="warning-quantity">KHÔNG ĐỦ SẢN PHẨM ĐỂ GIAO HÀNG</td>
-                        <%};%>%>
+                    <tr>
+                        <td class="tieude" style="color: red"><b>Tình trạng</b></td>
+                        <%if(order.confirm === true){%>
+                            <td style="color: red">Đã xác nhận</td>
+                        <%}else{%>
+                            <td style="color: red">Chưa xác nhận</td>
+                        <%};%>
 
-                        </tbody>
-                    </table>
+                    </tr>
 
-                    <div class="control-group">
-                        <%if(order.quantity <= order.quantityInStoreHouse){%>
+                    <%if(order.confirm === false){%>
+                    <%if(order.quantity > order.quantityInStoreHouse){%>
+                        <td colspan="3" class="warning-quantity">KHÔNG ĐỦ SẢN PHẨM ĐỂ GIAO HÀNG</td>
+                    <%};%>%>
+                    <%};%>
+
+
+
+                    </tbody>
+                </table>
+
+
+                <%if(order.confirm === false){%>
+
+                <div class="control-group">
+                    <a href="/order" class="shopBtn btn-large">Quay lại</a>
+                    <%if(order.quantity <= order.quantityInStoreHouse){%>
                         <a href="<%= order.accept %>" class="shopBtn btn-large">Xác nhận </a>
-                        <%};%>%>
+                    <%};%>%>
 
-                        <a href="<%= order.cancel %>" class="shopBtn btn-large">Hủy </a>
-                    </div>
+                    <a href="<%= order.cancel %>" class="shopBtn btn-large">Hủy </a>
 
+                </div>
+                <%};%>
             </div>
 
         </div>
