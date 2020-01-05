@@ -89,6 +89,9 @@ router.get('/',ensureAuthenticated, async (req, res, next) => {
                 monthSale: monthNow,
                 confirm: 2
             });
+            if (newbill !== null) {
+                bills.push(newbill);
+            }
 
             if (newbill !== null) {
                 bills.push(newbill);
