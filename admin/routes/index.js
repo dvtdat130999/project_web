@@ -13,44 +13,4 @@ router.get('/', ensureAuthenticated, mainController.getIndex);
 /* GET shop list page. */
 router.get('/shop', ensureAuthenticated, userController.getShop);
 
-/* GET product list of shop page. */
-
-/* GET sales page. */
-
-router.get('/sales_year',ensureAuthenticated, function(req, res, next) {
-  res.render('sales', { userdata:req.user });
-});
-
-router.get('/sales_month',ensureAuthenticated, function(req, res, next) {
-  res.render('sales', { userdata:req.user });
-});
-
-router.get('/sales_week',ensureAuthenticated, function(req, res, next) {
-  res.render('sales', { userdata:req.user });
-});
-/* GET top-selling page. */
-router.get('/top_necklace',ensureAuthenticated, function(req, res, next) {
-  res.render('top_selling_necklace', { userdata:req.user });
-});
-
-/* GET top-selling ring page. */
-router.get('/top_ring',ensureAuthenticated, function(req, res, next) {
-  res.render('top_selling_ring', { userdata:req.user });
-});
-
-/* GET ring list page. */
-router.get('/ring',ensureAuthenticated, function(req, res, next) {
-  res.render('ring', { userdata:req.user });
-});
-
-/* GET bracelet list page. */
-router.get('/necklace',ensureAuthenticated, function(req, res, next) {
-  res.render('necklace', { userdata:req.user });
-});
-
-/* GET bill list page. */
-router.get('/bill',ensureAuthenticated, function(req, res, next) {
-  res.render('bill', { userdata:req.user });
-});
-
 module.exports = router;
