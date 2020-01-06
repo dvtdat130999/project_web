@@ -225,7 +225,7 @@ exports.postChangePassword = async (req, res, next) => {
 };
 
 exports.getLocked=(req,res,next)=>{
-    res.render('lockedAccount',{userdata:req.user});
+    res.render('lockedAccount',{userdata:req.user, active:"account"});
 };
 
 exports.postLocked=async (req, res, next) =>{
@@ -264,7 +264,7 @@ exports.postLocked=async (req, res, next) =>{
 };
 
 exports.getUnLocked=async(req,res,next)=>{
-    res.render('unlockedAccount',{userdata:req.user});
+    res.render('unlockedAccount',{userdata:req.user, active:"account"});
 };
 
 exports.postUnLocked= async (req, res, next) =>{
