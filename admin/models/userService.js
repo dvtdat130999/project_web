@@ -59,13 +59,6 @@ exports.getUserBySecretToken = (secretToken) => {
 };
 
 exports.getUserByUsername = (username) => {
-    user.findOne({username: username}).exec(function (err, accounts_customer) {
-        if (err)
-            return err;
-
-        //Successful, so render
-        return accounts_customer;
-        });
     return user.findOne({username: username});
 };
 
@@ -76,4 +69,7 @@ exports.getUserByID = (id) => {
 exports.getUserByEmail = (email) => {
     return user.findOne({email: email});
 };
-//DELETE
+
+exports.getUserByAuthor = (author) => {
+    return user.find({author: author});
+};

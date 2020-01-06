@@ -7,42 +7,31 @@ const randomstring=require('randomstring');
 const nodemailer=require('nodemailer');
 
 exports.getAccountList = async (req, res, next) => {
-    const username = req.query.username;
-    if (typeof username !== "undefined") {
-       /* userService.getUserByUsername(username)
-            .exec(function (err, accounts_customer) {
-                if (err) {
-                    return next(err);
-                }
-                //Successful, so render
-                res.render('detail_account', {
-                    title: 'List customer',
-                    account_list: accounts_customer,
-                    userdata: req.user
-                });
-            });*/
+    if (req.user.author !== "admin") {
+        //Phân quyền nếu không phải là admin thì đá về trang chủ
+        res.redirect('/');
+    } else {
+        const username = req.query.username;
+        if (typeof username !== "undefined") {
+            let accounts_customer;
+            accounts_customer = await userService.getUserByUsername(username);
 
-
-        let accounts_customer;
-        accounts_customer = await userService.getUserByUsername(username);
-
-        res.render('detail_account', {
-            title: 'List customer',
-            account_list: accounts_customer,
-            userdata: req.user
-        });
-    }
-    else {
-        userService.getAccount(req.user.author)
-            .exec(function (err, accounts_customer) {
-                if (err) {
-                    return next(err);
-                }
-                //Successful, so render
-                res.render('customer_account', {account_list: accounts_customer, userdata: req.user, active:"account"});
+            res.render('detail_account', {
+                title: 'List customer',
+                account_list: accounts_customer,
+                userdata: req.user
             });
-    }
+        } else {
+            const accounts_customer = await userService.getAccount(req.user.author);
 
+            res.render('customer_account', {
+                account_list: accounts_customer,
+                userdata: req.user,
+                active: "account"
+            });
+        }
+
+    }
 };
 
 exports.getLogin = (req, res, next) => res.render('login',{ userdata:req.user });
@@ -68,7 +57,7 @@ exports.postLogin = (req, res, next) => {
     })(req, res, next);
 };
 
-exports.postRegister = (req, res, next) => {
+exports.postRegister = async (req, res, next) => {
     const {username, password, password2, name, address, phone, email} = req.body;
     let errors = [];
 
@@ -90,49 +79,54 @@ exports.postRegister = (req, res, next) => {
         res.render('register', { errors, username, password, password2, name, address, phone, email,userdata:req.user });
     } else {
         //Check username and email existed
-        userService.getUserByUsername(username)
-            .then(data => {
-                if (data) {
-                    errors.push({msg: "Tài khoản đã tồn tại"});
+        const data = await userService.getUserByUsername(username);
+        if (data) {
+            errors.push({msg: "Tài khoản đã tồn tại"});
+            res.render('register', { errors, username, password, password2, name, address, phone, email,userdata:req.user });
+        } else {
+            const data2 = await userService.getUserByEmail(email);
+            if (data2) {
+                errors.push({msg: "Email đã sử dụng"});
 
-                    res.render('register', { errors, username, password, password2, name, address, phone, email,userdata:req.user });
-                } else {
-                    userService.getUserByEmail(email)
-                        .then(data2 => {
-                            if (data2) {
-                                errors.push({msg: "Email đã sử dụng"});
+                res.render('register', {
+                    errors,
+                    username,
+                    password,
+                    password2,
+                    name,
+                    address,
+                    phone,
+                    email,
+                    userdata: req.user
+                });
+            } else {
+                const uriDetail = '/account?username=' + username;
 
-                                res.render('register', { errors, username, password, password2, name, address, phone, email,userdata:req.user });
-                            } else {
-                                const uriDetail='/account?username='+username;
+                const linkproducts = "/";
+                const newUser = new user({
+                    username,
+                    password,
+                    name,
+                    address,
+                    phone,
+                    email,
+                    uriDetail,
+                    linkproducts
+                });
 
-                                const linkproducts = "/";
-                                const newUser = new user({
-                                    username,
-                                    password,
-                                    name,
-                                    address,
-                                    phone,
-                                    email,
-                                    uriDetail,
-                                    linkproducts
-                                });
+                newUser.linkproducts = "/products?shop=" + newUser.id;
 
-                                newUser.linkproducts = "/products?shop=" + newUser.id;
-
-                                //Hash password
-                                userService.insertUser(newUser);
-                                req.flash('success_msg', 'Tạo tài khoản thành công');
-                                res.redirect('/users/register');
-                            }
-                        });
-                }
-            });
+                //Hash password
+                userService.insertUser(newUser);
+                req.flash('success_msg', 'Tạo tài khoản thành công');
+                res.redirect('/users/register');
+            }
+        }
     }
 };
 exports.postChangeMyAccount = async(req, res, next) => {
     const { name, address, phone, email} = req.body;
-    const user=await userService.getUserByUsername(req.user.username);
+    const user = await userService.getUserByUsername(req.user.username);
     if(name)
         user.name=name;
     if(address)
@@ -141,7 +135,6 @@ exports.postChangeMyAccount = async(req, res, next) => {
         user.phone=phone;
 
     await user.save();
-
 
     req.flash('success_msg', 'Thay đổi thành công');
     res.redirect('/users/my_account');
@@ -232,10 +225,10 @@ exports.postChangePassword = async (req, res, next) => {
 };
 
 exports.getLocked=(req,res,next)=>{
-    res.render('lockedAccount',{userdata:req.user});
+    res.render('lockedAccount',{userdata:req.user, active:"account"});
 };
 
-exports.postLocked=async (req, res, next) =>{
+exports.postLocked = async (req, res, next) =>{
     const{username}=req.body;
     if(!username)
     {
@@ -270,11 +263,11 @@ exports.postLocked=async (req, res, next) =>{
 
 };
 
-exports.getUnLocked=async(req,res,next)=>{
-    res.render('unlockedAccount',{userdata:req.user});
+exports.getUnLocked = async(req,res,next)=>{
+    res.render('unlockedAccount',{userdata:req.user, active:"account"});
 };
 
-exports.postUnLocked= async (req, res, next) =>{
+exports.postUnLocked = async (req, res, next) =>{
     const{username}=req.body;
     if(!username)
     {
@@ -301,11 +294,10 @@ exports.postUnLocked= async (req, res, next) =>{
     }
 };
 
-exports.getShop = (req, res, next) => {
+exports.getShop = async (req, res, next) => {
     if (req.user.author === 'admin') {
-        user.find({author: 'shop'}).then(data => {
-            res.render('shop', {userdata: req.user, shops: data, active: "shop"});
-        })
+        const data = await userService.getUserByAuthor("shop");
+        res.render('shop', {userdata: req.user, shops: data, active: "shop"});
     } else {
         res.redirect('/');
     }

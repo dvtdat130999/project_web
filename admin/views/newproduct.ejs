@@ -17,12 +17,14 @@ Lower Header Section
 
     <!--
     Navigation Bar Section
+
     -->
     <!--
     Body Section
     -->
     <div class="row">
-        <% include elements/sidebar.ejs%>
+        <% include elements/navbar.ejs%>
+        <div class="span2"></div>
         <div class="span9">
             <div class="well">
                 <form class="form-horizontal" action="/products/upload" enctype="multipart/form-data" method="post">
@@ -32,7 +34,7 @@ Lower Header Section
                     <div class="control-group">
                         <label class="control-label" for="name">Tên sản phẩm <sup>*</sup></label>
                         <div class="controls">
-                            <input type="text" name="name" placeholder="Tên của sản phẩm" value="<%=typeof productdata !=='undefined' ? productdata.name :''%>" required>
+                            <input type="text" name="name" placeholder="Tên của sản phẩm" value="<%=typeof productdata !=='undefined' ? productdata.nameProduct :''%>" required>
                         </div>
                     </div>
                     <div class="control-group">

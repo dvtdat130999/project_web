@@ -24,13 +24,15 @@ Lower Header Section
 
     <div class="row">
         <div id="sidebar" class="span3">
-            <div class="well well-small">
-                <ul class="nav nav-list">
-                    <li><a href="/order"><span class="icon-chevron-right active"></span>Chưa xác nhận</a></li>
-                    <li><a href="/order?confirmOrder=false"><span class="icon-chevron-right"></span>Đã xác nhận</a></li>
-                    <li style="border:0"> &nbsp;</li>
-                </ul>
-            </div>
+            <%if(userdata.author === "shop"){%>
+                <div class="well well-small">
+                    <ul class="nav nav-list">
+                        <li><a href="/order"><span class="icon-chevron-right active"></span>Chưa xác nhận</a></li>
+                        <li><a href="/order?confirmOrder=false"><span class="icon-chevron-right"></span>Đã xác nhận</a></li>
+                        <li style="border:0"> &nbsp;</li>
+                    </ul>
+                </div>
+            <%}%>
         </div>
         <div class="span9">
             <div class="well well-small">
@@ -40,16 +42,18 @@ Lower Header Section
 
                         <tbody>
                         <tr>
-                            <th colspan="4" class="header-table">
-                                DANH SÁCH ĐƠN ĐẶT HÀNG CẦN XÁC NHẬN
+                            <th colspan="5" class="header-table">
+                                DANH SÁCH ĐƠN ĐẶT HÀNG ĐÃ XÁC NHẬN
                             </th>
                         </tr>
 
                         <tr>
-                            <th><b>Tên sản phẩm</b></th>
-                            <th><b>Số lượng</b></th>
-                            <th><b>Địa chỉ giao hàng</b></th>
-                            <th>Chi tiết</th>
+                            <th class="nameProduct"><b>Tên sản phẩm</b></th>
+                            <th class="quantity"><b>Số lượng</b></th>
+                            <th class="addressDelivery"><b>Địa chỉ giao hàng</b></th>
+                            <th class="dateSale">Ngày bán</th>
+                            <th class="detail">Chi tiết</th>
+
 
                         </tr>
                         <%orders.forEach(function(order){%>
@@ -57,6 +61,7 @@ Lower Header Section
                             <td class="nameProduct"><%= order.nameProduct %></td>
                             <td class="quantity"><%= order.quantity%></td>
                             <td class="addressDelivery"><%= order.addressDelivery %></td>
+                            <td class="dateSale"><%= order.daySale %>-<%= order.monthSale %>-<%= order.yearSale %></td>
                             <td class="detail"><a href="<%= order.urlDetail%>%>"><i>chi tiết</i></a></td>
 
                         </tr>

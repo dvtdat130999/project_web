@@ -132,20 +132,26 @@ hr.soften {margin: 8px 0;background: #DDD;}
 }
 
 .nameProduct{
-    width: 23%;
+    width: 20%;
 }
 
 .quantity{
     width: 12%;
-    text-align: center;
+    text-align: center !important;
 }
 
 .addressDelivery{
-    width: 55%;
+    width: 46%;
+}
+
+.dateSale{
+    width: 12%;
+    text-align: center !important;
 }
 
 .detail{
     width: 10%;
+    text-align: center !important;
 }
 
 .header-table{
@@ -162,4 +168,12 @@ hr.soften {margin: 8px 0;background: #DDD;}
     color: red;
     font-weight: bold;
     font-size: larger;
+}
+
+#form-input{
+    margin: auto !important;
+}
+.forms-control{
+    margin: auto !important;
+    text-align: center!important;
 }

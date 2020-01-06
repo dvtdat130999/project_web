@@ -78,16 +78,92 @@ exports.findByCategory = (category) => {
     return product.find({category: type});
 }
 
-exports.findById = (id) => {
-    return product.find({_id: new mongoose.Types.ObjectId(id)})
-}
+exports.getProductById = async (id) => {
+    const productOnDB = await product.findOne({_id: id});
+    const nameProduct = productOnDB.name;
+    const description = productOnDB.description;
+    const price = productOnDB.price;
+    const quantity = productOnDB.quantity;
+    let category;
+    switch (productOnDB.category) {
+        case 1:
+            category = 'Đồng hồ';
+            break;
+        case 2:
+            category = 'Vòng tay';
+            break;
+        case 3:
+            category = 'Nhẫn';
+            break;
+        case 4:
+            category = 'Vòng cổ';
+            break;
+        default :
+            category = 'Khác';
+    }
 
-exports.insertProduct = (name, description, price, quantity, category, color, trademark, sex, uriDetail, idshop,  pathImg) =>{
-    cloudinary.uploader.upload(pathImg, (error, result) => {
-        const thumbnail = result.url;
-        const newproduct = new product({name, price, description, thumbnail, category, quantity, sex, trademark, color, uriDetail, idshop});
-        newproduct.uriDetail = "/products?id=" + newproduct.id;
-        newproduct.save();
-    });
-};
+    let color;
+    switch (productOnDB.color) {
+        case 1:
+            color = 'Vàng';
+            break;
+        case 2:
+            color = 'Trắng';
+            break;
+        case 3:
+            color = 'Tím';
+            break;
+        case 4:
+            color = 'Xanh dương';
+            break;
+        default :
+            color = 'Khác';
+    }
+
+    let trademark;
+    switch (productOnDB.trademark) {
+        case 1:
+            trademark = 'Skymond Luxury';
+            break;
+        case 2:
+            trademark = 'PNJ';
+            break;
+        case 3:
+            trademark = 'DOJI';
+            break;
+        case 4:
+            trademark = 'SJC';
+            break;
+        default :
+            trademark = 'Khác';
+    }
+
+    let sex;
+    switch (productOnDB.sex) {
+        case 1:
+            sex = 'Nam';
+            break;
+        case 2:
+            sex = 'Nữ';
+            break;
+        default :
+            sex = 'Khác';
+            break;
+    }
+
+    const thumbnail = productOnDB.thumbnail;
+    const newProduct = {
+        nameProduct: nameProduct,
+        price: price,
+        description: description,
+        thumbnail: thumbnail,
+        category: category,
+        quantity: quantity,
+        sex: sex,
+        trademark: trademark,
+        color: color
+    };
+
+    return newProduct;
+}
 

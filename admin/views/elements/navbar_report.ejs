@@ -1,0 +1,109 @@
+<form name="form-input" id="form-input">
+    <div class="forms-control">
+        <label for="choice">Thống kê</label>
+        <select id="choice" name="statistical" form="form-input" onchange="f()">
+            <%if(statistical === "year"){%>
+                <option value="year" selected>Năm</option>
+            <%}else{%>
+                <option value="year">Năm</option>
+            <%}%>
+
+            <%if(statistical === "quarter"){%>
+                <option value="quarter" selected>Quý</option>
+            <%}else{%>
+                <option value="quarter">Quý</option>
+            <%}%>
+
+            <%if(statistical === "month"){%>
+                <option value="month" selected>Tháng</option>
+            <%}else{%>
+                <option value="month">Tháng</option>
+            <%}%>
+
+            <%if(statistical === "week"){%>
+                <option value="week" selected>Tuần</option>
+            <%}else{%>
+                <option value="week">Tuần</option>
+            <%}%>
+
+            <%if(statistical === "day"){%>
+                <option value="day" selected>Ngày</option>
+            <%}else{%>
+                <option value="day">Ngày</option>
+            <%}%>
+
+            <%if(statistical === "7day"){%>
+                <option value="7day" selected>7 ngày gần nhất</option>
+            <%}else{%>
+                <option value="7day">7 ngày gần nhất</option>
+            <%}%>
+
+            <%if(statistical === "top10"){%>
+                <option value="top10" selected>Top 10 sản phẩm bán chạy</option>
+            <%}else{%>
+                <option value="top10">Top 10 sản phẩm bán chạy</option>
+            <%}%>
+
+        </select>
+
+
+        <%if(statistical === "top10"){%>
+        <label id="label-for-sortby" for="sortby" hidden>Thống kê theo</label>
+        <select id="sortby" name="sort" form="form-input" hidden>
+            <%if(sort === "topsale"){%>
+                <option value="topsale" selected>Sản phẩm bán chạy</option>
+                <option value="topbadsale">Sản phẩm bán ít chạy</option>
+            <%}else{%>
+                <option value="topsale">Sản phẩm bán chạy</option>
+                <option value="topbadsale" selected>Sản phẩm bán ít chạy</option>
+            <%}%>
+        </select>
+        <%}else{%>
+        <label id="label-for-sortby" for="sortby">Thống kê theo</label>
+        <select id="sortby" name="sort" form="form-input">
+            <%if(sort === "topsale"){%>
+                <option value="topsale" selected>Sản phẩm bán chạy</option>
+                <option value="topbadsale">Sản phẩm bán ít chạy</option>
+            <%}else{%>
+                <option value="topsale">Sản phẩm bán chạy</option>
+                <option value="topbadsale" selected>Sản phẩm bán ít chạy</option>
+            <%}%>
+        </select>
+        <%}%>
+
+
+        <input type="submit" value="OK" class="btn-warning">
+    </div>
+
+    <br>
+    <div id="div-input" class="forms-control">
+        <div id="input-data">
+            <%if(day){%>
+            <label id="label-for-day" for="day">Ngày </label>
+            <input id="day" name="day" type="number" required="true" value="<%=day%>" style="width: 80px; height: 30px; margin-right: 10px;">
+            <%}%>
+
+            <%if(week){%>
+            <label id="label-for-week" for="year">Tuần </label>
+            <input id="week" name="week" type="number" required="true" value="<%=week%>" style="width: 80px; height: 30px; margin-right: 10px;">
+            <%}%>
+
+            <%if(month){%>
+            <label id="label-for-month" for="month">Tháng </label>
+            <input id="month" name="month" type="number" required="true" value="<%=month%>" style="width: 80px; height: 30px; margin-right: 10px;">
+            <%}%>
+
+            <%if(quarter){%>
+            <label id="label-for-quarter" for="quarter">Quý </label>
+            <input id="quarter" name="quarter" type="number" required="true" value="<%=quarter%>" style="width: 80px; height: 30px; margin-right: 10px;">
+            <%}%>
+
+            <%if(year){%>
+            <label id="label-for-year" for="year">Năm </label>
+            <input id="year" name="year" type="number" required="true" value="<%=year%>" style="width: 80px; height: 30px; margin-right: 10px;">
+            <%}%>
+
+        </div>
+    </div>
+
+</form>

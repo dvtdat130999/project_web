@@ -2,96 +2,64 @@ const order = require('../databasemodel/order');
 const product = require('../databasemodel/products');
 const user = require('../databasemodel/users');
 const util = require('util')
+const orderService = require('../models/orderService');
 
 exports.getOrder = async (req, res, next) => {
-    const accept = req.query.accept;
-    const confirmOrder = req.query.confirmOrder;
 
-    if(typeof confirmOrder !== "undefined"){
-        const ordersOnDB = await order.find({confirm: true, idShop: req.user.id});
-        const orders = [];
-
-        for (const element of ordersOnDB) {
-            const newOrder = element;
-            newOrder.urlDetail = "/order?id=" + newOrder.id;
-            orders.push(newOrder);
+    //Phân quyền, nếu là admin thì sẽ có cách ứng xử khác
+    if(req.user.author === 'admin') {
+        //Chỉ cho phép admin xem tất cả các order đã xác nhận của tất cả các shop
+        //nếu có id thì cho phép xem chi tiết order
+        const id = req.query.id;
+        if (typeof id === "undefined") {
+            const orders = await orderService.getAllOrdersConfirm();
+            res.render('bill', {userdata: req.user, orders: orders, active:"order"});
+        } else {
+            const newOrder = await orderService.getDetailOrder(id);
+            res.render('detailOrder', {userdata: req.user, order: newOrder, active:"order"});
         }
-
-        /*res.writeHead(200);
-        res.end(util.inspect({bill: bill}));*/
-        res.render('bill', {userdata: req.user, orders: orders, active:"order"});
     }
     else
     {
-        if (typeof accept !== "undefined") {
-            const orderOnDB = await order.findOne({_id: accept});
-            const productOnDB = await product.findOne({_id: orderOnDB.idProduct});
 
-            if(productOnDB.quantity >= orderOnDB.quantity)
-            {
-                //Tiến hành cập nhật số lượng sản phẩm
-                productOnDB.quantity = productOnDB.quantity - orderOnDB.quantity;
-                productOnDB.save();
+        const accept = req.query.accept;
+        const confirmOrder = req.query.confirmOrder;
 
-                //Tạo bill và lưu trên cơ sở dữ liệu
-                const dateSale = new Date();
-                orderOnDB.daySale = dateSale.getDate();
-                orderOnDB.monthSale = dateSale.getMonth() + 1;
-                orderOnDB.yearSale = dateSale.getFullYear();
+        //Nếu có confirm thì tìm order đã xác nhận
+        //Ngược lại, tìm order chưa xác nhận
+        if(typeof confirmOrder !== "undefined"){
+            const orders = await orderService.getAllOrdersConfirmOfShop(req.user.id);
+            res.render('bill', {userdata: req.user, orders: orders, active:"order"});
+        }
+        else
+        {
+            //Nếu có accept thì xác nhận đơn hàng
+            if (typeof accept !== "undefined") {
+                const result = await orderService.AcceptOrder(accept);
 
-                orderOnDB.confirm = true;
-
-                orderOnDB.save();
-
-                req.flash('success_msg', 'Xác nhận thành công đơn hàng !!');
-                res.redirect('/order');
-                /*res.writeHead(200);
-                res.end(util.inspect({newBill: newBill}));*/
-            }
-            else{
-                res.writeHead(200);
-                res.end("Khong du hang hoa");
-            }
-        } else {
-            const id = req.query.id;
-
-            if (typeof id === "undefined") {
-                const ordersOnDB = await order.find({confirm: false, idShop: req.user.id});
-                const orders = [];
-
-                for (const element of ordersOnDB) {
-                    const newOrder = element;
-                    newOrder.urlDetail = "/order?id=" + newOrder.id;
-                    orders.push(newOrder);
+                if(result === true)
+                {
+                    req.flash('success_msg', 'Xác nhận thành công đơn hàng !!');
+                    res.redirect('/order');
+                    /*res.writeHead(200);
+                    res.end(util.inspect({newBill: newBill}));*/
                 }
-
-                /*res.writeHead(200);
-                res.end(util.inspect({bill: bill}));*/
-                res.render('bill', {userdata: req.user, orders: orders, active:"order"});
+                else{
+                    res.writeHead(200);
+                    res.end("Khong du hang hoa");
+                }
             } else {
-                const orderOnDB = await order.findOne({_id: id});
-                const detailProduct = await product.findOne({_id: orderOnDB.idProduct});
+                //Nếu có id thì xem chi tiết đơn hàng
+                const id = req.query.id;
 
-                const detailUser = await user.findOne({_id: orderOnDB.idUser});
-
-                const accept = "/order?accept=" + orderOnDB.id;
-                const cancel = "/order?cancel=" + orderOnDB.id;
-
-                const newOrder = {
-                    thumbnail: detailProduct.thumbnail,
-                    quantity: orderOnDB.quantity,
-                    quantityInStoreHouse: detailProduct.quantity,
-                    nameProduct: detailProduct.name,
-                    nameUser: detailUser.name,
-                    addressDelivery: orderOnDB.addressDelivery,
-                    phoneNumber: detailUser.phone,
-                    accept: accept,
-                    cancel: cancel,
-                    confirm: "<b><i>alo</i></b>"
-                };
-
-                res.render('detailOrder', {userdata: req.user, order: newOrder, active:"order"});
+                if (typeof id === "undefined") {
+                    const orders = await orderService.getAllOrdersNotConfirmOfShop(req.user.id);
+                    res.render('order', {userdata: req.user, orders: orders, active:"order"});
+                } else {
+                    const newOrder = await orderService.getDetailOrder(id);
+                    res.render('detailOrder', {userdata: req.user, order: newOrder, active:"order"});
+                }
             }
         }
     }
-}
+};

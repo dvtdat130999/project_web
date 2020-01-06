@@ -14,107 +14,65 @@ cloudinary.config({
 });
 
 exports.getProducts = async (req, res, next) => {
-    const id = req.query.id;
-    if (typeof id !== "undefined") {
-        productService.findById(id).exec((err, data) => {
-            //res.send(util.inspect({data: data}));
-            const nameproduct = data[0].name;
-            const description = data[0].description;
-            const price = data[0].price;
-            const quantity = data[0].quantity;
-            let category;
-            switch (data[0].category) {
-                case 1:
-                    category = 'Đồng hồ';
-                    break;
-                case 2:
-                    category = 'Vòng tay';
-                    break;
-                case 3:
-                    category = 'Nhẫn';
-                    break;
-                case 4:
-                    category = 'Vòng cổ';
-                    break;
-                default :
-                    category = 'Khác';
+    const search = req.query.search;
+    if (typeof search === "undefined") {
+        const id = req.query.id;
+        if (typeof id !== "undefined") {
+            const data = await productService.getProductById(id);
+
+            const nameProduct = data.nameProduct;
+            const price = data.price;
+            const description = data.description;
+            const thumbnail = data.thumbnail;
+            const category = data.category;
+            const quantity = data.quantity;
+            const sex = data.sex;
+            const trademark = data.trademark;
+            const color = data.color;
+
+            res.render('updateproduct', {
+                userdata: req.user,
+                id: id,
+                nameProduct: nameProduct,
+                price: price,
+                description: description,
+                thumbnail: thumbnail,
+                category: category,
+                quantity: quantity,
+                sex: sex,
+                trademark: trademark,
+                color: color,
+                active: "product"
+            });
+
+        } else {
+            let idshop = req.query.shop;
+
+            if (typeof idshop === "undefined")
+                idshop = req.user.id;
+
+            const data = await product.find({idshop: idshop});
+            res.render('products', {userdata: req.user, products: data, active: "product"});
+        }
+    } else {
+        const data = await product.find({idshop: req.user.id});
+        const listProduct = [];
+
+        for(const element of data){
+            const nameProduct = element.name.toLowerCase();
+
+            if(nameProduct.search(search.toLowerCase()) >= 0){
+                listProduct.push(element);
             }
+        }
 
-            let color;
-            switch (data[0].color) {
-                case 1:
-                    color = 'Vàng';
-                    break;
-                case 2:
-                    color = 'Trắng';
-                    break;
-                case 3:
-                    color = 'Tím';
-                    break;
-                case 4:
-                    color = 'Xanh dương';
-                    break;
-                default :
-                    color = 'Khác';
-            }
-
-            let trademark;
-            switch (data[0].trademark) {
-                case 1:
-                    trademark = 'Skymond Luxury';
-                    break;
-                case 2:
-                    trademark = 'PNJ';
-                    break;
-                case 3:
-                    trademark = 'DOJI';
-                    break;
-                case 4:
-                    trademark = 'SJC';
-                    break;
-                default :
-                    trademark = 'Khác';
-            }
-
-            let sex;
-            switch (data[0].sex) {
-                case 1:
-                    sex = 'Nam';
-                    break;
-                case 2:
-                    sex = 'Nữ';
-                    break;
-                default :
-                    sex = 'Khác';
-                    break;
-            }
-
-            const thumbnail = data[0].thumbnail;
-
-            res.render('updateproduct', {userdata: req.user, id: id, nameproduct: nameproduct, price: price, description: description,
-                thumbnail: thumbnail, category: category, quantity: quantity, sex: sex, trademark: trademark, color: color});
-        });
+        res.render('products', {userdata: req.user, products: listProduct, active: "product"});
     }
-    else{
-        let idshop = req.query.shop;
-
-        if (typeof idshop === "undefined")
-            idshop = req.user.id;
-
-        const data = await product.find({idshop: idshop});
-        res.render('products', {userdata: req.user, products: data, active:"home"});
-
-        /*product.find({idshop: idshop}).then(data => {
-            res.render('products', {userdata: req.user, products: data, active:"home"});
-        })*/
-    }
-
-
 }
 
 exports.getUpload = (req, res, next)=>{
     if(req.user.author === 'shop')
-        res.render('newproduct', {userdata: req.user});
+        res.render('newproduct', {userdata: req.user, active: "upload"});
     else
         res.redirect('/');
 }
