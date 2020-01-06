@@ -33,23 +33,81 @@ Lower Header Section
             <hr class="soft"/>
 
             <div class="well">
-                <form class="form-horizontal" action="/status" method="post">
+                <form class="form-horizontal" id="addressForm" name="addressForm" action="/status" method="post">
                     <%if(userdata){%>
 
                     <h3>Thông tin chi tiết giao hàng</h3>
+                        <div class="control-group">
+                            <label class="control-label">Tỉnh/Thành Phố<sup>*</sup></label>
+                            <div class="controls">
+                                <input class="input-address" id="city" name="city" type="text" placeholder="Nhập tỉnh/thành phố"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Quận/huyện<sup>*</sup></label>
+                            <div class="controls">
+                                <input class="input-address" id="district" name="district" type="text" placeholder="Nhập quận/huyện"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Phường/Xã<sup>*</sup></label>
+                            <div class="controls">
+                                <input class="input-address" id="ward" name="ward" type="text" placeholder="Nhập phường/xã"/>
+                            </div>
+                        </div>
                     <div class="control-group">
-                        <label class="control-label">Địa chỉ giao hàng<sup>*</sup></label>
+                        <label class="control-label">Địa chỉ<sup>*</sup></label>
                         <div class="controls">
-                            <input class="input-address" name="address" type="text" placeholder="Nhập địa chỉ"/>
+                            <input class="input-address" id="address" name="address" type="text" placeholder="Nhập địa chỉ"/>
                         </div>
                     </div>
-
-                    <div class="control-group">
-                        <div class="controls">
-                            <input type="submit" name="submitAccount" value="Đồng ý" class="shopBtn exclusive">
+                        <div class="control-group">
+                            <label class="control-label">Số điện thoại<sup>*</sup></label>
+                            <div class="controls">
+                                <input class="input-address" id="phoneNumber" name="address5" type="text" placeholder="Nhập số điện thoại"/>
+                            </div>
                         </div>
+                        <script>
+                            function Submit() {
+                                let city=document.getElementById('city');
+                                let district=document.getElementById('district');
+                                let ward=document.getElementById('ward');
+                                let address=document.getElementById('address');
+                                let phoneNumber=document.getElementById('phoneNumber');
+                                if (city.value==='')
+                                {
+                                    city.focus();
+                                    return;
+                                }
+                                if (district.value==='')
+                                {
+                                    district.focus();
+                                    return;
+                                }
+                                if (ward.value==='')
+                                {
+                                    ward.focus();
+                                    return;
+                                }
+                                if (address.value==='')
+                                {
+                                    address.focus();
+                                    return;
+                                }
+                                if (phoneNumber.value==='')
+                                {
+                                    phoneNumber.focus();
+                                    return;
+                                }
+                                document.getElementById('addressForm').submit();
+                                alert("Mua hàng thành công!");
+                            }
+                        </script>
+                </form>
+                    <button onclick="Submit()" name="submitAccount" class="shopBtn btn-address"> Đồng ý </button>
 
-                    </div>
+
+                 </div>
                     <a href="/cart" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Giỏ hàng</a>
                     <%}%>
 
@@ -58,8 +116,8 @@ Lower Header Section
 
                         <%}%>
 
-                </form>
-            </div>
+
+                </div>
 
 
 

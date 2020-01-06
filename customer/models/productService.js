@@ -2,6 +2,7 @@ var product = require('../databasemodel/products');
 var category=require('../databasemodel/categories');
 const Comment=require('../databasemodel/comments');
 const cart=require('../databasemodel/cart');
+const Order=require('../databasemodel/order');
 var async = require('async');
 const mongoose = require('mongoose');
 
@@ -131,6 +132,10 @@ exports.getProductById = (id) => {
     return product.find({_id: new mongoose.Types.ObjectId(id)});
 };
 
+exports.getProductById_Wait= async (id)=>{
+    return await product.find({_id: new mongoose.Types.ObjectId(id)});
+};
+
 exports.getAllProducts = async function() {
     return await product.find();
 };
@@ -141,6 +146,10 @@ exports.getCommentsOfProduct=async function(ID_product){
 
 exports.getCartOfUser=async function(username){
     return await cart.find({user: username});
+};
+
+exports.getAllMyOrder=async function(idUser){
+    return await Order.find({idUser: idUser});
 };
 
 //UPDATE

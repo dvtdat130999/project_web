@@ -32,7 +32,10 @@ router.post('/products', productController.postComment);
 //shoping
 router.post('/products/shopping', productController.shopping);
 
-/* get product status page - post address delivery*/
-router.post('/status', productController.getStatus);
+/*post address delivery*/
+router.post('/status', productController.postStatus);
+
+/*get status my products*/
+router.get('/status', productController.getStatus);
 
 module.exports = router;

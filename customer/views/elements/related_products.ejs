@@ -1,0 +1,51 @@
+<div class="well well-small">
+    <h3>Sản phẩm liên quan</h3>
+    <hr class="soften"/>
+    <div class="row-fluid">
+        <div id="newProductCar" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <ul class="thumbnails">
+                        <%let n=4;
+                        if (products_related.length<4)
+                        {
+                            n=products_related.length;
+                        }
+                        for (let i=0;i<n;i++){%>
+                            <li class="span3">
+                                <div class="thumbnail">
+                                    <a class="zoomTool" href="<%=products_related[i].uriDetail%>"><span class="icon-search"></span> Xem nhanh</a>
+                                    <a href="<%=products_related[i].uriDetail%>" class="tag"></a>
+                                    <a href="<%=products_related[i].uriDetail%>"><img src="<%=products_related[i].thumbnail%>" alt="bootstrap-ring"></a>
+                                </div>
+                            </li>
+                        <%};%>
+                    </ul>
+                </div>
+                <%if (products_related.length>4){%>
+                    <div class="item">
+                        <ul class="thumbnails">
+                            <%let n=8;
+                                if (products_related.length<8)
+                                {
+                                    n=products_related.length;
+                                }
+                            for (let i=4;i<n;i++){%>
+                            <li class="span3">
+                                <div class="thumbnail">
+                                    <a class="zoomTool" href="<%=products_related[i].uriDetail%>"><span class="icon-search"></span> Xem nhanh</a>
+                                    <a href="<%=products_related[i].uriDetail%>" class="tag"></a>
+                                    <a href="<%=products_related[i].uriDetail%>"><img src="<%=products_related[i].thumbnail%>" alt="bootstrap-ring"></a>
+                                </div>
+                            </li>
+                            <%};%>
+                        </ul>
+                    </div>
+                <%}%>
+            </div>
+            <a class="left carousel-control" href="#newProductCar" data-slide="prev">&lsaquo;</a>
+            <a class="right carousel-control" href="#newProductCar" data-slide="next">&rsaquo;</a>
+        </div>
+    </div>
+
+</div>

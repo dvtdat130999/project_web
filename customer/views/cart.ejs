@@ -157,6 +157,8 @@ Lower Header Section
                     <input type="number" id="pay" name="pay"/>
                 </form>
                     <button class="shopBtn btn-large pagination-right" onclick="SaveCart(0)">Lưu lại giỏ hàng</button>
+                    <button class="shopBtn btn-large btn-history" onclick="location.href='/status'">Xem lịch sử mua hàng</button>
+
                 <script>
                     function SaveCart(pay) {
 
@@ -166,7 +168,7 @@ Lower Header Section
                         arrayItem.push('<%=product._id%>');
                         number.push(document.getElementById('number<%=product._id%>').value);
                         <%})%>
-                        if (pay===1 && arrayItem.length===0)
+                        if (arrayItem.length===0)
                         {
                             alert("Giỏ hàng trống");
                             return;

@@ -7,8 +7,9 @@ const productService = require('../models/productService');
 var async = require('async');
 
 exports.getIndex = async (req, res, next) =>  {
+    let products=await product.find();
     let amount= await getAmount(req.user);
-    res.render('index', { userdata:req.user, amountItem: amount });
+    res.render('index', { userdata:req.user, amountItem: amount, productsNew: products });
 };
 
 exports.getCart = async (req, res, next) =>{
@@ -227,8 +228,36 @@ exports.getProduct = async (req, res, next) => {
             .exec( async function (err, list_products) {
                 if (err) { return next(err); }
                 //Successful, so render
+                let type=list_products[0].category;
+                console.log(type);
+                let category_Ralated="";
+                switch (type)
+                {
+                    case 1 : {
+                        category_Ralated = 'watch';
+                        break;
+                    }
+                    case 2 : {
+                        category_Ralated = 'bracelet';
+                        break;
+                    }
+                    case 3 : {
+                        category_Ralated = 'ring';
+                        break;
+                    }
+                    case 4 : {
+                        category_Ralated = 'necklaced';
+                        break;
+                    }
+                    default : {
+                        category_Ralated = 'ring';
+                    }
+                }
+                console.log(category_Ralated);
+                //Lấy các sản phẩm liên quan
+                let Array_category_Related=await productService.getProductsByCategory (category_Ralated);
                 let amount= await getAmount(req.user);
-                res.render('products/productdetail', {checked: checked_array , product_list: list_products ,userdata:req.user, active: arr, condition: condition, comments: array2D[index], amountItem: amount});
+                res.render('products/productdetail', {checked: checked_array , product_list: list_products ,userdata:req.user, active: arr, condition: condition, comments: array2D[index], amountItem: amount, products_related: Array_category_Related});
             });
         return;
     }
@@ -421,11 +450,11 @@ exports.shopping= async (req,res,next)=>{
     }
 };
 
-exports.getStatus = async (req, res, next) =>{
+exports.postStatus = async (req, res, next) =>{
     //Lấy ID người dùng
     let idUser=req.user._id;
     //lấy địa chỉ
-    let address=req.body.address;
+    let address=req.body.address+', '+req.body.ward+', '+req.body.district+', '+req.body.city;
     //Lấy ngày hiện tại
     let now=new Date();
     let day=now.getDate();
@@ -464,7 +493,25 @@ exports.getStatus = async (req, res, next) =>{
     //Xóa cart => amount = 0
     await Cart.deleteOne({user: cart[0].user});
 
-    res.render('status_products', {userdata:req.user, amountItem: 0});
+    res.redirect('/status');
+};
+
+exports.getStatus = async (req,res,next)=>{
+    //Lấy tất cả orders của tôi
+    let orders=await productService.getAllMyOrder(req.user._id);
+    console.log(orders);
+    //lấy danh sách sản phẩm tưởng ứng
+    let products=[];
+    for (let i=0;i<orders.length;i++)
+    {
+        let product=await productService.getProductById_Wait(orders[i].idProduct);
+        products.push(product[0]);
+    }
+
+    console.log(products);
+
+    let amount= await getAmount(req.user);
+    res.render('status_products', {userdata:req.user, amountItem: amount, orders: orders, products: products});
 };
 
 ////////////////////////////////////////////////////////////////////////////

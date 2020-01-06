@@ -63,7 +63,14 @@ hr.soften {margin: 8px 0;background: #DDD;}
 .thumbnail .caption {padding: 9px;color: #555555;background: #F3F2F2;}
 
 .input-address{
-    width: 80%;
+    width: 60%;
+}
+.btn-address{
+    width: 20%;
+    margin-left: 40%;
+}
+.btn-history{
+    margin-left: 40%;
 }
 
 .btn-number{

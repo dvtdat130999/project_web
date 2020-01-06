@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <% include elements/tag_head.ejs%>
-
+    <%if(typeof userdata === "undefined"){userdata=null;}%>
 </head>
 <body <%if (!userdata) {%>onload="loadItem()"<%}%>>
 <!--
