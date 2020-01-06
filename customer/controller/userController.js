@@ -24,8 +24,9 @@ exports.postAccount = async (req, res, next) => {
     newUser.address = address;
     newUser.phone = phone;
 
-    newUser.save();
+    await newUser.save();
 
+    req.flash('success_msg', 'Thay đổi thông tin thành công');
     res.redirect('/users/account');
 }
 

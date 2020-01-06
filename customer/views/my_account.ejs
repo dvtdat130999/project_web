@@ -3,7 +3,7 @@
 <head>
     <% include elements/tag_head.ejs%>
 </head>
-<body onload="prepare(<%=userdata%>)">
+<body>
 <!--
 	Upper Header Section
 -->
@@ -28,13 +28,11 @@ Lower Header Section
                 <li><a href="/">Trang chủ</a> <span class="divider">/</span></li>
                 <li class="active">Tài khoản</li>
             </ul>
-            <h3> Tài khoản</h3>
             <hr class="soft"/>
 
-
             <div class="well">
-                <button onclick="changeIn4()" class="exclusive shopBtn" id="changeIn4">Chỉnh sửa thông tin</button> 
-                <form class="form-horizontal" action="/users/account" method="post">
+                <%include partials/messages.ejs%>
+                <form class="form-horizontal" id="form-change-info" action="/users/account" method="post" >
                     <h3>Thông tin tài khoản</h3>
                     <div class="control-group">
                         <label class="control-label">Tên<sup>*</sup></label>
@@ -54,14 +52,15 @@ Lower Header Section
                             <input id="inputPhone" type="text" name="phone" value="<%=userdata.phone%>" readonly>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <div class="controls">
-                            <button id="buttonSubmit" type="submit" class="exclusive shopBtn">Đồng ý</button>
-                            <button onclick="cancelChange()" class="exclusive shopBtn" id="cancelChange">Hủy</button>
-                            <a id="changePassword" href="/users/change_password">Đổi mật khẩu</a>
-                        </div>
-                    </div>
+
+
                 </form>
+                <div id="control-btn" style="text-align: center">
+
+                </div>
+                <div style="text-align: center">
+                    <button onclick="changeIn4()" class="exclusive shopBtn" id="changeIn4">Chỉnh sửa thông tin</button>
+                </div>
             </div>
 
 

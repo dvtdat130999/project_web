@@ -44,26 +44,40 @@
         alert("Mật khẩu mới đã được gửi tới mail của bạn!");
     }
 
-    function prepare(userdata) {
-        document.getElementById('buttonSubmit').style.display = 'none';
-        document.getElementById('changePassword').style.display = 'none';
-        document.getElementById('cancelChange').style.display = 'none';
-        if (!userdata)
-        {
-            loadItem();
-        }
-    }
     
     function changeIn4() {
         document.getElementById('inputName').readOnly = false;
         document.getElementById('inputAddress').readOnly = false;
         document.getElementById('inputPhone').readOnly = false;
-        document.getElementById('buttonSubmit').style.display = 'inline';
-        document.getElementById('changePassword').style.display = 'inline';
-        document.getElementById('cancelChange').style.display = 'inline';
+
+        const nodeParent = document.getElementById("control-btn");
+
+        const buttonSubmit = document.createElement("button");
+        buttonSubmit.setAttribute("class", "exclusive shopBtn");
+        buttonSubmit.setAttribute("type", "submit");
+        buttonSubmit.setAttribute("form", "form-change-info");
+        buttonSubmit.style.marginRight= "10px";
+        buttonSubmit.innerText = "Đồng ý";
+
+        const cancelBtn = document.createElement("button");
+        cancelBtn.setAttribute("class", "exclusive shopBtn");
+        cancelBtn.onclick = cancelChange;
+        cancelBtn.style.marginRight="10px";
+        cancelBtn.setAttribute("type", "reset");
+        cancelBtn.innerText = "Hủy";
+
+        const changePass = document.createElement("a");
+        changePass.setAttribute("href", "/users/change_password");
+        changePass.innerText = "Đổi mật khẩu";
+
+        nodeParent.appendChild(buttonSubmit);
+        nodeParent.appendChild(cancelBtn);
+        nodeParent.appendChild(changePass);
+
         document.getElementById('changeIn4').style.display = 'none';
     }
+
     function cancelChange(){
-        window.location.reload();
+        window.location.reload();gt
     }
 </script>
