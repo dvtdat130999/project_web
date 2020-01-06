@@ -1,9 +1,13 @@
 <div id="sidebar" class="span3">
     <div class="well well-small">
         <ul class="nav nav-list">
+            <%if(userdata.author === 'admin'){%>
+
             <li><a href="/users/account"><span class="icon-chevron-right"></span>Quản lý các tài khoản</a></li>
             <li><a href="/shop"><span class="icon-chevron-right"></span>Quản lý gian hàng</a></li>
-            <li><a href="/sales"><span class="icon-chevron-right"></span>Doanh số</a></li>
+                <%}%>
+
+                <li><a href="/sales"><span class="icon-chevron-right"></span>Doanh số</a></li>
             <li><a href="/order"><span class="icon-chevron-right"></span>Đơn hàng</a></li>
             <li><a href="/users/account"><span class="icon-chevron-right"></span>Người dùng</a></li>
             <li style="border:0"> &nbsp;</li>

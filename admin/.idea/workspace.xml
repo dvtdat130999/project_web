@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../customer/controller/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/controller/userController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/views/elements/tag_head.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/elements/tag_head.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customer/views/my_account.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/my_account.ejs" afterDir="false" />
-    </list>
+    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +104,7 @@
       <workItem from="1578239199530" duration="123000" />
       <workItem from="1578272663676" duration="14273000" />
       <workItem from="1578300617172" duration="604000" />
+      <workItem from="1578313609033" duration="1227000" />
     </task>
     <servers />
   </component>
