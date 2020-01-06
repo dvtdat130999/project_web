@@ -22,7 +22,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="javascript.nodejs.core.library.configured.version" value="12.11.0" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.13.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -102,6 +102,7 @@
       <workItem from="1578234423468" duration="7000" />
       <workItem from="1578143853900" duration="6374000" />
       <workItem from="1578239199530" duration="123000" />
+      <workItem from="1578272663676" duration="2598000" />
     </task>
     <servers />
   </component>

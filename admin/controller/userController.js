@@ -7,42 +7,35 @@ const randomstring=require('randomstring');
 const nodemailer=require('nodemailer');
 
 exports.getAccountList = async (req, res, next) => {
-    const username = req.query.username;
-    if (typeof username !== "undefined") {
-       /* userService.getUserByUsername(username)
-            .exec(function (err, accounts_customer) {
-                if (err) {
-                    return next(err);
-                }
-                //Successful, so render
-                res.render('detail_account', {
-                    title: 'List customer',
-                    account_list: accounts_customer,
-                    userdata: req.user
-                });
-            });*/
+    if (req.user.author !== "admin") {
+        res.redirect('/');
+    } else {
+        const username = req.query.username;
+        if (typeof username !== "undefined") {
+            let accounts_customer;
+            accounts_customer = await userService.getUserByUsername(username);
 
-
-        let accounts_customer;
-        accounts_customer = await userService.getUserByUsername(username);
-
-        res.render('detail_account', {
-            title: 'List customer',
-            account_list: accounts_customer,
-            userdata: req.user
-        });
-    }
-    else {
-        userService.getAccount(req.user.author)
-            .exec(function (err, accounts_customer) {
-                if (err) {
-                    return next(err);
-                }
-                //Successful, so render
-                res.render('customer_account', {account_list: accounts_customer, userdata: req.user, active:"account"});
+            res.render('detail_account', {
+                title: 'List customer',
+                account_list: accounts_customer,
+                userdata: req.user
             });
-    }
+        } else {
+            userService.getAccount(req.user.author)
+                .exec(function (err, accounts_customer) {
+                    if (err) {
+                        return next(err);
+                    }
+                    //Successful, so render
+                    res.render('customer_account', {
+                        account_list: accounts_customer,
+                        userdata: req.user,
+                        active: "account"
+                    });
+                });
+        }
 
+    }
 };
 
 exports.getLogin = (req, res, next) => res.render('login',{ userdata:req.user });

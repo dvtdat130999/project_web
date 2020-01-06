@@ -24,13 +24,15 @@ Lower Header Section
 
     <div class="row">
         <div id="sidebar" class="span3">
-            <div class="well well-small">
-                <ul class="nav nav-list">
-                    <li><a href="/order"><span class="icon-chevron-right active"></span>Chưa xác nhận</a></li>
-                    <li><a href="/order?confirmOrder=false"><span class="icon-chevron-right"></span>Đã xác nhận</a></li>
-                    <li style="border:0"> &nbsp;</li>
-                </ul>
-            </div>
+            <%if(userdata.author === "shop"){%>
+                <div class="well well-small">
+                    <ul class="nav nav-list">
+                        <li><a href="/order"><span class="icon-chevron-right active"></span>Chưa xác nhận</a></li>
+                        <li><a href="/order?confirmOrder=false"><span class="icon-chevron-right"></span>Đã xác nhận</a></li>
+                        <li style="border:0"> &nbsp;</li>
+                    </ul>
+                </div>
+            <%}%>
         </div>
         <div class="span9">
             <div class="well well-small">
