@@ -39,25 +39,25 @@ Lower Header Section
             <div class="well well-small">
                 <hr class="soften"/>
                 <%include partials/messages.ejs%>
-                    <table class="table table-bordered table-condensed">
+                <table class="table table-bordered table-condensed">
 
-                        <tbody>
-                        <tr>
-                            <th colspan="5" class="header-table">
-                                DANH SÁCH ĐƠN ĐẶT HÀNG ĐÃ XÁC NHẬN
-                            </th>
-                        </tr>
+                    <tbody>
+                    <tr>
+                        <th colspan="5" class="header-table">
+                            DANH SÁCH ĐƠN ĐẶT HÀNG ĐANG GIAO
+                        </th>
+                    </tr>
 
-                        <tr>
-                            <th class="nameProduct"><b>Tên sản phẩm</b></th>
-                            <th class="quantity"><b>Số lượng</b></th>
-                            <th class="addressDelivery"><b>Địa chỉ giao hàng</b></th>
-                            <th class="dateSale">Ngày bán</th>
-                            <th class="detail">Chi tiết</th>
+                    <tr>
+                        <th class="nameProduct"><b>Tên sản phẩm</b></th>
+                        <th class="quantity"><b>Số lượng</b></th>
+                        <th class="addressDelivery"><b>Địa chỉ giao hàng</b></th>
+                        <th class="dateSale">Ngày bán</th>
+                        <th class="detail">Chi tiết</th>
 
 
-                        </tr>
-                        <%orders.forEach(function(order){%>
+                    </tr>
+                    <%orders.forEach(function(order){%>
                         <tr>
                             <td class="nameProduct"><%= order.nameProduct %></td>
                             <td class="quantity"><%= order.quantity%></td>
@@ -66,17 +66,17 @@ Lower Header Section
                             <td class="detail"><a href="<%= order.urlDetail%>%>"><i>chi tiết</i></a></td>
 
                         </tr>
-                        <%});%>
-                        <%if(orders.length === 0){%>
-                            <tr>
-                                <th colspan="5" class="header-table" style="color: red">
-                                    Không có đơn đặt hàng nào
-                                </th>
-                            </tr>
-                        <%};%>
+                    <%});%>
+                    <%if(orders.length === 0){%>
+                        <tr>
+                            <th colspan="5" class="header-table" style="color: red">
+                                Không có đơn đặt hàng nào cần xác nhận
+                            </th>
+                        </tr>
+                    <%};%>
 
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
             </div>
 
         </div>

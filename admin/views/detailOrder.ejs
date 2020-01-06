@@ -34,6 +34,9 @@ Lower Header Section
                 <table class="table table-bordered table-condensed">
 
                     <tbody>
+                    <th colspan="3" style="text-align: center; color: red; font-size: x-large">
+                        CHI TIẾT ĐƠN ĐẶT HÀNG
+                    </th>
                     <tr>
                         <td class="tieude" rowspan="7"><img src="<%= order.thumbnail %>"></td>
                         <td class="tieude"><b>Tên sản phẩm</b></td>
@@ -71,10 +74,15 @@ Lower Header Section
 
                     <tr>
                         <td class="tieude" style="color: red"><b>Tình trạng</b></td>
-                        <%if(order.confirm !== 0){%>
-                            <td style="color: red">Đã xác nhận</td>
-                        <%}else{%>
+                        <%if(order.confirm === 0){%>
                             <td style="color: red">Chưa xác nhận</td>
+
+                        <%}else{%>
+                        <%if(order.confirm === 1){%>
+                            <td style="color: red">Đang giao hàng</td>
+                        <%}else{%>
+                            <td style="color: red">Đã giao hàng</td>
+                        <%};%>
                         <%};%>
 
                     </tr>
@@ -85,22 +93,24 @@ Lower Header Section
                     <%};%>%>
                     <%};%>
 
-
-
                     </tbody>
                 </table>
 
 
-                <%if(order.confirm === 0){%>
+
 
                 <div class="control-group">
                     <a href="/order" class="shopBtn btn-large">Quay lại</a>
+                    <%if(order.confirm !== 2){%>
+                    <%if(order.confirm === 0){%>
                     <%if(order.quantity <= order.quantityInStoreHouse){%>
                         <a href="<%= order.accept %>" class="shopBtn btn-large">Xác nhận </a>
                     <%};%>%>
+                    <%}else{%>
+                        <a href="<%= order.accept %>" class="shopBtn btn-large">Xác nhận đã giao hàng</a>
+                    <%}%>
 
                     <a href="<%= order.cancel %>" class="shopBtn btn-large">Hủy </a>
-
                 </div>
                 <%};%>
             </div>
