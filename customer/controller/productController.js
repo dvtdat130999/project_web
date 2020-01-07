@@ -229,7 +229,7 @@ exports.getProduct = async (req, res, next) => {
                 if (err) { return next(err); }
                 //Successful, so render
                 let type=list_products[0].category;
-                console.log(type);
+                //console.log(type);
                 let category_Ralated="";
                 switch (type)
                 {
@@ -253,7 +253,7 @@ exports.getProduct = async (req, res, next) => {
                         category_Ralated = 'ring';
                     }
                 }
-                console.log(category_Ralated);
+                //console.log(category_Ralated);
                 //Lấy các sản phẩm liên quan
                 let Array_category_Related=await productService.getProductsByCategory (category_Ralated);
                 let amount= await getAmount(req.user);
@@ -407,8 +407,35 @@ exports.postComment = async (req,res,next)=>{
                 .exec(async function (err, list_products) {
                     if (err) { return next(err); }
                     //Successful, so render
+                    let type=list_products[0].category;
+                    //console.log(type);
+                    let category_Ralated="";
+                    switch (type)
+                    {
+                        case 1 : {
+                            category_Ralated = 'watch';
+                            break;
+                        }
+                        case 2 : {
+                            category_Ralated = 'bracelet';
+                            break;
+                        }
+                        case 3 : {
+                            category_Ralated = 'ring';
+                            break;
+                        }
+                        case 4 : {
+                            category_Ralated = 'necklaced';
+                            break;
+                        }
+                        default : {
+                            category_Ralated = 'ring';
+                        }
+                    }
+                    //Lấy các sản phẩm liên quan
+                    let Array_category_Related=await productService.getProductsByCategory (category_Ralated);
                     let amount= await getAmount(req.user);
-                    res.render('products/productdetail', {checked: checked_array , product_list: list_products ,userdata:req.user, active: arr, condition: condition, comments: array2D[index], amountItem: amount});
+                    res.render('products/productdetail', {checked: checked_array , product_list: list_products ,userdata:req.user, active: arr, condition: condition, comments: array2D[index], amountItem: amount, products_related: Array_category_Related});
                 });
         });
     }
