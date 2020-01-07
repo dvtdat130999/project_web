@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="" />
+    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../customer/views/forget_password.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/forget_password.ejs" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +106,8 @@
       <workItem from="1578143853900" duration="6374000" />
       <workItem from="1578239199530" duration="123000" />
       <workItem from="1578272663676" duration="14273000" />
+      <workItem from="1578300617172" duration="607000" />
+      <workItem from="1578324619570" duration="1395000" />
       <workItem from="1578300617172" duration="604000" />
       <workItem from="1578313609033" duration="1227000" />
       <workItem from="1578329155245" duration="3327000" />
