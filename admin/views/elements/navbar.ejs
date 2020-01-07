@@ -10,7 +10,8 @@
           <ul class="nav">
 
 
-
+          <%if (typeof active==="undefined"){active=""}%>
+            <%if (typeof userdata==="undefined"){userdata=[]}%>x
             <%if(active === "home"){%>
               <li class="active"><a href="/">Trang chủ	</a></li>
             <%}else{%>
