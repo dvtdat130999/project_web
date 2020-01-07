@@ -121,7 +121,7 @@ exports.postRegister = async (req, res, next) => {
                     userdata: req.user
                 });
             } else {
-                const uriDetail = '/account?username=' + username;
+                const uriDetail = '/users/account?username=' + username;
 
                 const linkproducts = "/";
                 const newUser = new user({

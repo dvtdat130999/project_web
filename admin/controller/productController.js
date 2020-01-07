@@ -48,8 +48,9 @@ exports.getProducts = async (req, res, next) => {
         } else {
             let idshop = req.query.shop;
 
-            if (typeof idshop === "undefined")
+            if (typeof idshop === "undefined"){
                 idshop = req.user.id;
+            }
 
             let listProduct = await product.find({idshop: idshop});
             console.log(listProduct);
@@ -73,8 +74,8 @@ exports.getProducts = async (req, res, next) => {
             {
                 array2D[index]=[];
             }
-
-            res.render('products', {userdata: req.user, products: array2D[index], active: "product", activePage: arr});
+            let condition="&shop="+idshop;
+            res.render('products', {userdata: req.user, products: array2D[index], active: "product", activePage: arr, condition: condition});
         }
     } else {
         let data;
@@ -93,7 +94,6 @@ exports.getProducts = async (req, res, next) => {
                 listProduct.push(element);
             }
         }
-
         res.render('products', {userdata: req.user, products: listProduct, active: "product"});
     }
 }

@@ -65,14 +65,14 @@ Lower Header Section
             <ul class="pagination modal-3">
                 <%for (i=1;i<activePage.length;i++){
                 if (activePage[i]==="class=active"){%>
-                <li><a href="products?page=<%=i%>" class="prev">&laquo</a></li>
+                <li><a href="products?page=<%=i%><%=condition%>" class="prev">&laquo</a></li>
                 <%}}%>
                 <%for (i=0;i<activePage.length;i++){%>
-                <li> <a href="products?page=<%=i+1%>" <%= activePage[i]%>><%=i+1%></a></li>
+                <li> <a href="products?page=<%=i+1%><%=condition%>" <%= activePage[i]%>><%=i+1%></a></li>
                 <%}%>
                 <%for (i=0;i<activePage.length-1;i++){
                 if (activePage[i]==="class=active"){%>
-                <li><a href="products?page=<%=i+2%>" class="next">&raquo;</a></li>
+                <li><a href="products?page=<%=i+2%><%=condition%>" class="next">&raquo;</a></li>
                 <%}}%>
 
             </ul>
