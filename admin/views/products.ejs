@@ -61,7 +61,21 @@ Lower Header Section
                 </tbody>
             </table><br/>
 
+            <%if (typeof activePage==="undefined"){activePage=[]}%>
+            <ul class="pagination modal-3">
+                <%for (i=1;i<activePage.length;i++){
+                if (activePage[i]==="class=active"){%>
+                <li><a href="products?page=<%=i%>" class="prev">&laquo</a></li>
+                <%}}%>
+                <%for (i=0;i<activePage.length;i++){%>
+                <li> <a href="products?page=<%=i+1%>" <%= activePage[i]%>><%=i+1%></a></li>
+                <%}%>
+                <%for (i=0;i<activePage.length-1;i++){
+                if (activePage[i]==="class=active"){%>
+                <li><a href="products?page=<%=i+2%>" class="next">&raquo;</a></li>
+                <%}}%>
 
+            </ul>
 
 
         </div>

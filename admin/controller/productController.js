@@ -51,8 +51,30 @@ exports.getProducts = async (req, res, next) => {
             if (typeof idshop === "undefined")
                 idshop = req.user.id;
 
-            const data = await product.find({idshop: idshop});
-            res.render('products', {userdata: req.user, products: data, active: "product"});
+            let listProduct = await product.find({idshop: idshop});
+            console.log(listProduct);
+            //Phan trang
+            let page=req.query.page;
+            let arr=[];
+            let numberOfProduct=10;
+
+            if (typeof page==="undefined"){
+                page="1";
+            }
+            let index=parseInt(page,10)-1;
+            let array2D = pageElementsArr(listProduct,numberOfProduct);
+
+            for (i=0;i<array2D.length;i++)
+            {
+                arr[i]="";
+            }
+            arr[index]="class=active";
+            if (typeof array2D[index]==="undefined")
+            {
+                array2D[index]=[];
+            }
+
+            res.render('products', {userdata: req.user, products: array2D[index], active: "product", activePage: arr});
         }
     } else {
         const data = await product.find({idshop: req.user.id});
@@ -275,3 +297,50 @@ exports.postUpdate = (req, res, next) =>{
     });
 };
 ////////////////////////////////////////////////////////////////////////////
+
+//hàm tạo ra mảng 2 chiều sản phẩm
+function pageElementsArr(arr, eleDispCount) {
+    const arrLen = arr.length;
+    const noOfPages = Math.ceil(arrLen / eleDispCount);
+    let pageArr = [];
+    let perPageArr = [];
+    let index = 0;
+    let condition = 0;
+    let remainingEleInArr = 0;
+
+    for (let i = 0; i < noOfPages; i++) {
+
+        if (i === 0) {
+            index = 0;
+            if (arrLen>=eleDispCount)
+            {
+                condition = eleDispCount;
+            }
+            else
+            {
+                condition=arrLen;
+            }
+        }
+        for (let j = index; j < condition; j++) {
+            perPageArr.push(arr[j]);
+        }
+        pageArr.push(perPageArr);
+        if (i === 0) {
+            remainingEleInArr = arrLen - perPageArr.length;
+        } else {
+            remainingEleInArr = remainingEleInArr - perPageArr.length;
+        }
+
+        if (remainingEleInArr > 0) {
+            if (remainingEleInArr > eleDispCount) {
+                index = index + eleDispCount;
+                condition = condition + eleDispCount;
+            } else {
+                index = index + perPageArr.length;
+                condition = condition + remainingEleInArr;
+            }
+        }
+        perPageArr = [];
+    }
+    return pageArr;
+}
