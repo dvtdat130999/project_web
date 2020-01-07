@@ -1,90 +1,88 @@
-  <div class="navbar">
-    <div class="navbar-inner">
-      <div class="container">
-        <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <div class="nav-collapse">
-          <ul class="nav">
-
-
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <div class="nav-collapse">
+        <ul class="nav">
           <%if (typeof active==="undefined"){active=""}%>
-            <%if (typeof userdata==="undefined"){userdata=[]}%>x
-            <%if(active === "home"){%>
-              <li class="active"><a href="/">Trang chủ	</a></li>
-            <%}else{%>
-              <li><a href="/">Trang chủ	</a></li>
-            <%}%>
+          <%if (typeof userdata==="undefined"){userdata=[]}%>
+          <%if(active === "home"){%>
+            <li class="active"><a href="/">Trang chủ	</a></li>
+          <%}else{%>
+            <li><a href="/">Trang chủ	</a></li>
+          <%}%>
 
 
 
-              <%if(userdata.author === 'shop'){%>
-              <%if(active === "product"){%>
-                <li class="active"><a href="/products">Sản phẩm</a></li>
-              <%}else{%>
-                <li><a href="/products">Sản phẩm</a></li>
-              <%}%>
-              <%}%>
+          <%if(userdata.author === 'shop'){%>
+          <%if(active === "product"){%>
+            <li class="active"><a href="/products">Sản phẩm</a></li>
+          <%}else{%>
+            <li><a href="/products">Sản phẩm</a></li>
+          <%}%>
+          <%}%>
 
-              <%if(active === "sales"){%>
-                <li class="active"><a href="/sales">Doanh số</a></li>
-              <%}else{%>
-                <li><a href="/sales">Doanh số</a></li>
-              <%}%>
+          <%if(active === "sales"){%>
+            <li class="active"><a href="/sales">Doanh số</a></li>
+          <%}else{%>
+            <li><a href="/sales">Doanh số</a></li>
+          <%}%>
 
-              <%if(userdata.author === 'admin'){%>
-              <%if(active === "shop"){%>
-                <li class="active"><a href="/shop">Gian hàng</a></li>
-              <%}else{%>
-                <li><a href="/shop">Gian hàng</a></li>
-              <%}%>
-              <%if(active === "account"){%>
-                <li class="active"><a href="/users/account">Danh sách tài khoản</a></li>
-              <%}else{%>
-                <li><a href="/users/account">Danh sách tài khoản</a></li>
-              <%}%>
-              <%}%>
-
-
-
-              <%if(active === "order"){%>
-                <li class="active"><a href="/bill">Đơn hàng</a></li>
-              <%}else{%>
-                <li><a href="/order">Đơn hàng</a></li>
-              <%}%>
-
-              <%if(userdata.author === 'shop'){%>
-              <%if(active === "upload"){%>
-                <li class="active"><a href="/products/upload">Thêm sản phẩm</a></li>
-              <%}else{%>
-                <li><a href="/products/upload">Thêm sản phẩm</a></li>
-              <%}%>
-              <%}%>
+          <%if(userdata.author === 'admin'){%>
+          <%if(active === "shop"){%>
+            <li class="active"><a href="/shop">Gian hàng</a></li>
+          <%}else{%>
+            <li><a href="/shop">Gian hàng</a></li>
+          <%}%>
+          <%if(active === "account"){%>
+            <li class="active"><a href="/users/account">Danh sách tài khoản</a></li>
+          <%}else{%>
+            <li><a href="/users/account">Danh sách tài khoản</a></li>
+          <%}%>
+          <%}%>
 
 
-          </ul>
 
-          <script>
-            function QuerySearch()
-            {
-              let Content=document.getElementById("SearchContent").value;
-              let query="/products?search="+Content;
-              location.href=query;
-            }
-          </script>
+          <%if(active === "order"){%>
+            <li class="active"><a href="/bill">Đơn hàng</a></li>
+          <%}else{%>
+            <li><a href="/order">Đơn hàng</a></li>
+          <%}%>
 
-          <%if(typeof search==="undefined"){
-            search="";
-          }%>
+          <%if(userdata.author === 'shop'){%>
+          <%if(active === "upload"){%>
+            <li class="active"><a href="/products/upload">Thêm sản phẩm</a></li>
+          <%}else{%>
+            <li><a href="/products/upload">Thêm sản phẩm</a></li>
+          <%}%>
+          <%}%>
 
-          <form action="javascript:QuerySearch()" class="navbar-search pull-left">
-            <input id="SearchContent" type="text" placeholder="Tìm kiếm sản phẩm" class="search-query span2" value="<%=search%>"/>
-            <button type="button" class="btn-warning" onclick="QuerySearch()"><b>Tìm Kiếm</b></button>
-          </form>
 
-        </div>
+        </ul>
+
+        <script>
+          function QuerySearch()
+          {
+            let Content=document.getElementById("SearchContent").value;
+            let query="/products?search="+Content;
+            location.href=query;
+          }
+        </script>
+
+        <%if(typeof search==="undefined"){
+          search="";
+        }%>
+
+        <form action="javascript:QuerySearch()" class="navbar-search pull-left">
+          <input id="SearchContent" type="text" placeholder="Tìm kiếm sản phẩm" class="search-query span2" value="<%=search%>"/>
+          <button type="button" class="btn-warning" onclick="QuerySearch()"><b>Tìm Kiếm</b></button>
+        </form>
+
       </div>
     </div>
   </div>
+</div>

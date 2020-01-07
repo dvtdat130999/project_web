@@ -77,7 +77,13 @@ exports.getProducts = async (req, res, next) => {
             res.render('products', {userdata: req.user, products: array2D[index], active: "product", activePage: arr});
         }
     } else {
-        const data = await product.find({idshop: req.user.id});
+        let data;
+        if(req.user.author === "shop") {
+            data = await product.find({idshop: req.user.id});
+        }
+        else {
+            data = await product.find({});
+        }
         const listProduct = [];
 
         for(const element of data){

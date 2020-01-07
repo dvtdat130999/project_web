@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="" />
     <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../customer/views/forget_password.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/forget_password.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/productController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/productController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/elements/navbar.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/elements/navbar.ejs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,12 +22,14 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1SyPIsjKyv9KuAVC4V6KActDbip" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.13.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.11.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../customer" />
     <property name="nodejs_interpreter_path" value="node" />
@@ -56,7 +61,95 @@
           <option name="name" value="StatusDashboardGroupingRule" />
         </RuleState>
       </list>
-    </option>
+    </option>  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <div class="nav-collapse">
+          <ul class="nav">
+          <%if (typeof active==="undefined"){active=""}%>
+            <%if (typeof userdata==="undefined"){userdata=[]}%>x
+            <%if(active === "home"){%>
+              <li class="active"><a href="/">Trang chủ	</a></li>
+            <%}else{%>
+              <li><a href="/">Trang chủ	</a></li>
+            <%}%>
+
+
+
+              <%if(userdata.author === 'shop'){%>
+              <%if(active === "product"){%>
+                <li class="active"><a href="/products">Sản phẩm</a></li>
+              <%}else{%>
+                <li><a href="/products">Sản phẩm</a></li>
+              <%}%>
+              <%}%>
+
+              <%if(active === "sales"){%>
+                <li class="active"><a href="/sales">Doanh số</a></li>
+              <%}else{%>
+                <li><a href="/sales">Doanh số</a></li>
+              <%}%>
+
+              <%if(userdata.author === 'admin'){%>
+              <%if(active === "shop"){%>
+                <li class="active"><a href="/shop">Gian hàng</a></li>
+              <%}else{%>
+                <li><a href="/shop">Gian hàng</a></li>
+              <%}%>
+              <%if(active === "account"){%>
+                <li class="active"><a href="/users/account">Danh sách tài khoản</a></li>
+              <%}else{%>
+                <li><a href="/users/account">Danh sách tài khoản</a></li>
+              <%}%>
+              <%}%>
+
+
+
+              <%if(active === "order"){%>
+                <li class="active"><a href="/bill">Đơn hàng</a></li>
+              <%}else{%>
+                <li><a href="/order">Đơn hàng</a></li>
+              <%}%>
+
+              <%if(userdata.author === 'shop'){%>
+              <%if(active === "upload"){%>
+                <li class="active"><a href="/products/upload">Thêm sản phẩm</a></li>
+              <%}else{%>
+                <li><a href="/products/upload">Thêm sản phẩm</a></li>
+              <%}%>
+              <%}%>
+
+
+          </ul>
+
+          <script>
+            function QuerySearch()
+            {
+              let Content=document.getElementById("SearchContent").value;
+              let query="/products?search="+Content;
+              location.href=query;
+            }
+          </script>
+
+          <%if(typeof search==="undefined"){
+            search="";
+          }%>
+
+          <form action="javascript:QuerySearch()" class="navbar-search pull-left">
+            <input id="SearchContent" type="text" placeholder="Tìm kiếm sản phẩm" class="search-query span2" value="<%=search%>"/>
+            <button type="button" class="btn-warning" onclick="QuerySearch()"><b>Tìm Kiếm</b></button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -114,6 +207,7 @@
       <workItem from="1578360287074" duration="1679000" />
       <workItem from="1578366963458" duration="58000" />
       <workItem from="1578369699758" duration="306000" />
+      <workItem from="1578383168378" duration="392000" />
       <workItem from="1578375288122" duration="68000" />
     </task>
     <servers />
