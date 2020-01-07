@@ -93,7 +93,7 @@ exports.getProduct = async (req, res, next) => {
     let arr=[];
     let checked_array=[];
     let condition="";
-    let numberOfProduct=9;
+    let numberOfProduct=12;
 
     //Search product
     let searchContent=req.query.search;
