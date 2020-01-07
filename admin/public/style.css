@@ -109,6 +109,51 @@ hr.soften {margin: 8px 0;background: #DDD;}
 #gototop{margin-top:1px;}
 #footerMenu a{ font-size:12px; text-transform:lowercase}
 
+.pagination {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin-top: 10px;
+}
+.pagination li {
+    display: inline;
+    text-align: center;
+}
+.pagination a {
+    float: left;
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 5px 12px;
+    color: black;
+    margin-left: -1px;
+    border: 1px solid transparent;
+    line-height: 1.5;
+}
+.pagination a.active {
+    cursor: default;
+}
+.pagination a:active {
+    outline: none;
+}
+
+.modal-3 a {
+    margin-left: 3px;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+}
+.modal-3 a:hover {
+    background-color: orange;
+}
+.modal-3 a.active, .modal-3 a:active {
+    background-color: darkorange;
+}
+
 .row{
     margin: 10px;
 }

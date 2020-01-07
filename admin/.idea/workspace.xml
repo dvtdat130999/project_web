@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="" />
+    <list default="true" id="fc5505b2-a299-423b-bde6-c25c6402be20" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../customer/views/forget_password.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../customer/views/forget_password.ejs" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +25,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="javascript.nodejs.core.library.configured.version" value="12.13.0" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.11.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -105,6 +108,12 @@
       <workItem from="1578272663676" duration="14273000" />
       <workItem from="1578300617172" duration="607000" />
       <workItem from="1578324619570" duration="1395000" />
+      <workItem from="1578300617172" duration="604000" />
+      <workItem from="1578313609033" duration="1227000" />
+      <workItem from="1578329155245" duration="3327000" />
+      <workItem from="1578360287074" duration="1679000" />
+      <workItem from="1578366963458" duration="58000" />
+      <workItem from="1578369699758" duration="306000" />
     </task>
     <servers />
   </component>

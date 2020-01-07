@@ -24,10 +24,31 @@ exports.getAccountList = async (req, res, next) => {
         } else {
             const accounts_customer = await userService.getAccount(req.user.author);
 
+            //Phan trang
+            let page=req.query.page;
+            let arr=[];
+            let numberOfProduct=10;
+
+            if (typeof page==="undefined"){
+                page="1";
+            }
+            let index=parseInt(page,10)-1;
+            let array2D = pageElementsArr(accounts_customer,numberOfProduct);
+
+            for (i=0;i<array2D.length;i++)
+            {
+                arr[i]="";
+            }
+            arr[index]="class=active";
+            if (typeof array2D[index]==="undefined")
+            {
+                array2D[index]=[];
+            }
+
             res.render('customer_account', {
-                account_list: accounts_customer,
+                account_list: array2D[index],
                 userdata: req.user,
-                active: "account"
+                active: "account", activePage: arr
             });
         }
 
@@ -301,4 +322,52 @@ exports.getShop = async (req, res, next) => {
     } else {
         res.redirect('/');
     }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//hàm tạo ra mảng 2 chiều sản phẩm
+function pageElementsArr(arr, eleDispCount) {
+    const arrLen = arr.length;
+    const noOfPages = Math.ceil(arrLen / eleDispCount);
+    let pageArr = [];
+    let perPageArr = [];
+    let index = 0;
+    let condition = 0;
+    let remainingEleInArr = 0;
+
+    for (let i = 0; i < noOfPages; i++) {
+
+        if (i === 0) {
+            index = 0;
+            if (arrLen>=eleDispCount)
+            {
+                condition = eleDispCount;
+            }
+            else
+            {
+                condition=arrLen;
+            }
+        }
+        for (let j = index; j < condition; j++) {
+            perPageArr.push(arr[j]);
+        }
+        pageArr.push(perPageArr);
+        if (i === 0) {
+            remainingEleInArr = arrLen - perPageArr.length;
+        } else {
+            remainingEleInArr = remainingEleInArr - perPageArr.length;
+        }
+
+        if (remainingEleInArr > 0) {
+            if (remainingEleInArr > eleDispCount) {
+                index = index + eleDispCount;
+                condition = condition + eleDispCount;
+            } else {
+                index = index + perPageArr.length;
+                condition = condition + remainingEleInArr;
+            }
+        }
+        perPageArr = [];
+    }
+    return pageArr;
 }
