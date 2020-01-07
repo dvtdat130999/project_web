@@ -38,7 +38,7 @@ Lower Header Section
                         <ul class="thumbnails span4">
                             <div class="thumbnail">
                                 <a href="<%= product.uriDetail %>" class="overlay"></a>
-                                <a href="<%= product.uriDetail %>"><img src='<%= product.thumbnail %>' alt=""></a>
+                                <a href="<%= product.uriDetail %>"><img src='<%= product.thumbnail %>' style="height: 225px" alt=""></a>
                                 <div class="caption cntr">
                                     <p><%= product.name %></p>
                                     <p><strong> <%= product.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+"đ" %></strong></p>

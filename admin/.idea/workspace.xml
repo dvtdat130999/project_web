@@ -30,6 +30,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.13.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.11.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../customer" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -59,7 +61,95 @@
           <option name="name" value="StatusDashboardGroupingRule" />
         </RuleState>
       </list>
-    </option>
+    </option>  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <div class="nav-collapse">
+          <ul class="nav">
+          <%if (typeof active==="undefined"){active=""}%>
+            <%if (typeof userdata==="undefined"){userdata=[]}%>x
+            <%if(active === "home"){%>
+              <li class="active"><a href="/">Trang chủ	</a></li>
+            <%}else{%>
+              <li><a href="/">Trang chủ	</a></li>
+            <%}%>
+
+
+
+              <%if(userdata.author === 'shop'){%>
+              <%if(active === "product"){%>
+                <li class="active"><a href="/products">Sản phẩm</a></li>
+              <%}else{%>
+                <li><a href="/products">Sản phẩm</a></li>
+              <%}%>
+              <%}%>
+
+              <%if(active === "sales"){%>
+                <li class="active"><a href="/sales">Doanh số</a></li>
+              <%}else{%>
+                <li><a href="/sales">Doanh số</a></li>
+              <%}%>
+
+              <%if(userdata.author === 'admin'){%>
+              <%if(active === "shop"){%>
+                <li class="active"><a href="/shop">Gian hàng</a></li>
+              <%}else{%>
+                <li><a href="/shop">Gian hàng</a></li>
+              <%}%>
+              <%if(active === "account"){%>
+                <li class="active"><a href="/users/account">Danh sách tài khoản</a></li>
+              <%}else{%>
+                <li><a href="/users/account">Danh sách tài khoản</a></li>
+              <%}%>
+              <%}%>
+
+
+
+              <%if(active === "order"){%>
+                <li class="active"><a href="/bill">Đơn hàng</a></li>
+              <%}else{%>
+                <li><a href="/order">Đơn hàng</a></li>
+              <%}%>
+
+              <%if(userdata.author === 'shop'){%>
+              <%if(active === "upload"){%>
+                <li class="active"><a href="/products/upload">Thêm sản phẩm</a></li>
+              <%}else{%>
+                <li><a href="/products/upload">Thêm sản phẩm</a></li>
+              <%}%>
+              <%}%>
+
+
+          </ul>
+
+          <script>
+            function QuerySearch()
+            {
+              let Content=document.getElementById("SearchContent").value;
+              let query="/products?search="+Content;
+              location.href=query;
+            }
+          </script>
+
+          <%if(typeof search==="undefined"){
+            search="";
+          }%>
+
+          <form action="javascript:QuerySearch()" class="navbar-search pull-left">
+            <input id="SearchContent" type="text" placeholder="Tìm kiếm sản phẩm" class="search-query span2" value="<%=search%>"/>
+            <button type="button" class="btn-warning" onclick="QuerySearch()"><b>Tìm Kiếm</b></button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -118,6 +208,7 @@
       <workItem from="1578366963458" duration="58000" />
       <workItem from="1578369699758" duration="306000" />
       <workItem from="1578383168378" duration="392000" />
+      <workItem from="1578375288122" duration="68000" />
     </task>
     <servers />
   </component>
