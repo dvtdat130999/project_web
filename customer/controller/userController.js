@@ -144,7 +144,7 @@ exports.postRegister = (req, res, next) => {
                 if (data) {
                     errors.push({msg: "Tài khoản đã tồn tại"});
 
-                    res.render('/users/register', { errors, username, password, password2, name, address, phone, email });
+                    res.render('register', { errors, username, password, password2, name, address, phone, email });
                 } else {
                     userService.getUserByEmail(email)
                         .then(data2 => {
